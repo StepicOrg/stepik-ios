@@ -193,7 +193,6 @@
 		0888D0F91F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		0888D0FD1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */; };
 		0888D1021F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */; };
-		0888D1051F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */; };
 		0888D1091F1E42A000A16863 /* CodeElementsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1081F1E42A000A16863 /* CodeElementsSize.swift */; };
 		088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */; };
 		088E58C11DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
@@ -2218,7 +2217,6 @@
 		0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeInputAccessoryView.xib; sourceTree = "<group>"; };
 		0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeInputAccessoryView.swift; sourceTree = "<group>"; };
 		0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeInputAccessoryCollectionViewCell.swift; sourceTree = "<group>"; };
-		0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeInputAccessoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		0888D1081F1E42A000A16863 /* CodeElementsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeElementsSize.swift; sourceTree = "<group>"; };
 		088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeAnswerDataset.swift; sourceTree = "<group>"; };
 		088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialSDKProvider.swift; sourceTree = "<group>"; };
@@ -6390,7 +6388,6 @@
 			isa = PBXGroup;
 			children = (
 				0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */,
-				0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */,
 			);
 			path = CodeInputAccessoryCollectionViewCell;
 			sourceTree = "<group>";
@@ -10829,7 +10826,6 @@
 				2C6E9CD41FED657E001821A2 /* Adaptive.storyboard in Resources */,
 				08AC213C1CDD35DF00FBB9CD /* Users.plist in Resources */,
 				2CADE6182487B4BD00F523FA /* GoogleService-Info.plist in Resources */,
-				0888D1051F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				2C22043420E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib in Resources */,
 				08FCC79420F3BAEB008B84B9 /* stepikcontent.css in Resources */,
 				2C6B2F9D20D7F24800F7C976 /* AchievementPopupViewController.xib in Resources */,
