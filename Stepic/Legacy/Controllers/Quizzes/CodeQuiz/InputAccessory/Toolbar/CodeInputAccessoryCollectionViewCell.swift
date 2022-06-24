@@ -71,7 +71,7 @@ extension CodeInputAccessoryCollectionViewCell: ProgrammaticallyInitializableVie
         self.layer.borderColor = Appearance.borderColor
         self.layer.masksToBounds = true
 
-        self.backgroundColor = .stepikTertiaryBackground
+        self.backgroundColor = Appearance.backgroundColor
     }
 
     func addSubviews() {
