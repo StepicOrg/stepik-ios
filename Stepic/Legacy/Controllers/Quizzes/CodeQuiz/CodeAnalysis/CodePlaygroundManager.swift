@@ -372,10 +372,7 @@ final class CodePlaygroundManager {
     ) {
         // TODO: If suggestions are presented, only change the data there, otherwise instantiate and add suggestions view
         if self.suggestionsController == nil {
-            self.suggestionsController = CodeSuggestionsTableViewController(
-                nibName: "CodeSuggestionsTableViewController",
-                bundle: nil
-            )
+            self.suggestionsController = CodeSuggestionsTableViewController()
             vc.addChild(self.suggestionsController!)
             textView.addSubview(self.suggestionsController!.view)
             self.suggestionsController?.delegate = suggestionsDelegate

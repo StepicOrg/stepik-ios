@@ -157,7 +157,6 @@
 		0860D9121F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */; };
 		0860D9151F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */; };
 		0860D9191F115D830087D61B /* CodeSuggestionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9171F115D830087D61B /* CodeSuggestionsTableViewController.swift */; };
-		0860D91B1F115D830087D61B /* CodeSuggestionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */; };
 		0861E6721CD80A9600B45652 /* Executable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6711CD80A9600B45652 /* Executable.swift */; };
 		0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
@@ -329,7 +328,6 @@
 		08FCC79420F3BAEB008B84B9 /* stepikcontent.css in Resources */ = {isa = PBXBuildFile; fileRef = 08FCC79320F3BAEA008B84B9 /* stepikcontent.css */; };
 		08FCEB641B9ED2AC00FC4F8B /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */; };
 		08FEFC1C1F117257005CA0FB /* CodeSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC1A1F117257005CA0FB /* CodeSuggestionTableViewCell.swift */; };
-		08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
 		08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC201F127470005CA0FB /* AutocompleteWords.swift */; };
 		0901F2E70A0CA50D44C96729 /* CourseRevenueTabPurchasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCF7BCE261D5A901F33E09 /* CourseRevenueTabPurchasesViewController.swift */; };
 		097807181FEAD22C2DE65676 /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E0D8A3998163442A02FB0 /* NewProfileView.swift */; };
@@ -658,6 +656,7 @@
 		2C57B2A1240945B2008284F0 /* SubmissionsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57B2A0240945B2008284F0 /* SubmissionsRepository.swift */; };
 		2C580B812754FE7800BAEE60 /* WishlistEntriesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C580B802754FE7800BAEE60 /* WishlistEntriesPersistenceService.swift */; };
 		2C5967EB23E7828800072800 /* SubmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5967EA23E7828800072800 /* SubmissionTests.swift */; };
+		2C5B2A182865879B0097B270 /* CodeSuggestionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5B2A172865879B0097B270 /* CodeSuggestionCellView.swift */; };
 		2C5B3813257280C6007BF21E /* AuthorsCourseListWidgetCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5B3812257280C6007BF21E /* AuthorsCourseListWidgetCoverView.swift */; };
 		2C5BE9DC233C0A110098EB2F /* katex in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BE9DB233C0A100098EB2F /* katex */; };
 		2C5D33DE25C9695300372C61 /* PromoCodesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D33DD25C9695200372C61 /* PromoCodesAPI.swift */; };
@@ -2180,7 +2179,6 @@
 		0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSnippetSymbols.swift; sourceTree = "<group>"; };
 		0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputAccessoryBuilder.swift; sourceTree = "<group>"; };
 		0860D9171F115D830087D61B /* CodeSuggestionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSuggestionsTableViewController.swift; sourceTree = "<group>"; };
-		0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeSuggestionsTableViewController.xib; sourceTree = "<group>"; };
 		0861E6711CD80A9600B45652 /* Executable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Executable.swift; sourceTree = "<group>"; };
 		0861E6741CD8106E00B45652 /* ExecutionQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueue.swift; sourceTree = "<group>"; };
 		0861E67A1CD9483500B45652 /* ExecutionQueues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueues.swift; sourceTree = "<group>"; };
@@ -2375,7 +2373,6 @@
 		08FCC79320F3BAEA008B84B9 /* stepikcontent.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = stepikcontent.css; sourceTree = "<group>"; };
 		08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthAPI.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08FEFC1A1F117257005CA0FB /* CodeSuggestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSuggestionTableViewCell.swift; sourceTree = "<group>"; };
-		08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeSuggestionTableViewCell.xib; sourceTree = "<group>"; };
 		08FEFC201F127470005CA0FB /* AutocompleteWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteWords.swift; sourceTree = "<group>"; };
 		09AF7B8FAACF8A4D31AF7583 /* UserCoursesInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserCoursesInteractor.swift; sourceTree = "<group>"; };
 		0A41A14CB4B66408B3A9EAF4 /* DebugMenuViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DebugMenuViewController.swift; sourceTree = "<group>"; };
@@ -2730,6 +2727,7 @@
 		2C5967EA23E7828800072800 /* SubmissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionTests.swift; sourceTree = "<group>"; };
 		2C5A92FE27D75A4C0086559D /* Model_course_update_purchase_button_behavior_v95.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_update_purchase_button_behavior_v95.xcdatamodel; sourceTree = "<group>"; };
 		2C5AB2B122F9BC78005E7AA0 /* Model_step_options_limits.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_options_limits.xcdatamodel; sourceTree = "<group>"; };
+		2C5B2A172865879B0097B270 /* CodeSuggestionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeSuggestionCellView.swift; sourceTree = "<group>"; };
 		2C5B3812257280C6007BF21E /* AuthorsCourseListWidgetCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsCourseListWidgetCoverView.swift; sourceTree = "<group>"; };
 		2C5BE9DB233C0A100098EB2F /* katex */ = {isa = PBXFileReference; lastKnownFileType = folder; path = katex; sourceTree = "<group>"; };
 		2C5D33DD25C9695200372C61 /* PromoCodesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesAPI.swift; sourceTree = "<group>"; };
@@ -6356,7 +6354,6 @@
 			isa = PBXGroup;
 			children = (
 				0860D9171F115D830087D61B /* CodeSuggestionsTableViewController.swift */,
-				0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */,
 			);
 			path = CodeSuggestionsTableViewController;
 			sourceTree = "<group>";
@@ -6364,8 +6361,8 @@
 		2CA4CF8A242A1710008BC4E8 /* CodeSuggestionTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				2C5B2A172865879B0097B270 /* CodeSuggestionCellView.swift */,
 				08FEFC1A1F117257005CA0FB /* CodeSuggestionTableViewCell.swift */,
-				08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */,
 			);
 			path = CodeSuggestionTableViewCell;
 			sourceTree = "<group>";
@@ -10801,7 +10798,6 @@
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
 				2C7FEE6F1FDAF8F600B2B4F1 /* Onboarding.storyboard in Resources */,
 				08CBA3541F5A2D9400302154 /* Profile.storyboard in Resources */,
-				0860D91B1F115D830087D61B /* CodeSuggestionsTableViewController.xib in Resources */,
 				2C604E1F207E45A1001588FB /* CodeEditorPreviewView.xib in Resources */,
 				089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				2CE8391120C8101500FE3672 /* AchievementBadgeView.xib in Resources */,
@@ -10811,7 +10807,6 @@
 				2CB9E8D11F839C8E0004E17F /* NotificationsTableViewCell.xib in Resources */,
 				2CA9D98C20123343007AA743 /* adjectives_f.plist in Resources */,
 				08484F04211AF4320006266F /* TextStoryView.xib in Resources */,
-				08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */,
 				0888D0F91F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
 				2CB62BEE2019FDB100B5E336 /* arrow_right.svg in Resources */,
 				2CA9D98A2011FBD5007AA743 /* LeaderboardTableViewCell.xib in Resources */,
@@ -12233,6 +12228,7 @@
 				62E9823012ADAFCE54EA40F4 /* CourseInfoTabSyllabusInteractor.swift in Sources */,
 				62E98ACECB6FC9CAE9A80729 /* CourseInfoTabSyllabusPresenter.swift in Sources */,
 				62E987EF8699C0A291B01127 /* CourseInfoTabSyllabusViewController.swift in Sources */,
+				2C5B2A182865879B0097B270 /* CodeSuggestionCellView.swift in Sources */,
 				62E98433E25F2090FCA2065D /* CourseInfoTabSyllabusViewModel.swift in Sources */,
 				2C19D99F26174C7400181DB0 /* StepikAcademyCourseListCollectionViewCell.swift in Sources */,
 				62E984F8DF99824B4D42BAA2 /* CourseInfoTabSyllabusInputProtocol.swift in Sources */,
