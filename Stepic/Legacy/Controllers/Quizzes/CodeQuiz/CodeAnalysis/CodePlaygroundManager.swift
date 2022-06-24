@@ -87,11 +87,30 @@ final class CodePlaygroundManager {
         language: CodeLanguage
     ) -> (shouldMakeNewLine: Bool, paired: Bool) {
         switch language {
-        case .python:
+        case .python, .python31:
             return symbol == ":"
                 ? (shouldMakeNewLine: true, paired: false)
                 : (shouldMakeNewLine: false, paired: false)
-        case .c, .cpp11, .cpp, .java, .java8, .java9, .java11, .cs, .kotlin, .swift, .rust, .javascript, .scala, .go, .perl, .php:
+        case .c,
+             .cValgrind,
+             .cpp11,
+             .cpp,
+             .java,
+             .java8,
+             .java9,
+             .java11,
+             .java17,
+             .cs,
+             .csMono,
+             .kotlin,
+             .swift,
+             .rust,
+             .javascript,
+             .scala,
+             .scala3,
+             .go,
+             .perl,
+             .php:
             return symbol == "{"
                 ? (shouldMakeNewLine: true, paired: true)
                 : (shouldMakeNewLine: false, paired: false)
