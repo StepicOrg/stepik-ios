@@ -1,14 +1,6 @@
-//
-//  InputAccessoryBuilder.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 08.07.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
-final class InputAccessoryBuilder {
+enum InputAccessoryBuilder {
     static func buildAccessoryView(
         size: CodeInputAccessorySize,
         language: CodeLanguage,
