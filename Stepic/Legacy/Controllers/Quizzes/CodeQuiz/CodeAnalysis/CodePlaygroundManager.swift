@@ -15,7 +15,7 @@ final class CodePlaygroundManager {
 
     let closers: [String: String] = ["{": "}", "[": "]", "(": ")", "\"": "\"", "'": "'"]
 
-    let allowedCharacters: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_"
+    let allowedCharactersSet = Set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_")
 
     var suggestionsController: CodeSuggestionsTableViewController?
     var isSuggestionsViewPresented: Bool { self.suggestionsController != nil }
@@ -130,13 +130,13 @@ final class CodePlaygroundManager {
 
         var offsetBefore = 0
         while let character = text[safe: (cursorPosition - offsetBefore - 1)],
-              self.allowedCharacters.contains(character) {
+              self.allowedCharactersSet.contains(character) {
             offsetBefore += 1
         }
 
         var offsetAfter = 0
         while let character = text[safe: (cursorPosition + offsetAfter)],
-              self.allowedCharacters.contains(character) {
+              self.allowedCharactersSet.contains(character) {
             offsetAfter += 1
         }
 
