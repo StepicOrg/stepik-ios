@@ -7,7 +7,7 @@ protocol CodeSuggestionDelegate: AnyObject {
 }
 
 final class CodeSuggestionsTableViewController: UITableViewController {
-    private static let defaultSuggestionHeigh: CGFloat = 22
+    private static let defaultSuggestionHeight: CGFloat = 22
     private static let maxSuggestionCount = 4
 
     weak var delegate: CodeSuggestionDelegate?
@@ -16,7 +16,7 @@ final class CodeSuggestionsTableViewController: UITableViewController {
         if let size = self.delegate?.suggestionsSize {
             return size.realSizes.suggestionHeight
         } else {
-            return Self.defaultSuggestionHeigh
+            return Self.defaultSuggestionHeight
         }
     }
 
