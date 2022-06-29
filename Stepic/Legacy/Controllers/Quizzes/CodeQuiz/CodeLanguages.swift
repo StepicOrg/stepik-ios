@@ -154,54 +154,7 @@ enum CodeLanguage: String, CaseIterable {
     var displayName: String { self.rawValue }
 
     var highlightrSample: String {
-        switch self {
-        case .python, .python31:
-            return "# comment\nprint(\"Hello World\")"
-        case .cpp, .cpp11, .c, .cValgrind:
-            return "// comment\n\n#include <iostream>\n\nint main()\n{\n\tstd::cout << \"Hello World!\" << std::endl;\n}"
-        case .haskell, .haskell7, .haskell8, .haskell88:
-            return "-- comment\n\nmain = putStrLn \"Hello World\""
-        case .java, .java8, .java9, .java11, .java17:
-            return "// comment\n\nclass HelloWorld {\n\tstatic public void main(String args[]) {\n\t\tSystem.out.println(\"Hello World!\");\n\t}\n}"
-        case .octave:
-            return "# comment\nprintf(\"Hello World\\n\");"
-        case .asm32, .asm64:
-            return "; comment\n\nmov ax,cs\nmov ds,ax\nmov ah,9\nmov dx, offset Hello\nint 21h\nxor ax,ax\nint 21h\n\nHello:\n db \"Hello World!\",13,10,\"$\""
-        case .shell:
-            return "# comment\necho Hello World"
-        case .rust:
-            return "// comment\nfn main() {\n\tprintln!(\"Hello World!\");\n}"
-        case .r:
-            return "# comment\ncat(\"Hello world\\n\")"
-        case .ruby:
-            return "# comment\nputs \"Hello World!\""
-        case .clojure:
-            return "; comment\n\n(defn hello []\n  (println \"Hello world!\"))\n\n(hello)"
-        case .cs, .csMono:
-            return "// comment\nclass HelloWorld\n{\n\tstatic void Main()\n\t{\n\t\tSystem.Console.WriteLine(\"Hello, World!\");\n\t}\n}"
-        case .javascript:
-            return "// comment\n\nconsole.log(\"Hello World\");"
-        case .scala, .scala3:
-            return "// comment\n\nobject HelloWorld extends App {\n  println(\"Hello world!\")\n}"
-        case .kotlin:
-            return "// comment\n\nfun main(args: Array<String>) {\n\tprintln(\"Hello, world!\")\n}"
-        case .go:
-            return "// comment\n\npackage main\nimport \"fmt\"\nfunc main() {\n\tfmt.Printf(\"Hello World\\n\")\n}"
-        case .pascal:
-            return "// comment\nProgram Hello_World;\n\n{$APPTYPE CONSOLE}\n\nBegin\n  WriteLn('Hello World');\nEnd."
-        case .perl:
-            return "# comment\nprint \"Hello World!\\n\";"
-        case .sql:
-            return "# comment\n\nSELECT 'Hello World';"
-        case .swift:
-            return "// comment\nprint(\"Hello World!\")"
-        case .php:
-            return "// comment\n\n<?php\n\necho 'Hello World';"
-        case .julia:
-            return "# comment\n\nprintln(\"Hello World\")"
-        case .dart:
-            return "void main() {\n\tprint('Hello, World!');\n}"
-        }
+        CodeLanguageSamples.sample(for: self)
     }
 
     // https://jupyterhub.int.stepik.org/user/ivan.magda/notebooks/ivan.magda/programming-languages-popularity.ipynb

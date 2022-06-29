@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>python</key>
+        <string>print(&quot;Hello World&quot;)</string>
+        <key>cpp</key>
+        <string>#include &lt;iostream&gt;
+
+            int main() {
+            std::cout &lt;&lt; &quot;Hello World&quot; &lt;&lt; std::endl;
+            }</string>
+        <key>haskell</key>
+        <string>module Main where
+
+            main = putStrLn &quot;Hello World&quot;</string>
+        <key>java</key>
+        <string>public class Main {
+            public static void main(String[] args) {
+            System.out.println(&quot;Hello World&quot;);
+            }
+            }</string>
+        <key>octave</key>
+        <string>printf(&quot;Hello World&quot;);</string>
+        <key>assembler</key>
+        <string>
+            mov ax,cs
+            mov ds,ax
+            mov ah,9
+            mov dx, offset Hello
+            int 21h
+            xor ax,ax
+            int 21h
+
+            Hello:
+
+            db &quot;Hello World!&quot;,13,10,&quot;$&quot;</string>
+        <key>shell</key>
+        <string>echo &quot;Hello World&quot;</string>
+        <key>rust</key>
+        <string>fn main() {
+            println!(&quot;Hello World&quot;);
+            }</string>
+        <key>r</key>
+        <string>cat(&quot;Hello World&quot;)</string>
+        <key>ruby</key>
+        <string>print &quot;Hello World&quot;</string>
+        <key>clojure</key>
+        <string>(println &quot;Hello World&quot;)</string>
+        <key>cs</key>
+        <string>System.Console.WriteLine(&quot;Hello World&quot;);</string>
+        <key>javascript</key>
+        <string>console.log(&quot;Hello World&quot;);</string>
+        <key>scala</key>
+        <string>object HelloWorld extends App {
+            println(&quot;Hello World&quot;)
+            }</string>
+        <key>kotlin</key>
+        <string>fun main() {
+            println(&quot;Hello World&quot;)
+            }</string>
+        <key>go</key>
+        <string>package main
+
+            import &quot;fmt&quot;
+
+            func main() {
+            fmt.Println(&quot;Hello World&quot;)
+            }</string>
+        <key>pascal</key>
+        <string>program HelloWorld(output);
+            begin
+            writeln(&apos;Hello World&apos;);
+            end.</string>
+        <key>perl</key>
+        <string>print &quot;Hello World\n&quot;;</string>
+        <key>sql</key>
+        <string>SELECT &apos;Hello World&apos;;</string>
+        <key>swift</key>
+        <string>print(&quot;Hello World&quot;)</string>
+        <key>php</key>
+        <string>&lt;?php
+
+            echo &apos;Hello World&apos;;</string>
+        <key>julia</key>
+        <string>println(&quot;Hello World&quot;)</string>
+        <key>dart</key>
+        <string>main() {
+            print(&apos;Hello World&apos;);
+            }</string>
+    </dict>
+</plist>

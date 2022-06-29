@@ -490,6 +490,8 @@
 		2C203B2D253F0FC0000683E6 /* TableReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C203B2C253F0FC0000683E6 /* TableReply.swift */; };
 		2C20778022BB897200D44DC0 /* DispatchQueue+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20777F22BB897200D44DC0 /* DispatchQueue+Promise.swift */; };
 		2C20778422BBA54800D44DC0 /* QuizStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20778322BBA54800D44DC0 /* QuizStatus.swift */; };
+		2C20B292286C63F5000F458A /* CodeLanguageSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20B291286C63F5000F458A /* CodeLanguageSamples.swift */; };
+		2C20B294286C640B000F458A /* code-language-samples.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C20B293286C640B000F458A /* code-language-samples.plist */; };
 		2C20C85922F8D08F0052E9BF /* StepOptionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C85822F8D08F0052E9BF /* StepOptionsPersistenceService.swift */; };
 		2C20C85E22F8E19F0052E9BF /* StepOptionsPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C85D22F8E19F0052E9BF /* StepOptionsPlainObject.swift */; };
 		2C20C86022F8E1C90052E9BF /* CodeLimitPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C85F22F8E1C90052E9BF /* CodeLimitPlainObject.swift */; };
@@ -2537,6 +2539,8 @@
 		2C203B2C253F0FC0000683E6 /* TableReply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableReply.swift; sourceTree = "<group>"; };
 		2C20777F22BB897200D44DC0 /* DispatchQueue+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Promise.swift"; sourceTree = "<group>"; };
 		2C20778322BBA54800D44DC0 /* QuizStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStatus.swift; sourceTree = "<group>"; };
+		2C20B291286C63F5000F458A /* CodeLanguageSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeLanguageSamples.swift; sourceTree = "<group>"; };
+		2C20B293286C640B000F458A /* code-language-samples.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "code-language-samples.plist"; sourceTree = "<group>"; };
 		2C20C85822F8D08F0052E9BF /* StepOptionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOptionsPersistenceService.swift; sourceTree = "<group>"; };
 		2C20C85D22F8E19F0052E9BF /* StepOptionsPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOptionsPlainObject.swift; sourceTree = "<group>"; };
 		2C20C85F22F8E1C90052E9BF /* CodeLimitPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeLimitPlainObject.swift; sourceTree = "<group>"; };
@@ -4649,6 +4653,24 @@
 			path = CoursePurchase;
 			sourceTree = "<group>";
 		};
+		2C20B290286C63EE000F458A /* CodeLanguageSamples */ = {
+			isa = PBXGroup;
+			children = (
+				2C20B293286C640B000F458A /* code-language-samples.plist */,
+				2C20B291286C63F5000F458A /* CodeLanguageSamples.swift */,
+			);
+			path = CodeLanguageSamples;
+			sourceTree = "<group>";
+		};
+		2C20B295286C6465000F458A /* AutocompleteWords */ = {
+			isa = PBXGroup;
+			children = (
+				2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */,
+				08FEFC201F127470005CA0FB /* AutocompleteWords.swift */,
+			);
+			path = AutocompleteWords;
+			sourceTree = "<group>";
+		};
 		2C249864275FDD3B00C688EB /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -5011,7 +5033,6 @@
 				2CDE82E1221D5CCB00C41887 /* highlight.js */,
 				2C4F3B082432693D002ADB53 /* jquery-3.4.1.min.js */,
 				2C4F3B072432693D002ADB53 /* kotlin-playground-1.21.1.min.js */,
-				2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */,
 				2CADE6172487B4BC00F523FA /* GoogleService-Info.plist */,
 				2C1A4D92244F8A1500D0F2DF /* ARKit-Badge-Glyph-Only.png */,
 				0869F6D71CE3684000F8A6DB /* default_sound.wav */,
@@ -6324,6 +6345,7 @@
 				0888D1081F1E42A000A16863 /* CodeElementsSize.swift */,
 				080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */,
 				2CA4CF87242A16E4008BC4E8 /* CodeAnalysis */,
+				2C20B290286C63EE000F458A /* CodeLanguageSamples */,
 				2CA4CF88242A16EF008BC4E8 /* CodeSuggestions */,
 				2CA4CF8B242A1732008BC4E8 /* InputAccessory */,
 			);
@@ -6341,7 +6363,7 @@
 		2CA4CF88242A16EF008BC4E8 /* CodeSuggestions */ = {
 			isa = PBXGroup;
 			children = (
-				08FEFC201F127470005CA0FB /* AutocompleteWords.swift */,
+				2C20B295286C6465000F458A /* AutocompleteWords */,
 				2CA4CF89242A1708008BC4E8 /* CodeSuggestionsTableViewController */,
 				2CA4CF8A242A1710008BC4E8 /* CodeSuggestionTableViewCell */,
 			);
@@ -10768,6 +10790,7 @@
 				0819856D20BF273800897BBA /* PersonalDeadlineTableViewCell.xib in Resources */,
 				2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */,
 				2C7FEE7A1FDAFB4600B2B4F1 /* OnboardingPageView.xib in Resources */,
+				2C20B294286C640B000F458A /* code-language-samples.plist in Resources */,
 				2C5DF1461FED2B36003B1177 /* StepCardView.xib in Resources */,
 				2C5D963B24C9B251004E9FD1 /* Auth-Release.plist in Resources */,
 				2CA9D9832010A13C007AA743 /* ProgressTableViewCell.xib in Resources */,
@@ -12748,6 +12771,7 @@
 				DA1ACE98741C42B9DCBBFB02 /* NewProfileCertificatesProvider.swift in Sources */,
 				19BCC6AE85FA7F15895BFDD0 /* NewProfileCertificatesView.swift in Sources */,
 				2CAC7D5624EF56A600942D14 /* FillBlanksQuizInputContainerView.swift in Sources */,
+				2C20B292286C63F5000F458A /* CodeLanguageSamples.swift in Sources */,
 				247608C654D7C9A7C5994A12 /* NewProfileCertificatesViewController.swift in Sources */,
 				224F80151254989529458041 /* NewProfileCreatedCoursesAssembly.swift in Sources */,
 				B2FE12ABF98ED99EAF727405 /* NewProfileCreatedCoursesDataFlow.swift in Sources */,
