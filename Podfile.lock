@@ -12,9 +12,10 @@ PODS:
   - Atributika (4.10.1)
   - BEMCheckBox (1.4.1)
   - Branch (1.40.2)
-  - Charts (3.6.0):
-    - Charts/Core (= 3.6.0)
-  - Charts/Core (3.6.0)
+  - Charts (4.1.0):
+    - Charts/Core (= 4.1.0)
+  - Charts/Core (4.1.0):
+    - SwiftAlgorithms (~> 1.0)
   - CocoaLumberjack (3.7.2):
     - CocoaLumberjack/Core (= 3.7.2)
   - CocoaLumberjack/Core (3.7.2)
@@ -189,6 +190,7 @@ PODS:
   - SVGKit (2.1.0):
     - CocoaLumberjack (~> 3.0)
   - SVProgressHUD (2.2.5)
+  - SwiftAlgorithms (1.0.0)
   - SwiftDate (6.3.1)
   - SwiftLint (0.45.1)
   - SwiftyGif (5.4.0)
@@ -214,7 +216,7 @@ DEPENDENCIES:
   - Atributika (= 4.10.1)
   - BEMCheckBox (= 1.4.1)
   - Branch (= 1.40.2)
-  - Charts (= 3.6.0)
+  - Charts (= 4.1.0)
   - DeviceKit (= 4.5.2)
   - DownloadButton (= 0.1.0)
   - EasyTipView (= 2.1.0)
@@ -297,6 +299,7 @@ SPEC REPOS:
     - SnapKit
     - STRegex
     - SVProgressHUD
+    - SwiftAlgorithms
     - SwiftDate
     - SwiftLint
     - SwiftyGif
@@ -364,8 +367,8 @@ SPEC CHECKSUMS:
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   Atributika: 47e778507cfb3cd2c996278b0285221a62e97d71
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
-  Branch: c1b244bf1170b0ea5c5eefa897648de8d14ff0d2
-  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  Branch: d99436c6f3d5b2529ba948d273e47e732830f207
+  Charts: 354f86803d11d9c35de280587fef50d1af063978
   CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
   DeviceKit: c622fc19f795f3e0b4d75d6d11b26604338cdab3
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
@@ -408,6 +411,7 @@ SPEC CHECKSUMS:
   STRegex: d49e88d0fe58538d3175fdd989bc1243b9be2a07
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
   SwiftLint: 06ac37e4d38c7068e0935bb30cda95f093bec761
   SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
@@ -419,6 +423,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: e65961cf42aa90c48b6c5358358f1b9e4abc8fd3
+PODFILE CHECKSUM: 2bb5dc24ec01e6805f170e0bb2fbfb3164c01595
 
 COCOAPODS: 1.11.3
