@@ -1,6 +1,5 @@
 import Foundation
 
-@available(iOS 12.0, *)
 @objc(ReplyValueTransformer)
 final class ReplyValueTransformer: NSSecureUnarchiveFromDataTransformer {
     static let name = NSValueTransformerName(rawValue: String(describing: ReplyValueTransformer.self))

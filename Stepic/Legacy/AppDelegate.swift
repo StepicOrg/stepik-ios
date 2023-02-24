@@ -36,15 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var analyticsStorageManager: AnalyticsStorageManagerProtocol = AnalyticsStorageManager.default
     private lazy var analytics: Analytics = StepikAnalytics.shared
 
-    @available(iOS 12.0, *)
     private lazy var siriShortcutsContinueUserActivityService: SiriShortcutsContinueUserActivityServiceProtocol = SiriShortcutsContinueUserActivityService()
 
-    @available(iOS 14.0, *)
-    private lazy var widgetContentIndexingService: WidgetContentIndexingServiceProtocol = WidgetContentIndexingService.default
-    @available(iOS 14.0, *)
-    private lazy var widgetRoutingService: WidgetRoutingServiceProtocol = WidgetRoutingService.default
-    @available(iOS 14.0, *)
-    private lazy var widgetUserDefaults: WidgetUserDefaultsProtocol = WidgetUserDefaults.default
+    private lazy var widgetService = WidgetService()
 
     private var applicationDidBecomeActiveAfterLaunch = true
 
@@ -164,12 +158,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IAPService.shared.prefetchProducts()
 
         if #available(iOS 14.0, *) {
-            self.widgetContentIndexingService.startIndexing(force: self.applicationDidBecomeActiveAfterLaunch)
+            self.widgetService.startIndexingContent(force: self.applicationDidBecomeActiveAfterLaunch)
 
             let widgetAddedEvent = AmplitudeAnalyticsEvent.homeScreenWidgetAdded(
-                size: self.widgetUserDefaults.lastWidgetSize
+                size: self.widgetService.getLastWidgetSize()
             )
-            if self.widgetUserDefaults.isWidgetAdded && !self.analyticsStorageManager.didSend(widgetAddedEvent) {
+            if self.widgetService.getIsWidgetAdded() && !self.analyticsStorageManager.didSend(widgetAddedEvent) {
                 self.analytics.send(widgetAddedEvent)
                 self.analyticsStorageManager.send(widgetAddedEvent)
             }
@@ -184,7 +178,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.visitedCoursesCleaner.removeObservers()
 
         if #available(iOS 14.0, *) {
-            self.widgetContentIndexingService.stopIndexing()
+            self.widgetService.stopIndexingContent()
         }
     }
 
@@ -272,8 +266,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        if #available(iOS 12.0, *),
-           self.siriShortcutsContinueUserActivityService.continueUserActivity(userActivity) {
+        if self.siriShortcutsContinueUserActivityService.continueUserActivity(userActivity) {
             return true
         }
         if self.spotlightContinueUserActivityService.continueUserActivity(userActivity) {
@@ -333,9 +326,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             if self.branchService.canOpenWithBranch(url: url) {
                 self.branchService.openURL(app: app, open: url, options: options)
-            } else if #available(iOS 14.0, *),
-                      self.widgetRoutingService.canOpen(url: url) {
-                self.widgetRoutingService.open(url: url)
+            } else if #available(iOS 14.0, *), self.widgetService.canOpenRouteURL(url) {
+                self.widgetService.openRouteURL(url)
             } else {
                 // Other actions
                 self.handleOpenedFromDeepLink(url)

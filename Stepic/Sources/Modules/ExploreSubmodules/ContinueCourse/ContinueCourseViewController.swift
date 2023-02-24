@@ -92,16 +92,14 @@ extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
     }
 
     func displaySiriButton(viewModel: ContinueCourse.SiriButtonAvailabilityCheck.ViewModel) {
-        if #available(iOS 12.0, *) {
-            if viewModel.shouldShowButton, let userActivity = viewModel.userActivity {
-                let contentConfiguration = SiriButtonContentConfiguration(
-                    shortcut: INShortcut(userActivity: userActivity),
-                    delegate: self
-                )
-                self.continueCourseView?.configureSiriButton(contentConfiguration: contentConfiguration)
-            } else {
-                self.continueCourseView?.configureSiriButton(contentConfiguration: nil)
-            }
+        if viewModel.shouldShowButton, let userActivity = viewModel.userActivity {
+            let contentConfiguration = SiriButtonContentConfiguration(
+                shortcut: INShortcut(userActivity: userActivity),
+                delegate: self
+            )
+            self.continueCourseView?.configureSiriButton(contentConfiguration: contentConfiguration)
+        } else {
+            self.continueCourseView?.configureSiriButton(contentConfiguration: nil)
         }
     }
 }
@@ -120,7 +118,6 @@ extension ContinueCourseViewController: ContinueCourseViewDelegate {
 
 // MARK: - ContinueCourseViewController: UIViewController, INUIAddVoiceShortcutButtonDelegate -
 
-@available(iOS 12.0, *)
 extension ContinueCourseViewController: INUIAddVoiceShortcutButtonDelegate {
     func present(
         _ addVoiceShortcutViewController: INUIAddVoiceShortcutViewController,
@@ -141,7 +138,6 @@ extension ContinueCourseViewController: INUIAddVoiceShortcutButtonDelegate {
 
 // MARK: - ContinueCourseViewController: INUIAddVoiceShortcutViewControllerDelegate -
 
-@available(iOS 12.0, *)
 extension ContinueCourseViewController: INUIAddVoiceShortcutViewControllerDelegate {
     func addVoiceShortcutViewController(
         _ controller: INUIAddVoiceShortcutViewController,
@@ -159,7 +155,6 @@ extension ContinueCourseViewController: INUIAddVoiceShortcutViewControllerDelega
 
 // MARK: - ContinueCourseViewController: INUIEditVoiceShortcutViewControllerDelegate -
 
-@available(iOS 12.0, *)
 extension ContinueCourseViewController: INUIEditVoiceShortcutViewControllerDelegate {
     func editVoiceShortcutViewController(
         _ controller: INUIEditVoiceShortcutViewController,

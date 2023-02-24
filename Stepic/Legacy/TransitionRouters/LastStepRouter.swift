@@ -368,12 +368,10 @@ final class LastStepRouter {
     }
 
     private static func donateContinueLearningInteraction(for viewController: UIViewController) {
-        if #available(iOS 12.0, *) {
-            let siriShortcutsService: SiriShortcutsServiceProtocol = SiriShortcutsService()
+        let siriShortcutsService: SiriShortcutsServiceProtocol = SiriShortcutsService()
 
-            let userActivity = siriShortcutsService.getContinueLearningShortcut()
-            viewController.userActivity = userActivity
-            userActivity.becomeCurrent()
-        }
+        let userActivity = siriShortcutsService.getContinueLearningShortcut()
+        viewController.userActivity = userActivity
+        userActivity.becomeCurrent()
     }
 }

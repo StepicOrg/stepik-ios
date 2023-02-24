@@ -2,12 +2,10 @@ import Foundation
 import PromiseKit
 import SVProgressHUD
 
-@available(iOS 12.0, *)
 protocol SiriShortcutsContinueUserActivityServiceProtocol: AnyObject {
     func continueUserActivity(_ userActivity: NSUserActivity) -> Bool
 }
 
-@available(iOS 12.0, *)
 final class SiriShortcutsContinueUserActivityService: SiriShortcutsContinueUserActivityServiceProtocol {
     private let lastCourseDataShortcutService: LastCourseDataShortcutServiceProtocol
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
