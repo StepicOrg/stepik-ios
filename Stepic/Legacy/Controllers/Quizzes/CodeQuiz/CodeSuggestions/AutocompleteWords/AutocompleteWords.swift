@@ -15,16 +15,16 @@ struct AutocompleteWords {
         var suggestions: [String] = []
 
         switch language {
-        case .python:
+        case .python, .python31:
             suggestions = python
             break
-        case .cpp, .cpp11:
+        case .cpp, .cpp11, .c, .cValgrind:
             suggestions = cpp
             break
-        case .cs:
+        case .cs, .csMono:
             suggestions = cs
             break
-        case .java, .java8, .java9, .java11:
+        case .java, .java8, .java9, .java11, .java17:
             suggestions = java
             break
         case .javascript:
@@ -35,7 +35,7 @@ struct AutocompleteWords {
             break
         case .sql:
             suggestions = sql
-        case .haskell, .haskell7, .haskell8:
+        case .haskell, .haskell7, .haskell8, .haskell88:
             suggestions = haskell
         case .r:
             suggestions = r

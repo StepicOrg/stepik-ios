@@ -16,3 +16,16 @@ updates:
       - "dependencies"
     rebase-strategy: "disabled"
     target-branch: "dev"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    assignees:
+      - "ivan-magda"
+    commit-message:
+      prefix: "GitHub Actions"
+    labels:
+      - "dependencies"
+      - "ci/cd"
+    rebase-strategy: "disabled"
+    target-branch: "dev"

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n4J-le-3oe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n4J-le-3oe">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17124"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -92,6 +92,7 @@
                     <connections>
                         <outlet property="animatedView" destination="AIR-cP-EPC" id="7KE-4S-dvi"/>
                         <outlet property="bottomConstraint" destination="JZp-DR-Y6r" id="ODE-mL-5da"/>
+                        <outlet property="closeButton" destination="rgL-TT-6ic" id="B7a-p8-W4e"/>
                         <outlet property="containerView" destination="v5m-vL-9FH" id="MEJ-Ih-OvH"/>
                         <outlet property="mainStackView" destination="5g3-nB-MMj" id="mBm-pF-rZl"/>
                         <outlet property="pageControl" destination="gh6-Y8-a3S" id="rtX-gc-O7F"/>

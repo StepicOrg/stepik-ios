@@ -135,6 +135,8 @@ final class NewProfileViewController: UIViewController, ControllerWithStepikPlac
         self.styledNavigationController?.removeBackButtonTitleForTopController()
         self.updateContentInsets()
         self.registerPlaceholders()
+
+        self.settingsButton.accessibilityIdentifier = AccessibilityIdentifiers.Profile.settingsButton
     }
 
     private func registerPlaceholders() {

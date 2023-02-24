@@ -175,6 +175,10 @@ final class EmailAuthViewController: UIViewController {
 
         self.emailTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         self.passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        
+        self.emailTextField.accessibilityIdentifier = AccessibilityIdentifiers.AuthEmail.emailTextField
+        self.passwordTextField.accessibilityIdentifier = AccessibilityIdentifiers.AuthEmail.passwordTextField
+        self.logInButton.accessibilityIdentifier = AccessibilityIdentifiers.AuthEmail.logInButton
 
         self.setup()
     }

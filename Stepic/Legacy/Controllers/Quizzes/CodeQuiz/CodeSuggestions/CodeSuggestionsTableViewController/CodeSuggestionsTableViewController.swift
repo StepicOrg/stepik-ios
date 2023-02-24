@@ -1,82 +1,104 @@
-//
-//  CodeSuggestionsTableViewController.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 08.07.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import UIKit
 
 protocol CodeSuggestionDelegate: AnyObject {
-    func didSelectSuggestion(suggestion: String, prefix: String)
     var suggestionsSize: CodeSuggestionsSize { get }
+
+    func didSelectSuggestion(suggestion: String, prefix: String)
 }
 
 final class CodeSuggestionsTableViewController: UITableViewController {
+    private static let defaultSuggestionHeight: CGFloat = 22
+    private static let maxSuggestionCount = 4
+
+    weak var delegate: CodeSuggestionDelegate?
+
+    private var suggestionRowHeight: CGFloat {
+        if let size = self.delegate?.suggestionsSize {
+            return size.realSizes.suggestionHeight
+        } else {
+            return Self.defaultSuggestionHeight
+        }
+    }
+
     var suggestions: [String] = [] {
         didSet {
-            tableView.reloadData()
+            self.tableView.reloadData()
         }
     }
 
     var prefix: String = "" {
         didSet {
-            tableView.reloadData()
+            self.tableView.reloadData()
         }
     }
 
-    private var suggestionHeight: CGFloat {
-        if let size = delegate?.suggestionsSize {
-            return size.realSizes.suggestionHeight
-        } else {
-            return 22
-        }
+    var suggestionsHeight: CGFloat {
+        self.suggestionRowHeight * CGFloat(min(Self.maxSuggestionCount, self.suggestions.count))
     }
-    private let maxSuggestionCount = 4
 
-    weak var delegate: CodeSuggestionDelegate?
+    init(suggestions: [String] = [], prefix: String = "") {
+        self.suggestions = suggestions
+        self.prefix = prefix
+        super.init(style: .plain)
+    }
 
-    var suggestionsHeight: CGFloat { suggestionHeight * CGFloat(min(maxSuggestionCount, suggestions.count)) }
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.register(UINib(nibName: "CodeSuggestionTableViewCell", bundle: nil), forCellReuseIdentifier: "CodeSuggestionTableViewCell")
+        self.tableView.register(cellClass: CodeSuggestionTableViewCell.self)
 
-        tableView.allowsSelection = false
+        self.tableView.separatorStyle = .singleLine
+        self.tableView.separatorInset = .zero
+
+        self.tableView.allowsSelection = false
         self.clearsSelectionOnViewWillAppear = false
-        tableView.rowHeight = suggestionHeight
+        self.tableView.rowHeight = self.suggestionRowHeight
 
         //Adding tap gesture recognizer to catch selection to avoid resignFirstResponder call and keyboard disappearance
-        let tapG = UITapGestureRecognizer(target: self, action: #selector(CodeSuggestionsTableViewController.didTap(recognizer:)))
-        tableView.addGestureRecognizer(tapG)
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.didTap(recognizer:))
+        )
+        self.tableView.addGestureRecognizer(tapGestureRecognizer)
     }
 
-    @objc func didTap(recognizer: UITapGestureRecognizer) {
-        let location = recognizer.location(in: self.tableView)
-        let path = tableView.indexPathForRow(at: location)
-        if let row = path?.row {
-            delegate?.didSelectSuggestion(suggestion: suggestions[row], prefix: prefix)
-        }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.suggestions.count
     }
-
-    // MARK: - Table view data source
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { suggestions.count }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "CodeSuggestionTableViewCell",
-            for: indexPath
-        ) as? CodeSuggestionTableViewCell else {
-            return UITableViewCell()
-        }
+        let cell: CodeSuggestionTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.updateConstraintsIfNeeded()
 
-        cell.setSuggestion(suggestions[indexPath.row], prefixLength: prefix.count, size: delegate?.suggestionsSize)
+        cell.setSuggestion(
+            self.suggestions[indexPath.row],
+            prefixLength: self.prefix.count,
+            size: self.delegate?.suggestionsSize
+        )
 
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { suggestionHeight }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        self.suggestionRowHeight
+    }
+
+    // MARK: Private API
+
+    @objc
+    private func didTap(recognizer: UITapGestureRecognizer) {
+        let location = recognizer.location(in: self.tableView)
+        let indexPath = tableView.indexPathForRow(at: location)
+
+        guard let row = indexPath?.row else {
+            return
+        }
+
+        self.delegate?.didSelectSuggestion(suggestion: self.suggestions[row], prefix: self.prefix)
+    }
 }

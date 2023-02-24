@@ -3,10 +3,10 @@ on: [pull_request]
 
 jobs:
   label:
-
     runs-on: ubuntu-latest
-
+    permissions:
+      pull-requests: write
     steps:
-    - uses: actions/labeler@v2
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: actions/labeler@4.1.0
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
