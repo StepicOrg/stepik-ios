@@ -444,7 +444,6 @@
 		2C11C9F224EFC81500A4647B /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11C9F124EFC81500A4647B /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		2C11C9F424EFCB2600A4647B /* UIFont+SizeOfString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11C9F324EFCB2600A4647B /* UIFont+SizeOfString.swift */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
-		2C12E4722565668000DC52CB /* UIViewController+PresentPanModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12E4712565668000DC52CB /* UIViewController+PresentPanModal.swift */; };
 		2C130E3C2512402B00389AEB /* LaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E3B2512402B00389AEB /* LaunchArguments.swift */; };
 		2C16495922C10DD400DF18CA /* UserActivitiesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */; };
 		2C16A88F248F98C9001E5CBD /* UserCoursesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16A88E248F98C9001E5CBD /* UserCoursesPersistenceService.swift */; };
@@ -552,6 +551,7 @@
 		2C313E5526AFE636004ECBD2 /* StepQuizReviewStatusCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C313E5426AFE636004ECBD2 /* StepQuizReviewStatusCircleView.swift */; };
 		2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
 		2C336D1F2865DDB900C91342 /* CodeInputAccessoryButtonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C336D1E2865DDB900C91342 /* CodeInputAccessoryButtonData.swift */; };
+		2C35B45029A95F2000F1F62F /* UIViewController+PresentPanModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35B44F29A95F2000F1F62F /* UIViewController+PresentPanModal.swift */; };
 		2C381BEF25505EC90084AD90 /* CourseListFilterBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C381BEE25505EC90084AD90 /* CourseListFilterBarButtonItem.swift */; };
 		2C38D49E27BBCAC6002865B7 /* PromoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38D49D27BBCAC6002865B7 /* PromoBanner.swift */; };
 		2C38D4A027BBD074002865B7 /* PromoBannersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C38D49F27BBD074002865B7 /* PromoBannersService.swift */; };
@@ -687,6 +687,7 @@
 		2C5F77C11F90F63B00E8E175 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
 		2C5F77C41F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */; };
 		2C5FF4A927A852D600A68CA1 /* CourseWidgetProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5FF4A827A852D600A68CA1 /* CourseWidgetProgressBarView.swift */; };
+		2C6036C029A94D330069FD81 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6036BF29A94D330069FD81 /* WidgetService.swift */; };
 		2C604E1F207E45A1001588FB /* CodeEditorPreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */; };
 		2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
 		2C60CCEE26CE81F30015C6A8 /* QuizReviewControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60CCED26CE81F30015C6A8 /* QuizReviewControlsView.swift */; };
@@ -2490,7 +2491,6 @@
 		2C11C9F124EFC81500A4647B /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		2C11C9F324EFCB2600A4647B /* UIFont+SizeOfString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+SizeOfString.swift"; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
-		2C12E4712565668000DC52CB /* UIViewController+PresentPanModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentPanModal.swift"; sourceTree = "<group>"; };
 		2C130E3B2512402B00389AEB /* LaunchArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchArguments.swift; sourceTree = "<group>"; };
 		2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitiesNetworkService.swift; sourceTree = "<group>"; };
 		2C16A88E248F98C9001E5CBD /* UserCoursesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoursesPersistenceService.swift; sourceTree = "<group>"; };
@@ -2604,6 +2604,7 @@
 		2C313E5426AFE636004ECBD2 /* StepQuizReviewStatusCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepQuizReviewStatusCircleView.swift; sourceTree = "<group>"; };
 		2C32664224B00BEF0013C473 /* Model_course_purchases_v54.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_purchases_v54.xcdatamodel; sourceTree = "<group>"; };
 		2C336D1E2865DDB900C91342 /* CodeInputAccessoryButtonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeInputAccessoryButtonData.swift; sourceTree = "<group>"; };
+		2C35B44F29A95F2000F1F62F /* UIViewController+PresentPanModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentPanModal.swift"; sourceTree = "<group>"; };
 		2C35C4C61F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_f.plist; sourceTree = "<group>"; };
 		2C35C4C81F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_m.plist; sourceTree = "<group>"; };
 		2C35C4CA1F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/nouns_f.plist; sourceTree = "<group>"; };
@@ -2761,6 +2762,7 @@
 		2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+FetchMethods.swift"; sourceTree = "<group>"; };
 		2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsMarkAsReadButton.swift; sourceTree = "<group>"; };
 		2C5FF4A827A852D600A68CA1 /* CourseWidgetProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetProgressBarView.swift; sourceTree = "<group>"; };
+		2C6036BF29A94D330069FD81 /* WidgetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetService.swift; sourceTree = "<group>"; };
 		2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CodeEditorPreviewView.xib; sourceTree = "<group>"; };
 		2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorPreviewView.swift; sourceTree = "<group>"; };
 		2C60CCED26CE81F30015C6A8 /* QuizReviewControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizReviewControlsView.swift; sourceTree = "<group>"; };
@@ -4592,7 +4594,7 @@
 		2C12E4702565663100DC52CB /* PanModal */ = {
 			isa = PBXGroup;
 			children = (
-				2C12E4712565668000DC52CB /* UIViewController+PresentPanModal.swift */,
+				2C35B44F29A95F2000F1F62F /* UIViewController+PresentPanModal.swift */,
 			);
 			path = PanModal;
 			sourceTree = "<group>";
@@ -5279,6 +5281,7 @@
 			isa = PBXGroup;
 			children = (
 				2C3A053E25B7693B0007FBCA /* WidgetRoutingService.swift */,
+				2C6036BF29A94D330069FD81 /* WidgetService.swift */,
 				2C51E1CD25B88B5600E38DF8 /* WidgetUserDefaults.swift */,
 				2C7AC4CC25B457300024D4D2 /* Content */,
 				2C8FA6C125B60096006BF4B6 /* Token */,
@@ -11013,6 +11016,7 @@
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/StepikModel/StepikModel.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftAlgorithms/Algorithms.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -11074,6 +11078,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StepikModel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Algorithms.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -11145,6 +11150,7 @@
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/StepikModel/StepikModel.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftAlgorithms/Algorithms.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -11202,6 +11208,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StepikModel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Algorithms.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -11584,9 +11591,7 @@
 				2C762B402653C93A00E0AB59 /* SwiftyJSON+DecimalNumber.swift in Sources */,
 				2C6FA0B02588B0EC00D50DAA /* DefaultSimpleCourseListView.swift in Sources */,
 				2C98423C26DE4CA80098E36B /* SearchResult+CoreDataProperties.swift in Sources */,
-				2C12E4722565668000DC52CB /* UIViewController+PresentPanModal.swift in Sources */,
 				2CBEAACE271EFA9A00B52D2C /* CourseInfoPurchaseModalDisclaimerView.swift in Sources */,
-				2C12E4722565668000DC52CB /* UIViewController+PresentPanModal.swift in Sources */,
 				2C6917C625EE47D700BAE0F5 /* NewExploreBlockPlaceholderView.swift in Sources */,
 				2CA867C12588FFF40006576E /* GridSimpleCourseListCollectionHeaderView.swift in Sources */,
 				2C0FE8C425F81A4900626289 /* InstructionPlainObject.swift in Sources */,
@@ -11609,6 +11614,7 @@
 				2CCB4B1A26E77CED0056C44E /* AnnouncementsAPI.swift in Sources */,
 				08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */,
+				2C6036C029A94D330069FD81 /* WidgetService.swift in Sources */,
 				2C6917D525EE489900BAE0F5 /* ExplorePlaceholderView.swift in Sources */,
 				2CFED65F252C5AC900FCAD41 /* Result+Stepik.swift in Sources */,
 				2CE42D4423CCC4530073F774 /* StreamVideoQualityStorageManager.swift in Sources */,
@@ -11898,6 +11904,7 @@
 				2C0F80C525C9BB5A006E9233 /* PromoPriceButton.swift in Sources */,
 				2CBCBD4A20D1AAFC000B5732 /* AchievementsListTableViewCell.swift in Sources */,
 				2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */,
+				2C35B45029A95F2000F1F62F /* UIViewController+PresentPanModal.swift in Sources */,
 				2CEA59D026E4BEF800A905E3 /* CourseSearchResultTableViewCell.swift in Sources */,
 				2C20C86622F8E4BF0052E9BF /* CodeDetails.swift in Sources */,
 				2C7024BA23D00762002A0246 /* SettingsRightDetailSwitchTableViewCell.swift in Sources */,
@@ -13452,7 +13459,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Stepic/Info-Production.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -13482,7 +13489,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = "Stepic/Info-Production.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -13573,7 +13580,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -13706,7 +13713,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -14274,7 +14281,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -14410,7 +14417,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 430;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

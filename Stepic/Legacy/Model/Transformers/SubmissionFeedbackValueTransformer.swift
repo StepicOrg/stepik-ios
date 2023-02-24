@@ -1,6 +1,5 @@
 import Foundation
 
-@available(iOS 12.0, *)
 @objc(SubmissionFeedbackValueTransformer)
 final class SubmissionFeedbackValueTransformer: NSSecureUnarchiveFromDataTransformer {
     static let name = NSValueTransformerName(rawValue: String(describing: SubmissionFeedbackValueTransformer.self))

@@ -1,6 +1,5 @@
 import Foundation
 
-@available(iOS 12.0, *)
 @objc(CatalogBlockContentValueTransformer)
 final class CatalogBlockContentValueTransformer: NSSecureUnarchiveFromDataTransformer {
     static let name = NSValueTransformerName(rawValue: String(describing: CatalogBlockContentValueTransformer.self))

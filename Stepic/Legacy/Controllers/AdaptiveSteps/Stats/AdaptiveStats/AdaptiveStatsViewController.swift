@@ -184,7 +184,7 @@ final class AdaptiveStatsViewController: UIViewController {
     }
 
     private func setUpChart() {
-        self.progressChart.chartDescription?.enabled = false
+        self.progressChart.chartDescription.enabled = false
         self.progressChart.isUserInteractionEnabled = false
         self.progressChart.setScaleEnabled(false)
         self.progressChart.pinchZoomEnabled = false
@@ -236,7 +236,7 @@ extension AdaptiveStatsViewController: AdaptiveStatsView {
         let data = LineChartData(dataSet: dataSet)
 
         self.progressChart.data = data
-        self.progressChart.data?.highlightEnabled = true
+        self.progressChart.data?.isHighlightEnabled = true
         self.progressChart.animate(yAxisDuration: 1.4, easingOption: .easeInOutCirc)
     }
 }

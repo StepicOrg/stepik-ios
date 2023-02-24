@@ -1,19 +1,16 @@
 import Foundation
 
-@available(iOS 12.0, *)
 protocol SiriShortcutsStorageManagerProtocol: AnyObject {
     var didClickFastContinueOnHomeWidget: Bool { get set }
     var didClickAddToSiriOnHomeWidget: Bool { get set }
 }
 
-@available(iOS 12.0, *)
 extension SiriShortcutsStorageManagerProtocol {
     var shouldShowSiriButtonOnHomeWidget: Bool {
         self.didClickFastContinueOnHomeWidget && !self.didClickAddToSiriOnHomeWidget
     }
 }
 
-@available(iOS 12.0, *)
 final class SiriShortcutsStorageManager: SiriShortcutsStorageManagerProtocol {
     var didClickFastContinueOnHomeWidget: Bool {
         get {

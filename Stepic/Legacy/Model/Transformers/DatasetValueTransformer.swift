@@ -1,6 +1,5 @@
 import Foundation
 
-@available(iOS 12.0, *)
 @objc(DatasetValueTransformer)
 final class DatasetValueTransformer: NSSecureUnarchiveFromDataTransformer {
     static let name = NSValueTransformerName(rawValue: String(describing: DatasetValueTransformer.self))
