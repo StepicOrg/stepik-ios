@@ -1,2 +1,2 @@
 Что тестировать:
-- Аналитика accessibility APPS-3634
+- Черная полоса в navbar на iPhone 14 Pro APPS-3667
