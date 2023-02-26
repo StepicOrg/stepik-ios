@@ -71,7 +71,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     func presentExamLesson(response: CourseInfo.ExamLessonPresentation.Response) {
         let viewModel = CourseInfo.ExamLessonPresentation.ViewModel(
-            urlPath: response.urlPath
+            urlPath: response.url.absoluteString
         )
         self.viewController?.displayExamLesson(viewModel: viewModel)
     }

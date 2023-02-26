@@ -71,25 +71,6 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.shouldCheckIAPPurchaseSupport && self.currentMobileTier?.priceTier != nil
     }
 
-    private var courseWebURL: URL? {
-        guard let course = self.currentCourse else {
-            return nil
-        }
-
-        if let slug = course.slug {
-            return self.urlFactory.makeCourse(slug: slug)
-        } else {
-            return self.urlFactory.makeCourse(id: course.id)
-        }
-    }
-
-    private var courseWebSyllabusURLPath: String? {
-        guard let courseWebURLPath = self.courseWebURL?.absoluteString else {
-            return nil
-        }
-        return "\(courseWebURLPath)/syllabus"
-    }
-
     // Tab index -> Submodule
     private var submodules: [Int: CourseInfoSubmoduleProtocol] = [:]
 
@@ -213,12 +194,13 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     func doCourseShareAction(request: CourseInfo.CourseShareAction.Request) {
-        guard let courseWebURL = self.courseWebURL else {
+        guard let currentCourse = self.currentCourse,
+              let courseURL = self.urlFactory.makeCourse(id: currentCourse.id) else {
             return
         }
 
         self.analytics.send(.shareCourseTapped)
-        self.presenter.presentCourseSharing(response: .init(url: courseWebURL, courseViewSource: self.courseViewSource))
+        self.presenter.presentCourseSharing(response: .init(url: courseURL, courseViewSource: self.courseViewSource))
     }
 
     func doCourseUnenrollmentAction(request: CourseInfo.CourseUnenrollmentAction.Request) {
@@ -755,9 +737,12 @@ extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
     }
 
     func presentExamLesson() {
-        if let courseWebSyllabusURLPath = self.courseWebSyllabusURLPath {
-            self.presenter.presentExamLesson(response: .init(urlPath: courseWebSyllabusURLPath))
+        guard let currentCourse = self.currentCourse,
+              let courseSyllabusURL = self.urlFactory.makeCourseSyllabus(id: currentCourse.id) else {
+            return
         }
+
+        self.presenter.presentExamLesson(response: .init(url: courseSyllabusURL))
     }
 }
 
