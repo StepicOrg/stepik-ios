@@ -590,7 +590,7 @@ CourseRevenueEmptyCourseBenefitsTitle = "No payments found for this request";
 CourseBenefitDetailTitle = "Purchase Details";
 CourseBenefitDetailTitleRefund = "Refund Details";
 CourseBenefitDetailAmountPercent = "%@ of sales revenue minus Stepik's fee";
-CourseBenefitDetailChannelZLink = "Came via z-link";
+CourseBenefitDetailChannelAuthorLink = "Came via a-link";
 CourseBenefitDetailChannelStepikLink = "Came via Stepik";
 CourseBenefitDetailChannelRefund = "Refund";
 CourseBenefitDetailChannelInvoicePayment = "Payment on account";
@@ -608,7 +608,7 @@ CourseRevenueTabMonthlyTurnoverTitle = "Sales";
 CourseRevenueTabMonthlyRefundsTitle = "Refunds";
 CourseRevenueTabMonthlyIncomeTitle = "Purchases";
 CourseRevenueTabMonthlyChannelStepikTitle = "Came via Stepik";
-CourseRevenueTabMonthlyChannelZLinkTitle = "Came via z-link";
+CourseRevenueTabMonthlyChannelAuthorLinkTitle = "Came via a-link";
 CourseRevenueTabMonthlyChannelInvoicePaymentsTitle = "Payment on account";
 
 /* CourseRevenueTabPurchases */

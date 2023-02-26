@@ -119,8 +119,8 @@ final class CourseRevenueTabPurchasesCellView: UIView {
                 return UIImage(named: "course-revenue-transaction-logo")
             } else if isRefunded {
                 return UIImage(named: "course-revenue-transaction-refund")
-            } else if viewModel?.isZLinkUsed ?? false {
-                return UIImage(named: "course-revenue-transaction-z-link")
+            } else if viewModel?.isAuthorLinkUsed ?? false {
+                return UIImage(named: "course-revenue-transaction-a-link")
             }
             return UIImage(named: "course-revenue-transaction-logo")
         }()
