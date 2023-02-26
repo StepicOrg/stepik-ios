@@ -103,7 +103,7 @@ final class CourseRevenueTabPurchasesPresenter: CourseRevenueTabPurchasesPresent
             formattedManualBenefitDescription: formattedManualBenefitDescription,
             isDebited: courseBenefit.status == .debited,
             isRefunded: courseBenefit.status == .refunded,
-            isZLinkUsed: courseBenefit.isZLinkUsed,
+            isAuthorLinkUsed: courseBenefit.isAuthorLinkUsed,
             isInvoicePayment: courseBenefit.isInvoicePayment,
             isManualBenefit: courseBenefit.isManualBenefit
         )

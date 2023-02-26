@@ -592,7 +592,7 @@ CourseRevenueEmptyCourseBenefitsTitle = "По данному запросу пл
 CourseBenefitDetailTitle = "Детали покупки";
 CourseBenefitDetailTitleRefund = "Детали возврата";
 CourseBenefitDetailAmountPercent = "%@ с продаж за вычетом комиссии Stepik";
-CourseBenefitDetailChannelZLink = "Переход по z-ссылке";
+CourseBenefitDetailChannelAuthorLink = "Переход по a-ссылке";
 CourseBenefitDetailChannelStepikLink = "Переход через Stepik";
 CourseBenefitDetailChannelRefund = "Возврат";
 CourseBenefitDetailChannelInvoicePayment = "Оплата по счёту";
@@ -610,7 +610,7 @@ CourseRevenueTabMonthlyTurnoverTitle = "Продажи";
 CourseRevenueTabMonthlyRefundsTitle = "Возвраты";
 CourseRevenueTabMonthlyIncomeTitle = "Покупки";
 CourseRevenueTabMonthlyChannelStepikTitle = "Переходы через Stepik";
-CourseRevenueTabMonthlyChannelZLinkTitle = "Переходы по z-ссылке";
+CourseRevenueTabMonthlyChannelAuthorLinkTitle = "Переходы по a-ссылке";
 CourseRevenueTabMonthlyChannelInvoicePaymentsTitle = "Оплаты по счёту";
 
 /* CourseRevenueTabPurchases */
