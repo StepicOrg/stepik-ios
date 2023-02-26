@@ -527,7 +527,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
                         return
                     }
                     WebControllerManager.shared.presentWebControllerWithURLString(
-                        "\(viewModel.urlPath)?from_mobile_app=true",
+                        viewModel.urlPath,
                         inController: strongSelf,
                         withKey: .exam,
                         allowsSafari: true,
