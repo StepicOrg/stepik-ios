@@ -53,8 +53,8 @@ final class CourseBenefitDetailPresenter: CourseBenefitDetailPresenterProtocol {
         }()
 
         let channelName: String = {
-            if courseBenefit.isZLinkUsed {
-                return NSLocalizedString("CourseBenefitDetailChannelZLink", comment: "")
+            if courseBenefit.isAuthorLinkUsed {
+                return NSLocalizedString("CourseBenefitDetailChannelAuthorLink", comment: "")
             } else if courseBenefit.isInvoicePayment {
                 return NSLocalizedString("CourseBenefitDetailChannelInvoicePayment", comment: "")
             } else if courseBenefit.isManualBenefit {

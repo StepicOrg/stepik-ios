@@ -32,7 +32,6 @@ extension ContinueLastStepView {
     }
 }
 
-@available(iOS 12.0, *)
 struct SiriButtonContentConfiguration {
     var shortcut: INShortcut?
     weak var delegate: INUIAddVoiceShortcutButtonDelegate?
@@ -53,7 +52,6 @@ final class ContinueLastStepView: UIView {
     // Should use wrapped button cause we have stack view
     private lazy var continueButtonBlock = UIView()
 
-    @available(iOS 12.0, *)
     private lazy var siriButton: INUIAddVoiceShortcutButton = {
         let button = INUIAddVoiceShortcutButton(style: .white)
         button.addTarget(self, action: #selector(self.siriButtonClicked), for: .touchUpInside)
@@ -196,7 +194,6 @@ final class ContinueLastStepView: UIView {
         }
     }
 
-    @available(iOS 12.0, *)
     func configureSiriButton(contentConfiguration: SiriButtonContentConfiguration?) {
         guard let contentConfiguration = contentConfiguration, !contentConfiguration.isEmpty else {
             self.siriButtonContainerView.isHidden = true
@@ -241,10 +238,8 @@ extension ContinueLastStepView: ProgrammaticallyInitializableViewProtocol {
 
         self.continueButtonBlock.addSubview(self.continueButton)
         self.contentStackView.addArrangedSubview(self.continueButtonBlock)
-        if #available(iOS 12.0, *) {
-            self.contentStackView.addArrangedSubview(self.siriButtonContainerView)
-            self.siriButtonContainerView.addSubview(self.siriButton)
-        }
+        self.contentStackView.addArrangedSubview(self.siriButtonContainerView)
+        self.siriButtonContainerView.addSubview(self.siriButton)
         self.contentStackView.addArrangedSubview(self.infoStackView)
 
         self.addSubview(self.backgroundImageView)
@@ -300,14 +295,12 @@ extension ContinueLastStepView: ProgrammaticallyInitializableViewProtocol {
             make.width.equalTo(self.snp.width).multipliedBy(self.appearance.continueButtonWidthRatio)
         }
 
-        if #available(iOS 12.0, *) {
-            self.siriButton.snp.makeConstraints { make in
-                make.top.bottom.equalToSuperview()
-                make.leading.greaterThanOrEqualToSuperview()
-                make.trailing.lessThanOrEqualToSuperview()
-                make.centerX.equalToSuperview()
-                make.width.equalTo(self.snp.width).multipliedBy(self.appearance.continueButtonWidthRatio)
-            }
+        self.siriButton.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.greaterThanOrEqualToSuperview()
+            make.trailing.lessThanOrEqualToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalTo(self.snp.width).multipliedBy(self.appearance.continueButtonWidthRatio)
         }
     }
 }

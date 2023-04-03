@@ -166,17 +166,14 @@ extension BaseExploreViewController: BaseExploreViewControllerProtocol {
             return
         }
 
-        let shouldDonateInteraction: Bool
-        if #available(iOS 12.0, *) {
+        let shouldDonateInteraction: Bool = {
             switch (viewModel.courseContinueSource, viewModel.courseViewSource) {
             case (.homeWidget, .fastContinue):
-                shouldDonateInteraction = true
+                return true
             default:
-                shouldDonateInteraction = false
+                return false
             }
-        } else {
-            shouldDonateInteraction = false
-        }
+        }()
 
         LastStepRouter.continueLearning(
             for: viewModel.course,

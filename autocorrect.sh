@@ -3,7 +3,7 @@ target_name=$1
 if [[ $target_name == "Stepic" ]]; then
 	path="Stepic/Sources"
 elif [[ $target_name == "StepicUITests" ]]; then
-	path="StepicUITests/Sources"
+	path="StepicUITests/"
 else
 	echo "warning: unknown target name ${target_name}"
 fi

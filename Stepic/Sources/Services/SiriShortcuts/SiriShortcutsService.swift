@@ -2,12 +2,10 @@ import CoreSpotlight
 import Foundation
 import MobileCoreServices
 
-@available(iOS 12.0, *)
 protocol SiriShortcutsServiceProtocol: AnyObject {
     func getContinueLearningShortcut() -> NSUserActivity
 }
 
-@available(iOS 12.0, *)
 final class SiriShortcutsService: SiriShortcutsServiceProtocol {
     func getContinueLearningShortcut() -> NSUserActivity {
         let activityType = NSUserActivity.continueLearningActivityType

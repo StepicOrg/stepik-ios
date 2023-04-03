@@ -160,6 +160,9 @@ final class SocialAuthViewController: UIViewController {
         }
 
         self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+        
+        self.signUpButton.accessibilityIdentifier = AccessibilityIdentifiers.AuthSocial.signUpButton
+        self.signInButton.accessibilityIdentifier = AccessibilityIdentifiers.AuthSocial.signInButton
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

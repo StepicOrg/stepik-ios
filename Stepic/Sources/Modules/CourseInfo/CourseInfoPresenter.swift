@@ -71,7 +71,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     func presentExamLesson(response: CourseInfo.ExamLessonPresentation.Response) {
         let viewModel = CourseInfo.ExamLessonPresentation.ViewModel(
-            urlPath: response.urlPath
+            urlPath: response.url.absoluteString
         )
         self.viewController?.displayExamLesson(viewModel: viewModel)
     }
@@ -347,11 +347,11 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             }
 
             if course.isPaid && !course.isPurchased && !course.canBeBought {
-                return NSLocalizedString("CourseIntoPaymentsCantBeBought", comment: "")
+                return NSLocalizedString("CourseInfoPaymentsCantBeBought", comment: "")
             }
 
             return shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase
-                ? NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage", comment: "")
+                ? NSLocalizedString("CourseInfoPaymentsIAPUnsupported", comment: "")
                 : nil
         }()
 

@@ -32,7 +32,8 @@ final class CourseBenefit: NSManagedObject, ManagedObject, JSONSerializable {
         self.currencyCode = json[JSONKey.currencyCode.rawValue].stringValue
         self.paymentAmount = json[JSONKey.paymentAmount.rawValue].floatValue
         self.buyerID = json[JSONKey.buyer.rawValue].int
-        self.isZLinkUsed = json[JSONKey.isZLinkUsed.rawValue].boolValue
+        // APPS-3653: Renamed
+        self.isAuthorLinkUsed = json[JSONKey.isZLinkUsed.rawValue].boolValue
         self.isInvoicePayment = json[JSONKey.isInvoicePayment.rawValue].boolValue
         self.promoCode = json[JSONKey.promoCode.rawValue].string
         self.seatsCount = json[JSONKey.seatsCount.rawValue].int

@@ -116,7 +116,11 @@ final class CourseInfoHeaderView: UIView {
 
     private lazy var titleView = CourseInfoHeaderTitleView()
 
-    private lazy var purchaseFeedbackView = QuizFeedbackView()
+    private lazy var purchaseFeedbackView: CourseInfoPurchaseFeedbackView = {
+        let view = CourseInfoPurchaseFeedbackView()
+        view.isHidden = true
+        return view
+    }()
 
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView()
@@ -245,10 +249,7 @@ final class CourseInfoHeaderView: UIView {
 
         if let purchaseFeedbackText = viewModel.purchaseFeedbackText {
             self.purchaseFeedbackView.isHidden = false
-            self.purchaseFeedbackView.update(state: .wrong, title: purchaseFeedbackText)
-            self.purchaseFeedbackView.setIconImage(
-                UIImage(named: "quiz-feedback-info")?.withRenderingMode(.alwaysTemplate)
-            )
+            self.purchaseFeedbackView.set(title: purchaseFeedbackText)
         } else {
             self.purchaseFeedbackView.isHidden = true
         }

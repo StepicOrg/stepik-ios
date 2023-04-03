@@ -100,7 +100,8 @@ extension CourseBenefit {
         }
     }
 
-    var isZLinkUsed: Bool {
+    // APPS-3653: Renamed
+    var isAuthorLinkUsed: Bool {
         get {
             self.managedIsZLinkUsed?.boolValue ?? false
         }

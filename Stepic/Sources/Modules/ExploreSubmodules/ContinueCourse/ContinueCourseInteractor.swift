@@ -21,9 +21,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
     private let tooltipStorageManager: TooltipStorageManagerProtocol
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
-    @available(iOS 12.0, *)
     private lazy var siriShortcutsService: SiriShortcutsServiceProtocol = SiriShortcutsService()
-    @available(iOS 12.0, *)
     private lazy var siriShortcutsStorageManager: SiriShortcutsStorageManagerProtocol = SiriShortcutsStorageManager()
 
     private var currentCourse: Course?
@@ -73,12 +71,10 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
             viewSource: .fastContinue
         )
 
-        if #available(iOS 12.0, *) {
-            self.siriShortcutsStorageManager.didClickFastContinueOnHomeWidget = true
+        self.siriShortcutsStorageManager.didClickFastContinueOnHomeWidget = true
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + Self.siriButtonAvailabilityCheckDelay) {
-                self.doSiriButtonAvailabilityCheck(request: .init())
-            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.siriButtonAvailabilityCheckDelay) {
+            self.doSiriButtonAvailabilityCheck(request: .init())
         }
     }
 
@@ -92,8 +88,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
     }
 
     func doSiriButtonAvailabilityCheck(request: ContinueCourse.SiriButtonAvailabilityCheck.Request) {
-        if #available(iOS 12.0, *),
-           self.siriShortcutsStorageManager.shouldShowSiriButtonOnHomeWidget {
+        if self.siriShortcutsStorageManager.shouldShowSiriButtonOnHomeWidget {
             let userActivity = self.siriShortcutsService.getContinueLearningShortcut()
             self.presenter.presentSiriButton(response: .init(shouldShowButton: true, userActivity: userActivity))
         } else {
@@ -102,9 +97,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
     }
 
     func doSiriButtonAction(request: ContinueCourse.SiriButtonAction.Request) {
-        if #available(iOS 12.0, *) {
-            self.siriShortcutsStorageManager.didClickAddToSiriOnHomeWidget = true
-        }
+        self.siriShortcutsStorageManager.didClickAddToSiriOnHomeWidget = true
     }
 }
 
