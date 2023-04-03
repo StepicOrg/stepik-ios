@@ -347,11 +347,11 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             }
 
             if course.isPaid && !course.isPurchased && !course.canBeBought {
-                return NSLocalizedString("CourseIntoPaymentsCantBeBought", comment: "")
+                return NSLocalizedString("CourseInfoPaymentsCantBeBought", comment: "")
             }
 
             return shouldCheckIAPPurchaseSupport && !isSupportedIAPPurchase
-                ? NSLocalizedString("CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage", comment: "")
+                ? NSLocalizedString("CourseInfoPaymentsIAPUnsupported", comment: "")
                 : nil
         }()
 

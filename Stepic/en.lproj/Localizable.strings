@@ -487,7 +487,8 @@ CourseInfoRemoveFromWishlistFailureMessage = "Failed to Remove Course from Wishl
 
 CourseInfoPaymentsNotAvailableEnded = "Course ended on %@";
 CourseInfoPaymentsNotAvailableEndedOther = "Course currently unavailable";
-CourseIntoPaymentsCantBeBought = "You cannot buy this course yet";
+CourseInfoPaymentsCantBeBought = "You cannot buy this course yet";
+CourseInfoPaymentsIAPUnsupported = "The course cannot be purchased in the mobile app yet. Add it to your Wishlist to come back later or be notified of the price drop.";
 
 CourseInfoRestorePurchaseTitle = "Restore Purchase";
 CourseInfoRestorePurchaseSuccessMessage = "Purchase Successfully Restored";
