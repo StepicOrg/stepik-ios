@@ -292,7 +292,7 @@ DEPENDENCIES
   generamba (= 1.5.0)
 
 RUBY VERSION
-   ruby 2.6.5p114
+   ruby 3.2.1p31
 
 BUNDLED WITH
    2.1.4
