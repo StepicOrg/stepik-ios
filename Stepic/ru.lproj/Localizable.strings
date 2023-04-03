@@ -489,7 +489,8 @@ CourseInfoRemoveFromWishlistFailureMessage = "Не удалось убрать �
 
 CourseInfoPaymentsNotAvailableEnded = "Курс закончился %@";
 CourseInfoPaymentsNotAvailableEndedOther = "Курс сейчас недоступен";
-CourseIntoPaymentsCantBeBought = "Пока нельзя купить этот курс";
+CourseInfoPaymentsCantBeBought = "Пока нельзя купить этот курс";
+CourseInfoPaymentsIAPUnsupported = "Курс пока нельзя купить в мобильном приложении. Добавьте курс в Cписок желаний, чтобы вернуться к нему позже или узнать о снижении цены.";
 
 CourseInfoRestorePurchaseTitle = "Восстановить покупку";
 CourseInfoRestorePurchaseSuccessMessage = "Покупка успешно восстановлена";
