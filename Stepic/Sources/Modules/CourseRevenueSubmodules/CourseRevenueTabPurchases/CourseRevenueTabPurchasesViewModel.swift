@@ -13,7 +13,7 @@ struct CourseRevenueTabPurchasesViewModel {
 
     let isDebited: Bool
     let isRefunded: Bool
-    let isZLinkUsed: Bool
+    let isAuthorLinkUsed: Bool
     let isInvoicePayment: Bool
     let isManualBenefit: Bool
 }

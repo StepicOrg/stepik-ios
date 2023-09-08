@@ -15,7 +15,7 @@ final class CodePlaygroundManager {
 
     let closers: [String: String] = ["{": "}", "[": "]", "(": ")", "\"": "\"", "'": "'"]
 
-    let allowedCharacters: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_"
+    let allowedCharactersSet = Set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_")
 
     var suggestionsController: CodeSuggestionsTableViewController?
     var isSuggestionsViewPresented: Bool { self.suggestionsController != nil }
@@ -87,11 +87,30 @@ final class CodePlaygroundManager {
         language: CodeLanguage
     ) -> (shouldMakeNewLine: Bool, paired: Bool) {
         switch language {
-        case .python:
+        case .python, .python31:
             return symbol == ":"
                 ? (shouldMakeNewLine: true, paired: false)
                 : (shouldMakeNewLine: false, paired: false)
-        case .c, .cpp11, .cpp, .java, .java8, .java9, .java11, .cs, .kotlin, .swift, .rust, .javascript, .scala, .go, .perl, .php:
+        case .c,
+             .cValgrind,
+             .cpp11,
+             .cpp,
+             .java,
+             .java8,
+             .java9,
+             .java11,
+             .java17,
+             .cs,
+             .csMono,
+             .kotlin,
+             .swift,
+             .rust,
+             .javascript,
+             .scala,
+             .scala3,
+             .go,
+             .perl,
+             .php:
             return symbol == "{"
                 ? (shouldMakeNewLine: true, paired: true)
                 : (shouldMakeNewLine: false, paired: false)
@@ -111,13 +130,13 @@ final class CodePlaygroundManager {
 
         var offsetBefore = 0
         while let character = text[safe: (cursorPosition - offsetBefore - 1)],
-              self.allowedCharacters.contains(character) {
+              self.allowedCharactersSet.contains(character) {
             offsetBefore += 1
         }
 
         var offsetAfter = 0
         while let character = text[safe: (cursorPosition + offsetAfter)],
-              self.allowedCharacters.contains(character) {
+              self.allowedCharactersSet.contains(character) {
             offsetAfter += 1
         }
 
@@ -372,10 +391,7 @@ final class CodePlaygroundManager {
     ) {
         // TODO: If suggestions are presented, only change the data there, otherwise instantiate and add suggestions view
         if self.suggestionsController == nil {
-            self.suggestionsController = CodeSuggestionsTableViewController(
-                nibName: "CodeSuggestionsTableViewController",
-                bundle: nil
-            )
+            self.suggestionsController = CodeSuggestionsTableViewController()
             vc.addChild(self.suggestionsController!)
             textView.addSubview(self.suggestionsController!.view)
             self.suggestionsController?.delegate = suggestionsDelegate

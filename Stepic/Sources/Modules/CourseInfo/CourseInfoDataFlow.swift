@@ -105,7 +105,7 @@ enum CourseInfo {
     /// Present exam in web
     enum ExamLessonPresentation {
         struct Response {
-            let urlPath: String
+            let url: URL
         }
 
         struct ViewModel {

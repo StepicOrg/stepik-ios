@@ -96,9 +96,9 @@ final class CourseRevenueTabMonthlyCellView: UIView {
                 image: UIImage(named: "course-revenue-transaction-logo")?.withRenderingMode(.alwaysOriginal)
             ),
             Item(
-                title: NSLocalizedString("CourseRevenueTabMonthlyChannelZLinkTitle", comment: ""),
+                title: NSLocalizedString("CourseRevenueTabMonthlyChannelAuthorLinkTitle", comment: ""),
                 subtitle: "\(viewModel?.countZPayments ?? 0)",
-                image: UIImage(named: "course-revenue-transaction-z-link")?.withRenderingMode(.alwaysOriginal)
+                image: UIImage(named: "course-revenue-transaction-a-link")?.withRenderingMode(.alwaysOriginal)
             ),
             Item(
                 title: NSLocalizedString("CourseRevenueTabMonthlyChannelInvoicePaymentsTitle", comment: ""),

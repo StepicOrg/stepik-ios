@@ -489,7 +489,8 @@ CourseInfoRemoveFromWishlistFailureMessage = "Не удалось убрать �
 
 CourseInfoPaymentsNotAvailableEnded = "Курс закончился %@";
 CourseInfoPaymentsNotAvailableEndedOther = "Курс сейчас недоступен";
-CourseIntoPaymentsCantBeBought = "Пока нельзя купить этот курс";
+CourseInfoPaymentsCantBeBought = "Пока нельзя купить этот курс";
+CourseInfoPaymentsIAPUnsupported = "Курс пока нельзя купить в мобильном приложении. Добавьте курс в Cписок желаний, чтобы вернуться к нему позже или узнать о снижении цены.";
 
 CourseInfoRestorePurchaseTitle = "Восстановить покупку";
 CourseInfoRestorePurchaseSuccessMessage = "Покупка успешно восстановлена";
@@ -592,7 +593,7 @@ CourseRevenueEmptyCourseBenefitsTitle = "По данному запросу пл
 CourseBenefitDetailTitle = "Детали покупки";
 CourseBenefitDetailTitleRefund = "Детали возврата";
 CourseBenefitDetailAmountPercent = "%@ с продаж за вычетом комиссии Stepik";
-CourseBenefitDetailChannelZLink = "Переход по z-ссылке";
+CourseBenefitDetailChannelAuthorLink = "Переход по a-ссылке";
 CourseBenefitDetailChannelStepikLink = "Переход через Stepik";
 CourseBenefitDetailChannelRefund = "Возврат";
 CourseBenefitDetailChannelInvoicePayment = "Оплата по счёту";
@@ -610,7 +611,7 @@ CourseRevenueTabMonthlyTurnoverTitle = "Продажи";
 CourseRevenueTabMonthlyRefundsTitle = "Возвраты";
 CourseRevenueTabMonthlyIncomeTitle = "Покупки";
 CourseRevenueTabMonthlyChannelStepikTitle = "Переходы через Stepik";
-CourseRevenueTabMonthlyChannelZLinkTitle = "Переходы по z-ссылке";
+CourseRevenueTabMonthlyChannelAuthorLinkTitle = "Переходы по a-ссылке";
 CourseRevenueTabMonthlyChannelInvoicePaymentsTitle = "Оплаты по счёту";
 
 /* CourseRevenueTabPurchases */

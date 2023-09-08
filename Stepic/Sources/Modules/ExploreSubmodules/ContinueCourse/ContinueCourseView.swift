@@ -37,7 +37,6 @@ final class ContinueCourseView: UIView {
         self.lastStepView.coverImageURL = viewModel.coverImageURL
     }
 
-    @available(iOS 12.0, *)
     func configureSiriButton(contentConfiguration: SiriButtonContentConfiguration?) {
         self.lastStepView.configureSiriButton(contentConfiguration: contentConfiguration)
     }

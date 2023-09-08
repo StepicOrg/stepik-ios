@@ -178,6 +178,7 @@ final class SettingsTableView: UIView {
         options: RightDetailCellOptions
     ) {
         cell.uniqueIdentifier = viewModel.uniqueIdentifier
+        cell.accessibilityIdentifier = viewModel.accessibilityIdentifier
         cell.accessoryType = options.accessoryType
 
         cell.elementView.title = options.title.text

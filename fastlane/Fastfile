@@ -1,11 +1,18 @@
-fastlane_version "2.200.0"
+fastlane_version "2.212.1"
 
 default_platform :ios
 
 platform :ios do
   # Config variables
 
-  team_id = ENV["FASTLANE_TEAM_ID"]
+  team_name = CredentialsManager::AppfileConfig.try_fetch_value(:team_name)
+  team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
+
+  itc_team_name = CredentialsManager::AppfileConfig.try_fetch_value(:itc_team_name)
+  itc_team_id = CredentialsManager::AppfileConfig.try_fetch_value(:itc_team_id)
+
+  firebase_app_id = ENV["FIREBASE_APP_ID"]
+
   keychain_password = ENV["KEYCHAIN_PASSWORD"]
 
   # Constants
@@ -98,7 +105,7 @@ platform :ios do
   end
 
   def update_beta_profile_compilation_condition(options)
-    require 'xcodeproj'
+    require "xcodeproj"
 
     target_name = options[:target] || "Stepic"
     scheme = options[:scheme]
@@ -115,10 +122,10 @@ platform :ios do
 
     project = Xcodeproj::Project.open("../Stepic.xcodeproj")
 
-    target = project.targets.find {|it| it.name == target_name }
+    target = project.targets.find { |it| it.name == target_name }
     UI.user_error!("Can't find target for name #{target_name}") if target.nil?
 
-    build_configuration = target.build_configurations.find {|it| it.name == configuration_name }
+    build_configuration = target.build_configurations.find { |it| it.name == configuration_name }
     UI.user_error!("Can't find build configuration for name #{configuration_name}") if build_configuration.nil?
 
     old_build_setting = build_configuration.build_settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"]
@@ -145,11 +152,11 @@ platform :ios do
 
     match(
       type: type,
-      storage_mode: "google_cloud",
-      google_cloud_bucket_name: "stepik-ios-cert",
-      force_for_new_devices: true,
       readonly: read_only,
       app_identifier: identifiers,
+      team_id: team_id,
+      team_name: team_name,
+      force_for_new_devices: true,
     )
   end
 
@@ -228,7 +235,6 @@ platform :ios do
   desc "Options: scheme"
   lane :beta do |options|
     scheme = options[:scheme]
-    firebase_app_id = ENV["FIREBASE_APP_ID"]
 
     UI.user_error!("Wrong scheme parameter") if scheme.nil?
     UI.user_error!("Firebase App ID is required") if firebase_app_id.nil?
@@ -236,7 +242,7 @@ platform :ios do
     ENV["FASTLANE_BETA_PROFILE"] = "true"
 
     clear_derived_data
-    cocoapods(repo_update: true)
+    cocoapods(try_repo_update_on_error: true)
 
     unlock_keychain(password: keychain_password)
 
@@ -337,7 +343,11 @@ platform :ios do
 
   desc "Update iOS UDID's on the Developer Portal."
   lane :sync_device_info do
-    register_devices(devices_file: "fastlane/Devicefile")
+    register_devices(
+      devices_file: "fastlane/Devicefile",
+      team_id: team_id,
+      team_name: team_name,
+    )
   end
 
   desc "Increment build number in project"
@@ -412,7 +422,7 @@ platform :ios do
     should_submit = options.key?(:should_submit) ? options[:should_submit] : false
 
     clear_derived_data
-    cocoapods(repo_update: true)
+    cocoapods(try_repo_update_on_error: true)
 
     unlock_keychain(password: keychain_password)
 

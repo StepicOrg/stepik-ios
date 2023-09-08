@@ -16,15 +16,18 @@ struct SettingsTableSectionViewModel {
         }
 
         let uniqueIdentifier: UniqueIdentifierType
+        let accessibilityIdentifier: String?
         let type: SettingsTableSectionCellType
         let appearance: Appearance
 
         init(
             uniqueIdentifier: UniqueIdentifierType,
+            accessibilityIdentifier: String? = nil,
             type: SettingsTableSectionCellType,
             appearance: Appearance = .init()
         ) {
             self.uniqueIdentifier = uniqueIdentifier
+            self.accessibilityIdentifier = accessibilityIdentifier ?? uniqueIdentifier
             self.type = type
             self.appearance = appearance
         }

@@ -23,8 +23,7 @@ final class AuthInfo: NSObject {
 
     private lazy var logoutDataClearService: LogoutDataClearServiceProtocol = LogoutDataClearService()
 
-    @available(iOS 14.0, *)
-    private lazy var widgetTokenFileManager: StepikWidgetTokenFileManagerProtocol = StepikWidgetTokenFileManager.default
+    private lazy var widgetService = WidgetService()
 
     override private init() {
         super.init()
@@ -42,7 +41,7 @@ final class AuthInfo: NSObject {
         }
 
         if #available(iOS 14.0, *) {
-            try? self.widgetTokenFileManager.write(token: StepikWidgetToken(accessToken: self.token?.accessToken))
+            try? self.widgetService.writeToken(StepikWidgetToken(accessToken: self.token?.accessToken))
         }
     }
 
@@ -55,7 +54,7 @@ final class AuthInfo: NSObject {
         self.defaults.synchronize()
 
         if #available(iOS 14.0, *) {
-            try? self.widgetTokenFileManager.write(token: StepikWidgetToken(accessToken: newToken?.accessToken))
+            try? self.widgetService.writeToken(StepikWidgetToken(accessToken: newToken?.accessToken))
         }
     }
 
