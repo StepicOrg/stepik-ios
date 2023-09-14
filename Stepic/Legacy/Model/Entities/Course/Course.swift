@@ -106,7 +106,9 @@ final class Course: NSManagedObject, ManagedObject, IDFetchable {
         self.id = json[JSONKey.id.rawValue].intValue
         self.title = json[JSONKey.title.rawValue].stringValue
         self.courseDescription = json[JSONKey.description.rawValue].stringValue
-        self.coverURLString = "\(StepikApplicationsInfo.stepikURL)" + json[JSONKey.cover.rawValue].stringValue
+
+        let cover = json[JSONKey.cover.rawValue].stringValue
+        self.coverURLString = cover.isValidHttpUrl ? cover : "\(StepikApplicationsInfo.stepikURL)\(cover)"
 
         self.beginDate = Parser.dateFromTimedateJSON(json[JSONKey.beginDate.rawValue])
         self.endDate = Parser.dateFromTimedateJSON(json[JSONKey.endDate.rawValue])
