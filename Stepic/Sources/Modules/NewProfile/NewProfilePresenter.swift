@@ -90,8 +90,9 @@ final class NewProfilePresenter: NewProfilePresenterProtocol {
     private func makeHeaderViewModel(user: User) -> NewProfileHeaderViewModel {
         let coverURL: URL? = {
             if let cover = user.cover {
-                let urlString = "\(StepikApplicationsInfo.stepikURL)\(cover)"
-                return URL(string: urlString)
+                return cover.isValidHttpUrl
+                  ? URL(string: cover)
+                  : URL(string: "\(StepikApplicationsInfo.stepikURL)\(cover)")
             }
             return nil
         }()

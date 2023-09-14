@@ -1165,6 +1165,7 @@
 		2CE532F7266E965600E80983 /* course-benefit-summaries.json in Resources */ = {isa = PBXBuildFile; fileRef = 2CE532F6266E965600E80983 /* course-benefit-summaries.json */; };
 		2CE532F9266EB02200E80983 /* CourseBenefitSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE532F8266EB02200E80983 /* CourseBenefitSummariesAPI.swift */; };
 		2CE532FB266EB0A400E80983 /* CourseBenefitSummariesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE532FA266EB0A400E80983 /* CourseBenefitSummariesPersistenceService.swift */; };
+		2CE619E82AB2F98100E5CA55 /* String+URLValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE619E72AB2F98100E5CA55 /* String+URLValidation.swift */; };
 		2CE61D832412960500DA2CBA /* SpotlightSearchableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE61D822412960500DA2CBA /* SpotlightSearchableItem.swift */; };
 		2CE61D852412961500DA2CBA /* SpotlightDomainIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE61D842412961500DA2CBA /* SpotlightDomainIdentifier.swift */; };
 		2CE664E320F5207A0082F3FE /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664DF20F520790082F3FE /* Downloader.swift */; };
@@ -3267,6 +3268,7 @@
 		2CE532F6266E965600E80983 /* course-benefit-summaries.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "course-benefit-summaries.json"; sourceTree = "<group>"; };
 		2CE532F8266EB02200E80983 /* CourseBenefitSummariesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitSummariesAPI.swift; sourceTree = "<group>"; };
 		2CE532FA266EB0A400E80983 /* CourseBenefitSummariesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBenefitSummariesPersistenceService.swift; sourceTree = "<group>"; };
+		2CE619E72AB2F98100E5CA55 /* String+URLValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+URLValidation.swift"; sourceTree = "<group>"; };
 		2CE61D822412960500DA2CBA /* SpotlightSearchableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightSearchableItem.swift; sourceTree = "<group>"; };
 		2CE61D842412961500DA2CBA /* SpotlightDomainIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightDomainIdentifier.swift; sourceTree = "<group>"; };
 		2CE664DF20F520790082F3FE /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
@@ -4531,6 +4533,7 @@
 				2CFED65E252C5AC900FCAD41 /* Result+Stepik.swift */,
 				2C9A8D2D22D348A5009434DB /* String+HTMLEscape.swift */,
 				2C546C1223DA02AB00352F27 /* String+SafeSubscript.swift */,
+				2CE619E72AB2F98100E5CA55 /* String+URLValidation.swift */,
 				2C6D61AD24D93E4500D019F2 /* String+Whitespaces.swift */,
 			);
 			path = SwiftStdlib;
@@ -11614,6 +11617,7 @@
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				2C85FCEE26FDE60700BD6BB9 /* CourseInfoTabNewsBadgeView.swift in Sources */,
 				2C0A10A7268B279A001D4023 /* CourseBenefitByMonthsAPI.swift in Sources */,
+				2CE619E82AB2F98100E5CA55 /* String+URLValidation.swift in Sources */,
 				2CCB4B1A26E77CED0056C44E /* AnnouncementsAPI.swift in Sources */,
 				08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */,
@@ -13294,7 +13298,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 435;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
@@ -13319,7 +13323,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 435;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Production.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -13461,7 +13465,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 435;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Stepic/Info-Production.plist";
@@ -13491,7 +13495,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 435;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -13582,7 +13586,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 435;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -13634,7 +13638,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 435;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
@@ -13715,7 +13719,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 435;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Stepic/Info-Develop.plist";
@@ -13763,7 +13767,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 435;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Develop.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -14283,7 +14287,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 435;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -14337,7 +14341,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 435;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
@@ -14419,7 +14423,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 435;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Stepic/Info-Release.plist";
@@ -14467,7 +14471,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 435;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StickerPackExtension/Info-Release.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

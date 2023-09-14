@@ -154,7 +154,7 @@ extension User {
             managedAvatarURL = value
         }
         get {
-            managedAvatarURL ?? "http://www.yoprogramo.com/wp-content/uploads/2015/08/human-error-in-finance-640x324.jpg"
+            managedAvatarURL ?? ""
         }
     }
 
