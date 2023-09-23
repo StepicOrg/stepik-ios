@@ -1,0 +1,18 @@
+/* Bundle display name */
+"CFBundleDisplayName" = "Stepik";
+
+/* Bundle name */
+"CFBundleName" = "Stepik";
+
+/* (No Comment) */
+"shortcutTitleContinueLearning" = "Continuer à apprendre";
+
+/* (No Comment) */
+"shortcutTitleNotifications" = "Avis";
+
+/* (No Comment) */
+"shortcutTitleProfile" = "Profil";
+
+/* (No Comment) */
+"shortcutTitleSearchCourses" = "Rechercher des cours";
+
