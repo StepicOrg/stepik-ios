@@ -45,11 +45,11 @@ def all_pods
   pod "SnapKit", "5.0.1"
 
   # Firebase
-  pod "Firebase/Core", "8.9.1"
-  pod "Firebase/Messaging", "8.9.1"
-  pod "Firebase/Analytics", "8.9.1"
-  pod "Firebase/Crashlytics", "8.9.1"
-  pod "Firebase/RemoteConfig", "8.9.1"
+  pod "Firebase/Core", "10.15.0"
+  pod "Firebase/Messaging", "10.15.0"
+  pod "Firebase/Analytics", "10.15.0"
+  pod "Firebase/Crashlytics", "10.15.0"
+  pod "Firebase/RemoteConfig", "10.15.0"
 
   pod "YandexMobileMetrica/Dynamic", "3.17.0"
   pod "Amplitude", "8.5.0"
@@ -102,6 +102,22 @@ target "Stepic" do
 end
 
 post_install do |installer|
+  # Fix Xcode 15 Error 'DT_TOOLCHAIN_DIR cannot be used to evaluate LIBRARY_SEARCH_PATHS, use TOOLCHAIN_DIR instead'
+  installer.aggregate_targets.each do |target|
+    target.xcconfigs.each do |variant, xcconfig|
+      xcconfig_path = target.client_root + target.xcconfig_relative_path(variant)
+      IO.write(xcconfig_path, IO.read(xcconfig_path).gsub("DT_TOOLCHAIN_DIR", "TOOLCHAIN_DIR"))
+    end
+  end
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      if config.base_configuration_reference.is_a? Xcodeproj::Project::Object::PBXFileReference
+        xcconfig_path = config.base_configuration_reference.real_path
+        IO.write(xcconfig_path, IO.read(xcconfig_path).gsub("DT_TOOLCHAIN_DIR", "TOOLCHAIN_DIR"))
+      end
+    end
+  end
+
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       if config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"].to_f < 12.0

@@ -93,6 +93,10 @@ final class AvatarImageView: UIImageView {
         label.textAlignment = NSTextAlignment.center
         label.backgroundColor = UIColor(hex6: self.colors[letters.hash % self.colors.count])
 
+        if label.bounds.size == .zero {
+            return nil
+        }
+
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(label.bounds.size, false, scale)
         if let context = UIGraphicsGetCurrentContext() {

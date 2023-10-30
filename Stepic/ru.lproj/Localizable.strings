@@ -567,7 +567,7 @@ CourseInfoPurchaseModalWishlistButtonInWishlistTitle = "Добавлен в Сп
 CourseInfoPurchaseModalBuyButtonPurchaseInProgressTitle = "Обработка платежа";
 
 CourseInfoPurchaseModalPurchaseErrorStatusTitle = "Оплата прошла, покупка не завершена";
-CourseInfoPurchaseModalPurchaseErrorFeedbackMessage = "При обработке платежа произошла ошибка, попробуйте восстановить покупку и <a href=\"https://support.stepik.org/hc/ru\">свяжитесь с поддержкой</a>, если ошибка не будет устранена. Повторного списания средств не произойдет.";
+CourseInfoPurchaseModalPurchaseErrorFeedbackMessage = "При обработке платежа произошла ошибка, попробуйте восстановить покупку и <a href=\"https://help.stepik.org/\">свяжитесь с поддержкой</a>, если ошибка не будет устранена. Повторного списания средств не произойдет.";
 CourseInfoPurchaseModalPurchaseErrorRestoreTitle = "Восстановить покупку";
 CourseInfoPurchaseModalPurchaseErrorContactSupportSubject = "Ошибка при покупке курса";
 CourseInfoPurchaseModalPurchaseSuccessStatusTitle = "Оплата прошла успешно";
@@ -827,7 +827,7 @@ PrivacyPolicyTitle = "Условия конфиденциальности";
 TermsOfServiceLink = "https://welcome.stepik.org/ru/terms";
 PrivacyPolicyLink = "https://welcome.stepik.org/ru/privacy";
 HelpCenterTitle = "Справочный центр";
-HelpCenterLink = "https://support.stepik.org/hc/ru";
+HelpCenterLink = "https://help.stepik.org/";
 ContactSupportTitle = "Написать в поддержку";
 ContactSupportSubject = "Обратная связь о приложении Stepik iOS";
 ContactSupportMessageBody = "Я делаю следующее:\n\n1.\n2.\n3.\n\nПроисходит вот что:\n\nЯ ожидаю:\n\n=======\nПожалуйста, не удаляйте эту информацию\n=======\nВерсия приложения: %@\nStepik ID: %@";
@@ -1037,10 +1037,10 @@ StepARQuickLookUnsupportedAlertMessage = "Ваше устройство не п�
 StepDisabledStudentTitle = "Увидеть задачу пока нельзя";
 StepDisabledStudentMessage = "Напишите авторам курса, чтобы они обратили внимание на настройки %@.<br><br>Возможно, через какое-то время доступ восстановится.";
 StepDisabledTeacherTitle = "Сейчас учащиеся не могут просмотреть эту задачу";
-StepDisabledTeacherInCourseMessage = "Чтобы учащиеся увидели эту задачу, измените тип курса на %@.<br><br>В шаге использована платная функциональность. <a href=\"https://support.stepik.org/hc/ru/articles/360012252539\">О тарифных планах</a>.";
+StepDisabledTeacherInCourseMessage = "Чтобы учащиеся увидели эту задачу, измените тип курса на %@.<br><br>В шаге использована платная функциональность. <a href=\"https://help.stepik.org/article/54722\">О тарифных планах</a>.";
 StepDisabledTeacherInCoursePlanProTitle = "<b>PRO</b> или сделайте его платным";
 StepDisabledTeacherInCoursePlanEnterpriseTitle = "<b>Enterprise</b>";
-StepDisabledTeacherNoCourseMessage = "Чтобы учащиеся увидели эту задачу, добавьте урок в %@.<br><br>В шаге использована платная функциональность. <a href=\"https://support.stepik.org/hc/ru/articles/360012252539\">О тарифных планах</a>.";
+StepDisabledTeacherNoCourseMessage = "Чтобы учащиеся увидели эту задачу, добавьте урок в %@.<br><br>В шаге использована платная функциональность. <a href=\"https://help.stepik.org/article/54722\">О тарифных планах</a>.";
 StepDisabledTeacherNoCoursePlanProTitle = "<b>платный</b> или <b>PRO-курс</b>";
 StepDisabledTeacherNoCoursePlanEnterpriseTitle = "<b>Enterprise-курс</b>";
 StepPosition = "Шаг %@";
