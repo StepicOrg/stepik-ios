@@ -1,7 +1,7 @@
 import Amplitude
+import AppMetricaCore
 import FirebaseAnalytics
 import Foundation
-import YandexMobileMetrica
 
 protocol AnalyticsEngine: AnyObject {
     func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool)
@@ -74,7 +74,7 @@ final class AppMetricaAnalyticsEngine: AnalyticsEngine {
     init() {}
 
     func sendAnalyticsEvent(named name: String, parameters: [String: Any]?, forceSend: Bool) {
-        YMMYandexMetrica.reportEvent(name, parameters: parameters) { error in
+        AppMetrica.reportEvent(name: name, parameters: parameters) { error in
             if LaunchArguments.analyticsDebugEnabled {
                 print(
                     """

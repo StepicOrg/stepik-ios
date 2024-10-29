@@ -10,7 +10,7 @@ import Amplitude
 import Firebase
 import FirebaseCore
 import UIKit
-import YandexMobileMetrica
+import AppMetricaCore
 
 final class AnalyticsHelper {
     static var sharedHelper = AnalyticsHelper()
@@ -18,8 +18,12 @@ final class AnalyticsHelper {
     func setupAnalytics() {
         FirebaseApp.configure()
 
-        if let config = YMMYandexMetricaConfiguration(apiKey: Tokens.shared.appMetricaToken) {
-            YMMYandexMetrica.activate(with: config)
+        if let configuration = AppMetricaConfiguration(apiKey: Tokens.shared.appMetricaToken) {
+            AppMetrica.activate(with: configuration)
+        } else {
+            #if DEBUG
+            print("AnalyticsHelper :: failed to initialize AppMetrica")
+            #endif
         }
 
         Amplitude.instance().initializeApiKey(Tokens.shared.amplitudeToken)

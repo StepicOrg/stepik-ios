@@ -51,7 +51,7 @@ def all_pods
   pod "Firebase/Crashlytics", "10.15.0"
   pod "Firebase/RemoteConfig", "10.15.0"
 
-  pod "YandexMobileMetrica/Dynamic", "3.17.0"
+  pod "AppMetricaCore", "5.8.2"
   pod "Amplitude", "8.5.0"
   pod "Branch", "1.40.2"
 

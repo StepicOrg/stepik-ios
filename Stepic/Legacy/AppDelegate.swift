@@ -17,7 +17,6 @@ import PromiseKit
 import SVProgressHUD
 import UIKit
 import VK_ios_sdk
-import YandexMobileMetrica
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

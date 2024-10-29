@@ -10,6 +10,41 @@ PODS:
   - AppAuth/Core (1.7.5)
   - AppAuth/ExternalUserAgent (1.7.5):
     - AppAuth/Core
+  - AppMetricaCore (5.8.2):
+    - AppMetricaCoreUtils (= 5.8.2)
+    - AppMetricaEncodingUtils (= 5.8.2)
+    - AppMetricaFMDB (= 5.8.2)
+    - AppMetricaHostState (= 5.8.2)
+    - AppMetricaLog (= 5.8.2)
+    - AppMetricaNetwork (= 5.8.2)
+    - AppMetricaPlatform (= 5.8.2)
+    - AppMetricaProtobuf (= 5.8.2)
+    - AppMetricaProtobufUtils (= 5.8.2)
+    - AppMetricaStorageUtils (= 5.8.2)
+  - AppMetricaCoreUtils (5.8.2):
+    - AppMetricaLog (= 5.8.2)
+  - AppMetricaEncodingUtils (5.8.2):
+    - AppMetricaCoreUtils (= 5.8.2)
+    - AppMetricaLog (= 5.8.2)
+    - AppMetricaPlatform (= 5.8.2)
+  - AppMetricaFMDB (5.8.2)
+  - AppMetricaHostState (5.8.2):
+    - AppMetricaCoreUtils (= 5.8.2)
+    - AppMetricaLog (= 5.8.2)
+  - AppMetricaLog (5.8.2)
+  - AppMetricaNetwork (5.8.2):
+    - AppMetricaCoreUtils (= 5.8.2)
+    - AppMetricaLog (= 5.8.2)
+    - AppMetricaPlatform (= 5.8.2)
+  - AppMetricaPlatform (5.8.2):
+    - AppMetricaCoreUtils (= 5.8.2)
+    - AppMetricaLog (= 5.8.2)
+  - AppMetricaProtobuf (5.8.2)
+  - AppMetricaProtobufUtils (5.8.2):
+    - AppMetricaProtobuf (= 5.8.2)
+  - AppMetricaStorageUtils (5.8.2):
+    - AppMetricaCoreUtils (= 5.8.2)
+    - AppMetricaLog (= 5.8.2)
   - Atributika (4.10.1)
   - BEMCheckBox (1.4.1)
   - Branch (1.40.2)
@@ -220,18 +255,13 @@ PODS:
   - TUSafariActivity (1.0.4)
   - URITemplate (3.0.1)
   - VK-ios-sdk (1.6.2)
-  - YandexMobileMetrica/Dynamic (3.17.0):
-    - YandexMobileMetrica/Dynamic/Core (= 3.17.0)
-    - YandexMobileMetrica/Dynamic/Crashes (= 3.17.0)
-  - YandexMobileMetrica/Dynamic/Core (3.17.0)
-  - YandexMobileMetrica/Dynamic/Crashes (3.17.0):
-    - YandexMobileMetrica/Dynamic/Core
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.7.1)
   - Agrume (= 5.6.13)
   - Alamofire (= 5.4.4)
   - Amplitude (= 8.5.0)
+  - AppMetricaCore (= 5.8.2)
   - Atributika (= 4.10.1)
   - BEMCheckBox (= 1.4.1)
   - Branch (= 1.40.2)
@@ -271,7 +301,6 @@ DEPENDENCIES:
   - TTTAttributedLabel (= 2.0.0)
   - TUSafariActivity (= 1.0.4)
   - VK-ios-sdk (= 1.6.2)
-  - YandexMobileMetrica/Dynamic (= 3.17.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -280,6 +309,17 @@ SPEC REPOS:
     - Alamofire
     - Amplitude
     - AppAuth
+    - AppMetricaCore
+    - AppMetricaCoreUtils
+    - AppMetricaEncodingUtils
+    - AppMetricaFMDB
+    - AppMetricaHostState
+    - AppMetricaLog
+    - AppMetricaNetwork
+    - AppMetricaPlatform
+    - AppMetricaProtobuf
+    - AppMetricaProtobufUtils
+    - AppMetricaStorageUtils
     - Atributika
     - BEMCheckBox
     - Branch
@@ -330,7 +370,6 @@ SPEC REPOS:
     - TUSafariActivity
     - URITemplate
     - VK-ios-sdk
-    - YandexMobileMetrica
 
 EXTERNAL SOURCES:
   FLEX:
@@ -386,6 +425,17 @@ SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
   Amplitude: ef9ed339ddd33c9183edf63fa4bbaa86cf873321
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
+  AppMetricaCore: bf95c826ec74260b8c81cca9fc21efb8aea52a70
+  AppMetricaCoreUtils: e272b7ae0d4da73e178cc9d7cf391ce67c713d61
+  AppMetricaEncodingUtils: ee11733ecad85bf10d513920ef091bbc0ae5f2c7
+  AppMetricaFMDB: 44ffa4aa173513c04af2a1fbf6dfc180f266872a
+  AppMetricaHostState: c6a10727120cdd4d7eaaabf57f9e562ec9cd6b0f
+  AppMetricaLog: 49eb3d5ef7d4288a388cc34eaa53cbcd42241b8a
+  AppMetricaNetwork: f29d5bedc1abb6dff4be1f89422e5403dcda7dee
+  AppMetricaPlatform: f3423676add2e9a61b6b67f2692f385b62bf87a8
+  AppMetricaProtobuf: d895f7478c9e90ac3a50bd2f2ae8bd022205dbd1
+  AppMetricaProtobufUtils: 2e4134f486620a27306940347265c824784c906c
+  AppMetricaStorageUtils: d4b1470acba258fe9a07d9860defdeb93096b89b
   Atributika: 47e778507cfb3cd2c996278b0285221a62e97d71
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Branch: d99436c6f3d5b2529ba948d273e47e732830f207
@@ -444,8 +494,7 @@ SPEC CHECKSUMS:
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
   URITemplate: 5f5a79f3e384884102c4e6b3325d159c20a8035a
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
-  YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: a057eb3d3a00eec2905e3789ff848d8911d354de
+PODFILE CHECKSUM: 404f851a9aa47bf3d1e58f496d000242bc291a56
 
 COCOAPODS: 1.16.0
