@@ -76,7 +76,7 @@ def all_pods
   pod "TTTAttributedLabel", "2.0.0"
   pod "lottie-ios", "3.2.3"
   pod "Koloda", "5.0.1"
-  pod "Charts", "4.1.0"
+  pod "DGCharts", "5.1.0"
   pod "EasyTipView", "2.1.0"
   pod "ActionSheetPicker-3.0", "2.7.1"
   pod "Nuke", "9.5.0"

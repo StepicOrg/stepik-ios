@@ -13,14 +13,13 @@ PODS:
   - Atributika (4.10.1)
   - BEMCheckBox (1.4.1)
   - Branch (1.40.2)
-  - Charts (4.1.0):
-    - Charts/Core (= 4.1.0)
-  - Charts/Core (4.1.0):
-    - SwiftAlgorithms (~> 1.0)
   - CocoaLumberjack (3.8.5):
     - CocoaLumberjack/Core (= 3.8.5)
   - CocoaLumberjack/Core (3.8.5)
   - DeviceKit (4.5.2)
+  - DGCharts (5.1.0):
+    - DGCharts/Core (= 5.1.0)
+  - DGCharts/Core (5.1.0)
   - DownloadButton (0.1.0)
   - EasyTipView (2.1.0)
   - Firebase/Analytics (10.15.0):
@@ -211,7 +210,6 @@ PODS:
   - SVGKit (2.1.0):
     - CocoaLumberjack (~> 3.0)
   - SVProgressHUD (2.2.5)
-  - SwiftAlgorithms (1.0.0)
   - SwiftDate (6.3.1)
   - SwiftLint (0.45.1)
   - SwiftyGif (5.4.5)
@@ -237,8 +235,8 @@ DEPENDENCIES:
   - Atributika (= 4.10.1)
   - BEMCheckBox (= 1.4.1)
   - Branch (= 1.40.2)
-  - Charts (= 4.1.0)
   - DeviceKit (= 4.5.2)
+  - DGCharts (= 5.1.0)
   - DownloadButton (= 0.1.0)
   - EasyTipView (= 2.1.0)
   - Firebase/Analytics (= 10.15.0)
@@ -285,9 +283,9 @@ SPEC REPOS:
     - Atributika
     - BEMCheckBox
     - Branch
-    - Charts
     - CocoaLumberjack
     - DeviceKit
+    - DGCharts
     - DownloadButton
     - EasyTipView
     - Firebase
@@ -323,7 +321,6 @@ SPEC REPOS:
     - SnapKit
     - STRegex
     - SVProgressHUD
-    - SwiftAlgorithms
     - SwiftDate
     - SwiftLint
     - SwiftyGif
@@ -392,9 +389,9 @@ SPEC CHECKSUMS:
   Atributika: 47e778507cfb3cd2c996278b0285221a62e97d71
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Branch: d99436c6f3d5b2529ba948d273e47e732830f207
-  Charts: ce0768268078eee0336f122c3c4ca248e4e204c5
   CocoaLumberjack: 6a459bc897d6d80bd1b8c78482ec7ad05dffc3f0
   DeviceKit: c622fc19f795f3e0b4d75d6d11b26604338cdab3
+  DGCharts: 1c6daf585b6cfc78807af44ea690d357c410627f
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
   Firebase: 66043bd4579e5b73811f96829c694c7af8d67435
@@ -438,7 +435,6 @@ SPEC CHECKSUMS:
   STRegex: d49e88d0fe58538d3175fdd989bc1243b9be2a07
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
   SwiftLint: 06ac37e4d38c7068e0935bb30cda95f093bec761
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
@@ -450,6 +446,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: 32ae5ca74085f0729c6725e8dc77732580571c83
+PODFILE CHECKSUM: a057eb3d3a00eec2905e3789ff848d8911d354de
 
 COCOAPODS: 1.16.0
