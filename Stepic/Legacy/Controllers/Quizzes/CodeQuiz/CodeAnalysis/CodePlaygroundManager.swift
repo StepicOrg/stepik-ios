@@ -13,9 +13,8 @@ final class CodePlaygroundManager {
     typealias AnalysisResult = (text: String, position: Int, autocomplete: Autocomplete?)
     typealias Changes = (isInsertion: Bool, changes: String)
 
-    let closers: [String: String] = ["{": "}", "[": "]", "(": ")", "\"": "\"", "'": "'"]
-
-    let allowedCharactersSet = Set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_")
+    private static let closers = ["{": "}", "[": "]", "(": ")", "\"": "\"", "'": "'"]
+    private static let allowedCharactersSet = Set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_")
 
     var suggestionsController: CodeSuggestionsTableViewController?
     var isSuggestionsViewPresented: Bool { self.suggestionsController != nil }
@@ -23,62 +22,25 @@ final class CodePlaygroundManager {
     /// Detects the changes string between currentText and previousText.
     /// All changes should be a substring inserted somewhere into the string.
     func getChangesSubstring(currentText: String, previousText: String) -> Changes {
-        var maxString = ""
-        var minString = ""
-        var isInsertion = true
+        let startIndex = zip(currentText, previousText)
+            .enumerated()
+            .first(where: { $1.0 != $1.1 })?.0 ?? min(currentText.count, previousText.count)
+        let endIndexCurrent = currentText.index(currentText.endIndex, offsetBy: -(currentText.count - startIndex))
+        let endIndexPrevious = previousText.index(previousText.endIndex, offsetBy: -(previousText.count - startIndex))
 
-        // Determine if something was deleted or inserted
-        if currentText.count > previousText.count {
-            maxString = currentText
-            minString = previousText
-            isInsertion = true
-        } else {
-            maxString = previousText
-            minString = currentText
-            isInsertion = false
-        }
+        let reversedCurrentText = String(currentText[endIndexCurrent...].reversed())
+        let reversedPreviousText = String(previousText[endIndexPrevious...].reversed())
 
-        // Search for the beginning of the changed substring
-        var changesBeginningOffset = 0
-        while changesBeginningOffset < minString.count
-                && minString[minString.index(minString.startIndex, offsetBy: changesBeginningOffset)]
-                == maxString[maxString.index(maxString.startIndex, offsetBy: changesBeginningOffset)] {
-            changesBeginningOffset += 1
-        }
+        let reversedIndex = zip(reversedCurrentText, reversedPreviousText)
+            .enumerated()
+            .first(where: { $1.0 != $1.1 })?.0 ?? min(reversedCurrentText.count, reversedPreviousText.count)
 
-        minString.removeSubrange(
-            minString.startIndex..<minString.index(minString.startIndex, offsetBy: changesBeginningOffset)
-        )
-        maxString.removeSubrange(
-            maxString.startIndex..<maxString.index(maxString.startIndex, offsetBy: changesBeginningOffset)
-        )
+        let isInsertion = currentText.count > previousText.count
+        let changes = isInsertion
+            ? String(currentText.dropFirst(startIndex).dropLast(reversedIndex))
+            : String(previousText.dropFirst(startIndex).dropLast(reversedIndex))
 
-        // Search for the ending of the changed substring
-        var changesEndingOffset = 0
-        while changesEndingOffset < minString.count
-                && minString[minString.index(minString.index(before: minString.endIndex), offsetBy: -changesEndingOffset)]
-                == maxString[maxString.index(maxString.index(before: maxString.endIndex), offsetBy: -changesEndingOffset)] {
-            changesEndingOffset += 1
-        }
-
-        if !minString.isEmpty {
-            minString.removeSubrange(
-                minString.index(
-                    minString.index(before: minString.endIndex),
-                    offsetBy: -changesEndingOffset + 1
-                )..<minString.endIndex
-            )
-        }
-        if !maxString.isEmpty {
-            maxString.removeSubrange(
-                maxString.index(
-                    maxString.index(before: maxString.endIndex),
-                    offsetBy: -changesEndingOffset + 1
-                )..<maxString.endIndex
-            )
-        }
-
-        return (isInsertion: isInsertion, changes: maxString)
+        return (isInsertion: isInsertion, changes: changes)
     }
 
     /// Detects if there should be made a new line with tab space and paired closing brace after new line.
@@ -86,34 +48,40 @@ final class CodePlaygroundManager {
         symbol: Character,
         language: CodeLanguage
     ) -> (shouldMakeNewLine: Bool, paired: Bool) {
-        switch language {
-        case .python, .python31:
-            return symbol == ":"
-                ? (shouldMakeNewLine: true, paired: false)
-                : (shouldMakeNewLine: false, paired: false)
-        case .c,
-             .cValgrind,
-             .cpp11,
-             .cpp,
-             .java,
-             .java8,
-             .java9,
-             .java11,
-             .java17,
-             .cs,
-             .csMono,
-             .kotlin,
-             .swift,
-             .rust,
-             .javascript,
-             .scala,
-             .scala3,
-             .go,
-             .perl,
-             .php:
-            return symbol == "{"
-                ? (shouldMakeNewLine: true, paired: true)
-                : (shouldMakeNewLine: false, paired: false)
+        switch symbol {
+        case ":":
+            switch language {
+            case .python, .python31:
+                return (shouldMakeNewLine: true, paired: false)
+            default:
+                return (shouldMakeNewLine: false, paired: false)
+            }
+        case "{":
+            switch language {
+            case .c,
+                    .cValgrind,
+                    .cpp,
+                    .cpp11,
+                    .java,
+                    .java8,
+                    .java9,
+                    .java11,
+                    .java17,
+                    .cs,
+                    .csMono,
+                    .kotlin,
+                    .swift,
+                    .rust,
+                    .javascript,
+                    .scala,
+                    .scala3,
+                    .go,
+                    .perl,
+                    .php:
+                return (shouldMakeNewLine: true, paired: true)
+            default:
+                return (shouldMakeNewLine: false, paired: false)
+            }
         default:
             return (shouldMakeNewLine: false, paired: false)
         }
@@ -128,22 +96,30 @@ final class CodePlaygroundManager {
             return ""
         }
 
-        var offsetBefore = 0
-        while let character = text[safe: (cursorPosition - offsetBefore - 1)],
-              self.allowedCharactersSet.contains(character) {
-            offsetBefore += 1
+        let startIndex = text.startIndex
+        let cursorIndex = text.index(startIndex, offsetBy: cursorPosition, limitedBy: text.endIndex) ?? text.endIndex
+
+        var beforeCursorIndex = cursorIndex
+        while beforeCursorIndex > text.startIndex {
+            let prevIndex = text.index(before: beforeCursorIndex)
+            if Self.allowedCharactersSet.contains(text[prevIndex]) {
+                beforeCursorIndex = prevIndex
+            } else {
+                break
+            }
         }
 
-        var offsetAfter = 0
-        while let character = text[safe: (cursorPosition + offsetAfter)],
-              self.allowedCharactersSet.contains(character) {
-            offsetAfter += 1
+        var afterCursorIndex = cursorIndex
+        while afterCursorIndex < text.endIndex {
+            let nextIndex = text.index(after: afterCursorIndex)
+            if Self.allowedCharactersSet.contains(text[afterCursorIndex]) {
+                afterCursorIndex = nextIndex
+            } else {
+                break
+            }
         }
 
-        let beforeCursorString = text[safe: (cursorPosition - offsetBefore)..<cursorPosition] ?? ""
-        let afterCursorString = text[safe: cursorPosition..<(cursorPosition + offsetAfter)] ?? ""
-
-        return beforeCursorString + afterCursorString
+        return String(text[beforeCursorIndex..<afterCursorIndex])
     }
 
     private func checkNextLineInsertion(
@@ -242,7 +218,7 @@ final class CodePlaygroundManager {
         changes: Changes
     ) -> AnalysisResult? {
         guard changes.isInsertion,
-              let closer = closers[changes.changes] else {
+              let closer = Self.closers[changes.changes] else {
             return nil
         }
 
@@ -250,16 +226,16 @@ final class CodePlaygroundManager {
 
         // Check if there is text after the bracket, not a \n or whitespace
         let cursorIndex = text.index(text.startIndex, offsetBy: cursorPosition)
+
         if cursorIndex != text.endIndex {
             let textAfter = String(text[cursorIndex...])
             if let indexOfLineEndAfter = textAfter.indexOf("\n") {
                 let line = String(textAfter[..<textAfter.index(textAfter.startIndex, offsetBy: indexOfLineEndAfter)])
+
                 var onlySpaces = true
-                for character in line {
-                    if character != " " {
-                        onlySpaces = false
-                        break
-                    }
+                for character in line where character != " " {
+                    onlySpaces = false
+                    break
                 }
 
                 if onlySpaces {
@@ -348,29 +324,17 @@ final class CodePlaygroundManager {
     }
 
     func countTabSize(text: String) -> Int {
-        var minTabSize = 100
+        var minTabSize = Int.max
 
         text.enumerateLines { line, _ in
-            var spacesBeforeFirstCharacter = 0
-
-            for character in line {
-                if character == " " {
-                    spacesBeforeFirstCharacter += 1
-                } else {
-                    break
-                }
-            }
-
-            if spacesBeforeFirstCharacter > 0 && minTabSize > spacesBeforeFirstCharacter {
-                minTabSize = spacesBeforeFirstCharacter
+            let leadingSpaces = line.prefix(while: { $0 == " " }).count
+            // Update the minimum tab size if this line has leading spaces and it's fewer than any previous line
+            if leadingSpaces > 0 {
+                minTabSize = min(minTabSize, leadingSpaces)
             }
         }
 
-        if minTabSize == 100 {
-            minTabSize = 4
-        }
-
-        return minTabSize
+        return minTabSize == Int.max ? 4 : minTabSize
     }
 
     private func hideSuggestions() {
@@ -429,8 +393,8 @@ final class CodePlaygroundManager {
 
     func textRangeFrom(position: Int, textView: UITextView) -> UITextRange {
         let firstCharacterPosition = textView.beginningOfDocument
-        let characterPosition = textView.position(from: firstCharacterPosition, offset: position)!
-        let characterRange = textView.textRange(from: characterPosition, to: characterPosition)!
+        let characterPosition = textView.position(from: firstCharacterPosition, offset: position).require()
+        let characterRange = textView.textRange(from: characterPosition, to: characterPosition).require()
         return characterRange
     }
 
@@ -439,13 +403,18 @@ final class CodePlaygroundManager {
             return
         }
 
-        let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
-        var text = textView.text!
-        text.insert(contentsOf: symbols, at: text.index(text.startIndex, offsetBy: cursorPosition))
-        textView.text = text
-        // Import here to update selectedTextRange before calling textViewDidChange #APPS-2352
-        textView.selectedTextRange = self.textRangeFrom(position: cursorPosition + symbols.count, textView: textView)
-        // Manually call textViewDidChange, becuase when manually setting the text of a UITextView with code,
+        if selectedRange.isEmpty {
+            let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
+            var text = textView.text ?? ""
+            text.insert(contentsOf: symbols, at: text.index(text.startIndex, offsetBy: cursorPosition))
+            textView.text = text
+            // Import here to update selectedTextRange before calling textViewDidChange #APPS-2352
+            textView.selectedTextRange = textRangeFrom(position: cursorPosition + symbols.count, textView: textView)
+        } else {
+            textView.replace(selectedRange, withText: symbols)
+        }
+
+        // Manually call textViewDidChange, because when manually setting the text of a UITextView with code,
         // the textViewDidChange: method does not get called.
         textView.delegate?.textViewDidChange?(textView)
     }
