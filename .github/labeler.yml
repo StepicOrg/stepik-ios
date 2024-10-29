@@ -1,13 +1,19 @@
 a/b:
-  - Stepic/Legacy/Analytics/SplitTests/*
-  - Stepic/Legacy/Analytics/SplitTests/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          [
+            "Stepic/Legacy/Analytics/SplitTests/*",
+            "Stepic/Legacy/Analytics/SplitTests/**/*",
+          ]
 
 dependencies:
-  - Gemfile
-  - Gemfile.lock
-  - Podfile
-  - Podfile.lock
+  - changed-files:
+      - any-glob-to-any-file:
+          ["Gemfile", "Gemfile.lock", "Podfile", "Podfile.lock"]
 
 main:
-  - Stepic/*
-  - Stepic/**/*
+  - changed-files:
+      - any-glob-to-any-file: ["Stepic/*", "Stepic/**/*"]
+
+release:
+  - base-branch: "master"
