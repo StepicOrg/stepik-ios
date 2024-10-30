@@ -12,6 +12,28 @@ struct StepicWidget: Widget {
         .configurationDisplayName("ConfigurationDisplayName")
         .description("ConfigurationDescription")
         .supportedFamilies([.systemSmall, .systemMedium])
+        .safeContentMarginsDisabled()
+    }
+}
+
+extension View {
+    @ViewBuilder
+    func safeContainerBackground(@ViewBuilder content: () -> some View) -> some View {
+        if #available(iOS 17.0, *) {
+            self.containerBackground(for: .widget, content: content)
+        } else {
+            self.background(content())
+        }
+    }
+}
+
+extension WidgetConfiguration {
+    func safeContentMarginsDisabled() -> some WidgetConfiguration {
+        if #available(iOS 15.0, *) {
+            return contentMarginsDisabled()
+        } else {
+            return self
+        }
     }
 }
 

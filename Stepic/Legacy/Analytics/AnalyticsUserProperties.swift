@@ -1,8 +1,8 @@
 import Amplitude
+import AppMetricaCore
 import FirebaseAnalytics
 import FirebaseCrashlytics
 import UIKit
-import YandexMobileMetrica
 
 final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     static let shared = AnalyticsUserProperties()
@@ -12,10 +12,10 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     func setGroup(test: String, group: String) {
         self.setAmplitudeProperty(key: test, value: group)
         // AppMetrica
-        let userProfile = YMMMutableUserProfile()
-        let groupAttribute = YMMProfileAttribute.customString(test)
+        let userProfile = MutableUserProfile()
+        let groupAttribute = ProfileAttribute.customString(test)
         userProfile.apply(groupAttribute.withValue(group))
-        YMMYandexMetrica.report(userProfile, onFailure: nil)
+        AppMetrica.reportUserProfile(userProfile, onFailure: nil)
     }
 
     // MARK: Public API
@@ -31,7 +31,7 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
 
         let userProfileID: String? = id != nil ? String(id.require()) : nil
         // Update AppMetrica user profile id.
-        YMMYandexMetrica.setUserProfileID(userProfileID)
+        AppMetrica.userProfileID = userProfileID
         // Update FirebaseAnalytics user profile id.
         FirebaseAnalytics.Analytics.setUserID(userProfileID)
     }
@@ -158,20 +158,20 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     }
 
     private func setYandexMetricaProfileAttributes(_ profileAttributes: [String: Any]) {
-        let userProfileUpdates = profileAttributes.map { key, value -> YMMUserProfileUpdate in
+        let userProfileUpdates = profileAttributes.map { key, value -> UserProfileUpdate in
             if let boolValue = value as? Bool {
-                return YMMProfileAttribute.customBool(key).withValue(boolValue)
+                return ProfileAttribute.customBool(key).withValue(boolValue)
             } else if let doubleValue = value as? Double {
-                return YMMProfileAttribute.customNumber(key).withValue(doubleValue)
+                return ProfileAttribute.customNumber(key).withValue(doubleValue)
             } else {
-                return YMMProfileAttribute.customString(key).withValue(String(describing: value))
+                return ProfileAttribute.customString(key).withValue(String(describing: value))
             }
         }
 
-        let userProfile = YMMMutableUserProfile()
+        let userProfile = MutableUserProfile()
         userProfile.apply(from: userProfileUpdates)
-        YMMYandexMetrica.report(userProfile) { error in
-            print("AnalyticsUserProperties :: YMMYandexMetrica :: failed report userProfile with error = \(error)")
+        AppMetrica.reportUserProfile(userProfile) { error in
+            print("AnalyticsUserProperties :: AppMetrica :: failed report userProfile with error = \(error)")
         }
     }
 

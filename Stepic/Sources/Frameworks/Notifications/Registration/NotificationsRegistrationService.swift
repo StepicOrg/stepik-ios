@@ -222,7 +222,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
                 remoteDevice.isBadgesEnabled = true
                 return ApiDataDownloader.devices.update(remoteDevice)
             }
-        }.done { device -> Void in
+        }.done { device in
             print("NotificationsRegistrationService: device registered, info = \(device.json)")
             DeviceDefaults.sharedDefaults.deviceId = device.id
         }.catch { error in
