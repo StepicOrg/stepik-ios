@@ -6,7 +6,7 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Branch
+import BranchSDK
 import Foundation
 
 final class BranchService {

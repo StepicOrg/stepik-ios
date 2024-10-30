@@ -38,7 +38,7 @@ struct ContinueCourseWithCourseListView: View {
             .background(Color.black.opacity(0.15))
         }
         .foregroundColor(Color.white)
-        .background(Color.backgroundColor)
+        .safeContainerBackground { Color.backgroundColor }
     }
 
     private var primaryCourseView: some View {

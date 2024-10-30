@@ -121,8 +121,14 @@ extension CourseInfoTabNewsTableViewAdapter: UITableViewDataSource {
 
         self.cellHeightCache[viewModelUniqueIdentifier] = newHeight
 
-        let workItem = DispatchWorkItem { [weak tableView] in
-            guard let strongTableView = tableView else {
+        let workItem = DispatchWorkItem { [weak self, weak tableView] in
+            guard let strongSelf = self,
+                  let strongTableView = tableView else {
+                return
+            }
+
+            guard !strongSelf.viewModels.isEmpty
+                  && strongTableView.dataSource != nil else {
                 return
             }
 

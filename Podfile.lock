@@ -1,100 +1,139 @@
 PODS:
-  - ActionSheetPicker-3.0 (2.7.1)
-  - Agrume (5.6.13):
+  - ActionSheetPicker-3.0 (2.7.4)
+  - Agrume (5.8.0):
     - SwiftyGif
-  - Alamofire (5.4.4)
-  - Amplitude (8.5.0)
+  - Alamofire (5.10.1)
+  - Amplitude (8.22.0):
+    - AnalyticsConnector (~> 1.0.0)
+  - AnalyticsConnector (1.0.3)
   - AppAuth (1.7.5):
     - AppAuth/Core (= 1.7.5)
     - AppAuth/ExternalUserAgent (= 1.7.5)
   - AppAuth/Core (1.7.5)
   - AppAuth/ExternalUserAgent (1.7.5):
     - AppAuth/Core
+  - AppMetricaCore (5.8.2):
+    - AppMetricaCoreUtils (= 5.8.2)
+    - AppMetricaEncodingUtils (= 5.8.2)
+    - AppMetricaFMDB (= 5.8.2)
+    - AppMetricaHostState (= 5.8.2)
+    - AppMetricaLog (= 5.8.2)
+    - AppMetricaNetwork (= 5.8.2)
+    - AppMetricaPlatform (= 5.8.2)
+    - AppMetricaProtobuf (= 5.8.2)
+    - AppMetricaProtobufUtils (= 5.8.2)
+    - AppMetricaStorageUtils (= 5.8.2)
+  - AppMetricaCoreUtils (5.8.2):
+    - AppMetricaLog (= 5.8.2)
+  - AppMetricaEncodingUtils (5.8.2):
+    - AppMetricaCoreUtils (= 5.8.2)
+    - AppMetricaLog (= 5.8.2)
+    - AppMetricaPlatform (= 5.8.2)
+  - AppMetricaFMDB (5.8.2)
+  - AppMetricaHostState (5.8.2):
+    - AppMetricaCoreUtils (= 5.8.2)
+    - AppMetricaLog (= 5.8.2)
+  - AppMetricaLog (5.8.2)
+  - AppMetricaNetwork (5.8.2):
+    - AppMetricaCoreUtils (= 5.8.2)
+    - AppMetricaLog (= 5.8.2)
+    - AppMetricaPlatform (= 5.8.2)
+  - AppMetricaPlatform (5.8.2):
+    - AppMetricaCoreUtils (= 5.8.2)
+    - AppMetricaLog (= 5.8.2)
+  - AppMetricaProtobuf (5.8.2)
+  - AppMetricaProtobufUtils (5.8.2):
+    - AppMetricaProtobuf (= 5.8.2)
+  - AppMetricaStorageUtils (5.8.2):
+    - AppMetricaCoreUtils (= 5.8.2)
+    - AppMetricaLog (= 5.8.2)
   - Atributika (4.10.1)
   - BEMCheckBox (1.4.1)
-  - Branch (1.40.2)
-  - Charts (4.1.0):
-    - Charts/Core (= 4.1.0)
-  - Charts/Core (4.1.0):
-    - SwiftAlgorithms (~> 1.0)
+  - BranchSDK (3.6.5)
   - CocoaLumberjack (3.8.5):
     - CocoaLumberjack/Core (= 3.8.5)
   - CocoaLumberjack/Core (3.8.5)
-  - DeviceKit (4.5.2)
-  - DownloadButton (0.1.0)
+  - DeviceKit (5.5.0)
+  - DGCharts (5.1.0):
+    - DGCharts/Core (= 5.1.0)
+  - DGCharts/Core (5.1.0)
   - EasyTipView (2.1.0)
-  - Firebase/Analytics (10.15.0):
+  - Firebase/Analytics (10.29.0):
     - Firebase/Core
-  - Firebase/Core (10.15.0):
+  - Firebase/Core (10.29.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (~> 10.15.0)
-  - Firebase/CoreOnly (10.15.0):
-    - FirebaseCore (= 10.15.0)
-  - Firebase/Crashlytics (10.15.0):
+    - FirebaseAnalytics (~> 10.29.0)
+  - Firebase/CoreOnly (10.29.0):
+    - FirebaseCore (= 10.29.0)
+  - Firebase/Crashlytics (10.29.0):
     - Firebase/CoreOnly
-    - FirebaseCrashlytics (~> 10.15.0)
-  - Firebase/Messaging (10.15.0):
+    - FirebaseCrashlytics (~> 10.29.0)
+  - Firebase/Messaging (10.29.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 10.15.0)
-  - Firebase/RemoteConfig (10.15.0):
+    - FirebaseMessaging (~> 10.29.0)
+  - Firebase/RemoteConfig (10.29.0):
     - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 10.15.0)
+    - FirebaseRemoteConfig (~> 10.29.0)
   - FirebaseABTesting (10.29.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseAnalytics (10.15.0):
-    - FirebaseAnalytics/AdIdSupport (= 10.15.0)
+  - FirebaseAnalytics (10.29.0):
+    - FirebaseAnalytics/AdIdSupport (= 10.29.0)
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseAnalytics/AdIdSupport (10.15.0):
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - FirebaseAnalytics/AdIdSupport (10.29.0):
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
-    - GoogleAppMeasurement (= 10.15.0)
+    - GoogleAppMeasurement (= 10.29.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseCore (10.15.0):
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - FirebaseCore (10.29.0):
     - FirebaseCoreInternal (~> 10.0)
-    - GoogleUtilities/Environment (~> 7.8)
-    - GoogleUtilities/Logger (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.12)
+    - GoogleUtilities/Logger (~> 7.12)
   - FirebaseCoreExtension (10.29.0):
     - FirebaseCore (~> 10.0)
   - FirebaseCoreInternal (10.29.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseCrashlytics (10.15.0):
+  - FirebaseCrashlytics (10.29.0):
     - FirebaseCore (~> 10.5)
     - FirebaseInstallations (~> 10.0)
+    - FirebaseRemoteConfigInterop (~> 10.23)
     - FirebaseSessions (~> 10.5)
     - GoogleDataTransport (~> 9.2)
     - GoogleUtilities/Environment (~> 7.8)
-    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesObjC (~> 2.1)
   - FirebaseInstallations (10.29.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
-  - FirebaseMessaging (10.15.0):
+  - FirebaseMessaging (10.29.0):
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
-    - GoogleDataTransport (~> 9.2)
+    - GoogleDataTransport (~> 9.3)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/Reachability (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseRemoteConfig (10.15.0):
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - FirebaseRemoteConfig (10.29.0):
     - FirebaseABTesting (~> 10.0)
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
+    - FirebaseRemoteConfigInterop (~> 10.23)
+    - FirebaseSharedSwift (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
+  - FirebaseRemoteConfigInterop (10.29.0)
   - FirebaseSessions (10.29.0):
     - FirebaseCore (~> 10.5)
     - FirebaseCoreExtension (~> 10.0)
@@ -104,27 +143,28 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 7.13)
     - nanopb (< 2.30911.0, >= 2.30908.0)
     - PromisesSwift (~> 2.1)
+  - FirebaseSharedSwift (10.29.0)
   - FLEX (4.4.1)
-  - GoogleAppMeasurement (10.15.0):
-    - GoogleAppMeasurement/AdIdSupport (= 10.15.0)
+  - GoogleAppMeasurement (10.29.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.29.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (10.15.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.15.0)
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - GoogleAppMeasurement/AdIdSupport (10.29.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.29.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (10.15.0):
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.29.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
-    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - nanopb (< 2.30911.0, >= 2.30908.0)
   - GoogleDataTransport (9.4.1):
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30911.0, >= 2.30908.0)
@@ -178,74 +218,69 @@ PODS:
     - URITemplate (~> 3.0)
   - Mockingjay/XCTest (3.0.0-alpha.1):
     - Mockingjay/Core
-  - nanopb (2.30909.1):
-    - nanopb/decode (= 2.30909.1)
-    - nanopb/encode (= 2.30909.1)
-  - nanopb/decode (2.30909.1)
-  - nanopb/encode (2.30909.1)
+  - nanopb (2.30910.0):
+    - nanopb/decode (= 2.30910.0)
+    - nanopb/encode (= 2.30910.0)
+  - nanopb/decode (2.30910.0)
+  - nanopb/encode (2.30910.0)
   - Nimble (9.2.1)
-  - Nuke (9.5.0)
-  - Pageboy (3.6.2)
+  - Nuke (10.7.1)
+  - Pageboy (4.2.0)
   - PanModal (1.2.7)
   - pop (1.0.12)
   - Presentr (1.9)
-  - PromiseKit (6.16.1):
-    - PromiseKit/CorePromise (= 6.16.1)
-    - PromiseKit/Foundation (= 6.16.1)
-    - PromiseKit/UIKit (= 6.16.1)
-  - PromiseKit/CorePromise (6.16.1)
-  - PromiseKit/Foundation (6.16.1):
+  - PromiseKit (8.0.0):
+    - PromiseKit/CorePromise (= 8.0.0)
+    - PromiseKit/Foundation (= 8.0.0)
+    - PromiseKit/UIKit (= 8.0.0)
+  - PromiseKit/CorePromise (8.0.0)
+  - PromiseKit/Foundation (8.0.0):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.16.1):
+  - PromiseKit/UIKit (8.0.0):
     - PromiseKit/CorePromise
   - PromisesObjC (2.4.0)
   - PromisesSwift (2.4.0):
     - PromisesObjC (= 2.4.0)
   - Quick (4.0.0)
-  - SDWebImage (5.12.1):
-    - SDWebImage/Core (= 5.12.1)
-  - SDWebImage/Core (5.12.1)
-  - SnapKit (5.0.1)
+  - SDWebImage (5.19.7):
+    - SDWebImage/Core (= 5.19.7)
+  - SDWebImage/Core (5.19.7)
+  - SnapKit (5.7.1)
   - StepikModel (0.0.1)
   - STRegex (2.1.1)
-  - SVGKit (2.1.0):
+  - SVGKit (3.1.1):
     - CocoaLumberjack (~> 3.0)
-  - SVProgressHUD (2.2.5)
-  - SwiftAlgorithms (1.0.0)
+  - SVProgressHUD (2.3.1):
+    - SVProgressHUD/Core (= 2.3.1)
+  - SVProgressHUD/Core (2.3.1)
   - SwiftDate (6.3.1)
-  - SwiftLint (0.45.1)
+  - SwiftLint (0.57.0)
   - SwiftyGif (5.4.5)
-  - SwiftyJSON (5.0.0)
-  - Tabman (2.10.0):
-    - Pageboy (~> 3.6.0)
+  - SwiftyJSON (5.0.2)
+  - Tabman (3.2.0):
+    - Pageboy (~> 4.2.0)
   - TTTAttributedLabel (2.0.0)
   - TUSafariActivity (1.0.4)
   - URITemplate (3.0.1)
   - VK-ios-sdk (1.6.2)
-  - YandexMobileMetrica/Dynamic (3.17.0):
-    - YandexMobileMetrica/Dynamic/Core (= 3.17.0)
-    - YandexMobileMetrica/Dynamic/Crashes (= 3.17.0)
-  - YandexMobileMetrica/Dynamic/Core (3.17.0)
-  - YandexMobileMetrica/Dynamic/Crashes (3.17.0):
-    - YandexMobileMetrica/Dynamic/Core
 
 DEPENDENCIES:
-  - ActionSheetPicker-3.0 (= 2.7.1)
-  - Agrume (= 5.6.13)
-  - Alamofire (= 5.4.4)
-  - Amplitude (= 8.5.0)
+  - ActionSheetPicker-3.0 (= 2.7.4)
+  - Agrume (= 5.8.0)
+  - Alamofire (= 5.10.1)
+  - Amplitude (= 8.22.0)
+  - AppMetricaCore (= 5.8.2)
   - Atributika (= 4.10.1)
   - BEMCheckBox (= 1.4.1)
-  - Branch (= 1.40.2)
-  - Charts (= 4.1.0)
-  - DeviceKit (= 4.5.2)
-  - DownloadButton (= 0.1.0)
+  - BranchSDK (= 3.6.5)
+  - DeviceKit (= 5.5.0)
+  - DGCharts (= 5.1.0)
   - EasyTipView (= 2.1.0)
-  - Firebase/Analytics (= 10.15.0)
-  - Firebase/Core (= 10.15.0)
-  - Firebase/Crashlytics (= 10.15.0)
-  - Firebase/Messaging (= 10.15.0)
-  - Firebase/RemoteConfig (= 10.15.0)
+  - Firebase/Analytics (= 10.29.0)
+  - Firebase/Core (= 10.29.0)
+  - Firebase/Crashlytics (= 10.29.0)
+  - Firebase/Messaging (= 10.29.0)
+  - Firebase/RemoteConfig (= 10.29.0)
   - FLEX (from `https://github.com/ivan-magda/FLEX.git`, branch `master`)
   - GoogleSignIn (= 6.1.0)
   - Highlightr (from `https://github.com/ivan-magda/Highlightr.git`, tag `v2.1.3`)
@@ -255,25 +290,24 @@ DEPENDENCIES:
   - lottie-ios (= 3.2.3)
   - Mockingjay (from `https://github.com/kylef/Mockingjay.git`, branch `master`)
   - Nimble (= 9.2.1)
-  - Nuke (= 9.5.0)
+  - Nuke (= 10.7.1)
   - PanModal (from `https://github.com/ivan-magda/PanModal.git`, branch `remove-presenting-appearance-transitions`)
   - Presentr (from `https://github.com/ivan-magda/Presentr.git`, tag `v1.9.1`)
-  - PromiseKit (from `https://github.com/mxcl/PromiseKit.git`, tag `6.16.2`)
+  - PromiseKit (= 8.0.0)
   - Quick (= 4.0.0)
-  - SDWebImage (= 5.12.1)
-  - SnapKit (= 5.0.1)
+  - SDWebImage (= 5.19.7)
+  - SnapKit (= 5.7.1)
   - StepikModel (from `./StepikModel`)
   - STRegex (= 2.1.1)
-  - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
-  - SVProgressHUD (= 2.2.5)
+  - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `3.x`)
+  - SVProgressHUD (= 2.3.1)
   - SwiftDate (= 6.3.1)
-  - SwiftLint (= 0.45.1)
-  - SwiftyJSON (= 5.0.0)
-  - Tabman (= 2.10.0)
+  - SwiftLint (= 0.57.0)
+  - SwiftyJSON (= 5.0.2)
+  - Tabman (= 3.2.0)
   - TTTAttributedLabel (= 2.0.0)
   - TUSafariActivity (= 1.0.4)
   - VK-ios-sdk (= 1.6.2)
-  - YandexMobileMetrica/Dynamic (= 3.17.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -281,14 +315,25 @@ SPEC REPOS:
     - Agrume
     - Alamofire
     - Amplitude
+    - AnalyticsConnector
     - AppAuth
+    - AppMetricaCore
+    - AppMetricaCoreUtils
+    - AppMetricaEncodingUtils
+    - AppMetricaFMDB
+    - AppMetricaHostState
+    - AppMetricaLog
+    - AppMetricaNetwork
+    - AppMetricaPlatform
+    - AppMetricaProtobuf
+    - AppMetricaProtobufUtils
+    - AppMetricaStorageUtils
     - Atributika
     - BEMCheckBox
-    - Branch
-    - Charts
+    - BranchSDK
     - CocoaLumberjack
     - DeviceKit
-    - DownloadButton
+    - DGCharts
     - EasyTipView
     - Firebase
     - FirebaseABTesting
@@ -300,7 +345,9 @@ SPEC REPOS:
     - FirebaseInstallations
     - FirebaseMessaging
     - FirebaseRemoteConfig
+    - FirebaseRemoteConfigInterop
     - FirebaseSessions
+    - FirebaseSharedSwift
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleSignIn
@@ -316,6 +363,7 @@ SPEC REPOS:
     - Nuke
     - Pageboy
     - pop
+    - PromiseKit
     - PromisesObjC
     - PromisesSwift
     - Quick
@@ -323,7 +371,6 @@ SPEC REPOS:
     - SnapKit
     - STRegex
     - SVProgressHUD
-    - SwiftAlgorithms
     - SwiftDate
     - SwiftLint
     - SwiftyGif
@@ -333,7 +380,6 @@ SPEC REPOS:
     - TUSafariActivity
     - URITemplate
     - VK-ios-sdk
-    - YandexMobileMetrica
 
 EXTERNAL SOURCES:
   FLEX:
@@ -351,13 +397,10 @@ EXTERNAL SOURCES:
   Presentr:
     :git: https://github.com/ivan-magda/Presentr.git
     :tag: v1.9.1
-  PromiseKit:
-    :git: https://github.com/mxcl/PromiseKit.git
-    :tag: 6.16.2
   StepikModel:
     :path: "./StepikModel"
   SVGKit:
-    :branch: 2.x
+    :branch: 3.x
     :git: https://github.com/SVGKit/SVGKit.git
 
 CHECKOUT OPTIONS:
@@ -376,40 +419,50 @@ CHECKOUT OPTIONS:
   Presentr:
     :git: https://github.com/ivan-magda/Presentr.git
     :tag: v1.9.1
-  PromiseKit:
-    :git: https://github.com/mxcl/PromiseKit.git
-    :tag: 6.16.2
   SVGKit:
-    :commit: c40671b9a264f8f71831c4e0452736debfae2164
+    :commit: 6f75e96948fa72fa5ebc5d1f0bfa761a5614c546
     :git: https://github.com/SVGKit/SVGKit.git
 
 SPEC CHECKSUMS:
-  ActionSheetPicker-3.0: 36da254b97a09ff89679ecb8b8510bd3e5bdc773
-  Agrume: 21b96a1138abc0f890211bfcb12f8b1e3464b4c1
-  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
-  Amplitude: ef9ed339ddd33c9183edf63fa4bbaa86cf873321
+  ActionSheetPicker-3.0: a380d57270b6b2d321c4add024ba5c466a7f5cfd
+  Agrume: 0b1a42b5bfbc3aa9f0801f2857d8df1138cf2951
+  Alamofire: 840d2a1ad82355b536ec6ba5f97e5bfa54600ca3
+  Amplitude: d5c696f6fc1632a0e6672af2f01aa184e0b93194
+  AnalyticsConnector: a53214d38ae22734c6266106c0492b37832633a9
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
+  AppMetricaCore: bf95c826ec74260b8c81cca9fc21efb8aea52a70
+  AppMetricaCoreUtils: e272b7ae0d4da73e178cc9d7cf391ce67c713d61
+  AppMetricaEncodingUtils: ee11733ecad85bf10d513920ef091bbc0ae5f2c7
+  AppMetricaFMDB: 44ffa4aa173513c04af2a1fbf6dfc180f266872a
+  AppMetricaHostState: c6a10727120cdd4d7eaaabf57f9e562ec9cd6b0f
+  AppMetricaLog: 49eb3d5ef7d4288a388cc34eaa53cbcd42241b8a
+  AppMetricaNetwork: f29d5bedc1abb6dff4be1f89422e5403dcda7dee
+  AppMetricaPlatform: f3423676add2e9a61b6b67f2692f385b62bf87a8
+  AppMetricaProtobuf: d895f7478c9e90ac3a50bd2f2ae8bd022205dbd1
+  AppMetricaProtobufUtils: 2e4134f486620a27306940347265c824784c906c
+  AppMetricaStorageUtils: d4b1470acba258fe9a07d9860defdeb93096b89b
   Atributika: 47e778507cfb3cd2c996278b0285221a62e97d71
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
-  Branch: d99436c6f3d5b2529ba948d273e47e732830f207
-  Charts: ce0768268078eee0336f122c3c4ca248e4e204c5
+  BranchSDK: ef7d89062afb08b20f65d5b1633b215ee77ab77f
   CocoaLumberjack: 6a459bc897d6d80bd1b8c78482ec7ad05dffc3f0
-  DeviceKit: c622fc19f795f3e0b4d75d6d11b26604338cdab3
-  DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
+  DeviceKit: d83e38ca196a4ebf0cc5f37d6f0316a24b794d5b
+  DGCharts: 1c6daf585b6cfc78807af44ea690d357c410627f
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
-  Firebase: 66043bd4579e5b73811f96829c694c7af8d67435
+  Firebase: cec914dab6fd7b1bd8ab56ea07ce4e03dd251c2d
   FirebaseABTesting: d87f56707159bae64e269757a6e963d490f2eebe
-  FirebaseAnalytics: 47cef43728f81a839cf1306576bdd77ffa2eac7e
-  FirebaseCore: 2cec518b43635f96afe7ac3a9c513e47558abd2e
+  FirebaseAnalytics: 23717de130b779aa506e757edb9713d24b6ffeda
+  FirebaseCore: 30e9c1cbe3d38f5f5e75f48bfcea87d7c358ec16
   FirebaseCoreExtension: 705ca5b14bf71d2564a0ddc677df1fc86ffa600f
   FirebaseCoreInternal: df84dd300b561c27d5571684f389bf60b0a5c934
-  FirebaseCrashlytics: a83f26fb922a3fe181eb738fb4dcf0c92bba6455
+  FirebaseCrashlytics: 34647b41e18de773717fdd348a22206f2f9bc774
   FirebaseInstallations: 913cf60d0400ebd5d6b63a28b290372ab44590dd
-  FirebaseMessaging: 0c0ae1eb722ef0c07f7801e5ded8dccd1357d6d4
-  FirebaseRemoteConfig: 64b6ada098c649304114a817effd7e5f87229b11
+  FirebaseMessaging: 7b5d8033e183ab59eb5b852a53201559e976d366
+  FirebaseRemoteConfig: 48ef3f243742a8d72422ccfc9f986e19d7de53fd
+  FirebaseRemoteConfigInterop: 6efda51fb5e2f15b16585197e26eaa09574e8a4d
   FirebaseSessions: dbd14adac65ce996228652c1fc3a3f576bdf3ecc
+  FirebaseSharedSwift: 20530f495084b8d840f78a100d8c5ee613375f6e
   FLEX: 75ca95cff4bd57592c6e75adee7651ace29f9c25
-  GoogleAppMeasurement: 722db6550d1e6d552b08398b69a975ac61039338
+  GoogleAppMeasurement: f9de05ee17401e3355f68e8fc8b5064d429f5918
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleSignIn: c90b5bec45e780f54c6a8e1e3c182a86e3dda69d
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
@@ -421,35 +474,33 @@ SPEC CHECKSUMS:
   Koloda: d07b9199a383abc5898b62aa945a599f5e7c0c4b
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   Mockingjay: 97656c6f59879923976a0a52ef09da45756cca82
-  nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
+  nanopb: 438bc412db1928dac798aa6fd75726007be04262
   Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
-  Nuke: 6f400a4ea957e09149ec335a3c6acdcc814d89e4
-  Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
+  Nuke: 279f17a599fd1c83cf51de5e0e1f2db143a287b0
+  Pageboy: 7f7886f61c76633df635861bf7839caf2cabdb3e
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Presentr: 931d50e158060ea88fbf8f3dd202b17e0bb53eb0
-  PromiseKit: d4b7fa52340b2bf1423ddb39b5edbc4642d1b13a
+  PromiseKit: 7039707ba8764b6ce98501debce2489561b038a5
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
-  SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
-  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SDWebImage: 8a6b7b160b4d710e2a22b6900e25301075c34cb3
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   StepikModel: 7bf35e3dcd1687b5b7cf4f49838e1e74776a593c
   STRegex: d49e88d0fe58538d3175fdd989bc1243b9be2a07
-  SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
+  SVGKit: 3f02ad9c8227831e508e2e37ecc4005d2f0496a5
+  SVProgressHUD: 4837c74bdfe2e51e8821c397825996a8d7de6e22
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
-  SwiftLint: 06ac37e4d38c7068e0935bb30cda95f093bec761
+  SwiftLint: eb47480d47c982481592c195c221d11013a679cc
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
-  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
-  Tabman: d8d6ab0b483c7db375a71ac227d3ef791b56a049
+  SwiftyJSON: f5b1bf1cd8dd53cd25887ac0eabcfd92301c6a5a
+  Tabman: 49f9181a2bfe5c29d002864dac2de8e0b7ea9180
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
   URITemplate: 5f5a79f3e384884102c4e6b3325d159c20a8035a
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
-  YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: 32ae5ca74085f0729c6725e8dc77732580571c83
+PODFILE CHECKSUM: d03640469d149734e912909db96c9be5974aa6f8
 
-COCOAPODS: 1.16.0
+COCOAPODS: 1.16.1

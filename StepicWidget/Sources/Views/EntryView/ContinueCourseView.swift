@@ -54,7 +54,7 @@ struct ContinueCourseView: View {
         }
         .padding()
         .foregroundColor(Color.white)
-        .background(Color.backgroundColor)
+        .safeContainerBackground { Color.backgroundColor }
     }
 
     private var emptyView: some View {
@@ -88,7 +88,7 @@ struct ContinueCourseView: View {
         }
         .padding()
         .foregroundColor(Color.white)
-        .background(Color.backgroundColor)
+        .safeContainerBackground { Color.backgroundColor }
     }
 }
 

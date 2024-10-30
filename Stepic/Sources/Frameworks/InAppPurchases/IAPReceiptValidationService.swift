@@ -145,7 +145,7 @@ final class IAPReceiptValidationService: IAPReceiptValidationServiceProtocol {
 
 // MARK: - IAPReceiptRefreshRequest: NSObject, SKRequestDelegate -
 
-fileprivate final class IAPReceiptRefreshRequest: NSObject, SKRequestDelegate {
+private final class IAPReceiptRefreshRequest: NSObject, SKRequestDelegate {
     typealias CompletionHandler = (ResultType) -> Void
 
     private let request: SKReceiptRefreshRequest

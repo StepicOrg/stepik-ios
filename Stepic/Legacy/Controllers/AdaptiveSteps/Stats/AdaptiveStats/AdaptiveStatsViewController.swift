@@ -6,7 +6,7 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import UIKit
 
 final class AdaptiveStatsViewController: UIViewController {

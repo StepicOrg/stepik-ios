@@ -15,14 +15,14 @@ project "Stepic",
 def shared_pods
   pod "StepikModel", path: "./StepikModel"
 
-  pod "Alamofire", "5.4.4"
+  pod "Alamofire", "5.10.1"
   pod "Atributika", "4.10.1"
-  pod "SwiftyJSON", "5.0.0"
-  pod "SDWebImage", "5.12.1"
-  pod "SVGKit", :git => "https://github.com/SVGKit/SVGKit.git", :branch => "2.x"
-  pod "DeviceKit", "4.5.2"
-  pod "PromiseKit", :git => "https://github.com/mxcl/PromiseKit.git", :tag => "6.16.2"
-  pod "SwiftLint", "0.45.1"
+  pod "SwiftyJSON", "5.0.2"
+  pod "SDWebImage", "5.19.7"
+  pod "SVGKit", :git => "https://github.com/SVGKit/SVGKit.git", :branch => "3.x"
+  pod "DeviceKit", "5.5.0"
+  pod "PromiseKit", "8.0.0"
+  pod "SwiftLint", "0.57.0"
 
   if ENV["FASTLANE_BETA_PROFILE"] == "true"
     pod "FLEX",
@@ -39,21 +39,19 @@ end
 def all_pods
   shared_pods
 
-  pod "DownloadButton", "0.1.0"
-  pod "SVProgressHUD", "2.2.5"
-
-  pod "SnapKit", "5.0.1"
+  pod "SVProgressHUD", "2.3.1"
+  pod "SnapKit", "5.7.1"
 
   # Firebase
-  pod "Firebase/Core", "10.15.0"
-  pod "Firebase/Messaging", "10.15.0"
-  pod "Firebase/Analytics", "10.15.0"
-  pod "Firebase/Crashlytics", "10.15.0"
-  pod "Firebase/RemoteConfig", "10.15.0"
+  pod "Firebase/Core", "10.29.0"
+  pod "Firebase/Messaging", "10.29.0"
+  pod "Firebase/Analytics", "10.29.0"
+  pod "Firebase/Crashlytics", "10.29.0"
+  pod "Firebase/RemoteConfig", "10.29.0"
 
-  pod "YandexMobileMetrica/Dynamic", "3.17.0"
-  pod "Amplitude", "8.5.0"
-  pod "Branch", "1.40.2"
+  pod "AppMetricaCore", "5.8.2"
+  pod "Amplitude", "8.22.0"
+  pod "BranchSDK", "3.6.5"
 
   pod "BEMCheckBox", "1.4.1"
 
@@ -71,17 +69,17 @@ def all_pods
   pod "Presentr", :git => "https://github.com/ivan-magda/Presentr.git", :tag => "v1.9.1"
   pod "PanModal", :git => "https://github.com/ivan-magda/PanModal.git", :branch => "remove-presenting-appearance-transitions"
 
-  pod "Agrume", "5.6.13"
+  pod "Agrume", "5.8.0"
   pod "Highlightr", :git => "https://github.com/ivan-magda/Highlightr.git", :tag => "v2.1.3"
   pod "TTTAttributedLabel", "2.0.0"
   pod "lottie-ios", "3.2.3"
   pod "Koloda", "5.0.1"
-  pod "Charts", "4.1.0"
+  pod "DGCharts", "5.1.0"
   pod "EasyTipView", "2.1.0"
-  pod "ActionSheetPicker-3.0", "2.7.1"
-  pod "Nuke", "9.5.0"
+  pod "ActionSheetPicker-3.0", "2.7.4"
+  pod "Nuke", "10.7.1"
   pod "STRegex", "2.1.1"
-  pod "Tabman", "2.10.0"
+  pod "Tabman", "3.2.0"
   pod "SwiftDate", "6.3.1"
 end
 

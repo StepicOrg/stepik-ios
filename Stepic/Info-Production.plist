@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.219.2</string>
+	<string>1.220</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -62,7 +62,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>437</string>
+	<string>441</string>
 	<key>FacebookAppID</key>
 	<string>171127739724012</string>
 	<key>FacebookDisplayName</key>
@@ -78,6 +78,8 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
+	<key>LSMinimumSystemVersion</key>
+	<string>12.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -85,6 +87,65 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER).ContinueLearningUserActivity</string>
+	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypePlay</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>shortcutTitleContinueLearning</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER).ContinueLearning</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>version</key>
+				<string>1</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeSearch</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>shortcutTitleSearchCourses</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER).SearchCourses</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>version</key>
+				<string>1</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeContact</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>shortcutTitleProfile</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER).Profile</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>version</key>
+				<string>1</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>shortcut-item-notifications</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>shortcutTitleNotifications</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER).Notifications</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>version</key>
+				<string>1</string>
+			</dict>
+		</dict>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
@@ -122,64 +183,5 @@
 		<key>test</key>
 		<string>key_test_gjtWCOSjnAMKMtV9qJ4YyeelFzced092</string>
 	</dict>
-	<key>UIApplicationShortcutItems</key>
-	<array>
-		<dict>
-			<key>UIApplicationShortcutItemType</key>
-			<string>$(PRODUCT_BUNDLE_IDENTIFIER).ContinueLearning</string>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string>UIApplicationShortcutIconTypePlay</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>shortcutTitleContinueLearning</string>
-			<key>UIApplicationShortcutItemUserInfo</key>
-			<dict>
-				<key>version</key>
-				<string>1</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemType</key>
-			<string>$(PRODUCT_BUNDLE_IDENTIFIER).SearchCourses</string>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string>UIApplicationShortcutIconTypeSearch</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>shortcutTitleSearchCourses</string>
-			<key>UIApplicationShortcutItemUserInfo</key>
-			<dict>
-				<key>version</key>
-				<string>1</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemType</key>
-			<string>$(PRODUCT_BUNDLE_IDENTIFIER).Profile</string>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string>UIApplicationShortcutIconTypeContact</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>shortcutTitleProfile</string>
-			<key>UIApplicationShortcutItemUserInfo</key>
-			<dict>
-				<key>version</key>
-				<string>1</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemType</key>
-			<string>$(PRODUCT_BUNDLE_IDENTIFIER).Notifications</string>
-			<key>UIApplicationShortcutItemIconFile</key>
-			<string>shortcut-item-notifications</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>shortcutTitleNotifications</string>
-			<key>UIApplicationShortcutItemUserInfo</key>
-			<dict>
-				<key>version</key>
-				<string>1</string>
-			</dict>
-		</dict>
-	</array>
-	<key>NSUserActivityTypes</key>
-	<array>
-		<string>$(PRODUCT_BUNDLE_IDENTIFIER).ContinueLearningUserActivity</string>
-	</array>
 </dict>
 </plist>
