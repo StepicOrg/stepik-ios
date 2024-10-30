@@ -1,9 +1,9 @@
 target_name=$1
 
 if [[ $target_name == "Stepic" ]]; then
-	path="Stepic/Sources"
+	path="${PWD}/Stepic/Sources"
 elif [[ $target_name == "StepicUITests" ]]; then
-	path="StepicUITests/"
+	path="${PWD}/StepicUITests"
 else
 	echo "warning: unknown target name ${target_name}"
 fi
@@ -15,7 +15,7 @@ fi
 swiftlint_executable="${PWD}/Pods/SwiftLint/swiftlint"
 
 if [[ -f $swiftlint_executable ]]; then
-    $swiftlint_executable lint --config ${PWD}/.swiftlint.yml --path $path
+	$swiftlint_executable lint --config "${PWD}/.swiftlint.yml" "$path"
 else
-    echo "warning: SwiftLint not installed, run pod install"
+	echo "warning: SwiftLint not installed, run pod install"
 fi

@@ -133,7 +133,7 @@ final class IAPProductsService: IAPProductsServiceProtocol {
 
 // MARK: - IAPProductRequest: NSObject, SKProductsRequestDelegate -
 
-fileprivate final class IAPProductRequest: NSObject, SKProductsRequestDelegate {
+private final class IAPProductRequest: NSObject, SKProductsRequestDelegate {
     typealias CompletionHandler = (Swift.Result<[SKProduct], Swift.Error>) -> Void
 
     private let request: SKProductsRequest
