@@ -34,7 +34,11 @@ final class CoursesAPI: APIEndpoint {
             return .value([])
         }
 
-        return self.getObjectsByIds(ids: ids, updating: existing)
+        if RemoteConfig.shared.coursesApiFilterFreeOnly {
+            return self.getObjectsByIds(ids: ids, updating: existing).filterValues({ !$0.isPaid })
+        } else {
+            return self.getObjectsByIds(ids: ids, updating: existing)
+        }
     }
 
     @available(*, deprecated, message: "Legacy: we want to pass existing")
@@ -47,9 +51,22 @@ final class CoursesAPI: APIEndpoint {
             return .value([])
         }
 
-        return self.coursesPersistenceService.fetch(ids: ids).then { cachedCourses, _ in
-            self.getObjectsByIds(ids: ids, updating: cachedCourses)
-        }.then { self.indexCoursesInSpotlight($0) }
+        if RemoteConfig.shared.coursesApiFilterFreeOnly {
+            return self.coursesPersistenceService
+                .fetch(ids: ids)
+                .then { cachedCourses, _ in
+                    self.getObjectsByIds(ids: ids, updating: cachedCourses)
+                }
+                .then { self.indexCoursesInSpotlight($0) }
+                .filterValues({ !$0.isPaid })
+        } else {
+            return self.coursesPersistenceService
+                .fetch(ids: ids)
+                .then { cachedCourses, _ in
+                    self.getObjectsByIds(ids: ids, updating: cachedCourses)
+                }
+                .then { self.indexCoursesInSpotlight($0) }
+        }
     }
 
     func retrieve(
@@ -120,13 +137,34 @@ final class CoursesAPI: APIEndpoint {
 
         params["page"] = page
 
-        return self.retrieve.requestWithFetching(
-            requestEndpoint: "courses",
-            paramName: "courses",
-            params: params,
-            withManager: self.manager
-        ).then { courses, meta in
-            self.indexCoursesInSpotlight(courses).map { _ in (courses, meta) }
+        if RemoteConfig.shared.coursesApiFilterFreeOnly {
+            return self.retrieve
+                .requestWithFetching(
+                    requestEndpoint: "courses",
+                    paramName: "courses",
+                    params: params,
+                    withManager: self.manager
+                )
+                .then { courses, meta in
+                    self.indexCoursesInSpotlight(courses)
+                        .map { _ in
+                            (courses.filter({ !$0.isPaid }), meta)
+                        }
+                }
+        } else {
+            return self.retrieve
+                .requestWithFetching(
+                    requestEndpoint: "courses",
+                    paramName: "courses",
+                    params: params,
+                    withManager: self.manager
+                )
+                .then { courses, meta in
+                    self.indexCoursesInSpotlight(courses)
+                        .map { _ in
+                            (courses, meta)
+                        }
+                }
         }
     }
 

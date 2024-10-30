@@ -43,7 +43,8 @@ The price includes commission from App Store and VAT. By paying for access to th
         Key.purchaseFlowDisclaimerRussian.rawValue: NSString(string: Self.defaultPurchaseFlowDisclaimerRussian),
         Key.purchaseFlowDisclaimerEnglish.rawValue: NSString(string: Self.defaultPurchaseFlowDisclaimerEnglish),
         Key.purchaseFlowPromoCodeEnabled.rawValue: NSNumber(value: false),
-        Key.purchaseFlowStartFlowFromCourseScreenEnabled.rawValue: NSNumber(value: false)
+        Key.purchaseFlowStartFlowFromCourseScreenEnabled.rawValue: NSNumber(value: false),
+        Key.coursesApiFilterFreeOnly.rawValue: NSNumber(value: true)
     ]
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
@@ -135,6 +136,10 @@ The price includes commission from App Store and VAT. By paying for access to th
 
     var promoBannersStringValue: String? {
         self.getStringValueFromDelegateOrRemoteConfigForKey(.promoBanners)
+    }
+
+    var coursesApiFilterFreeOnly: Bool {
+        self.getNSStringValueFromDelegateOrRemoteConfigForKey(.coursesApiFilterFreeOnly)?.boolValue ?? true
     }
 
     init(delegate: RemoteConfigDelegate? = nil) {
@@ -254,6 +259,7 @@ The price includes commission from App Store and VAT. By paying for access to th
         case purchaseFlowPromoCodeEnabled = "purchase_flow_ios_promocode_enabled"
         case purchaseFlowStartFlowFromCourseScreenEnabled = "purchase_flow_ios_start_flow_from_course_screen_enabled"
         case promoBanners = "promo_banners_ios"
+        case coursesApiFilterFreeOnly = "ios_courses_api_filter_free_only"
 
         var valueDataType: ValueDataType { .string }
 
