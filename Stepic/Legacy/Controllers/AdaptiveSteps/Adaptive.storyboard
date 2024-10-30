@@ -299,7 +299,7 @@
                                                 <constraint firstAttribute="height" constant="0.5" id="Vae-6p-676"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pje-0G-2Uu" customClass="LineChartView" customModule="Charts">
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pje-0G-2Uu" customClass="LineChartView" customModule="DGCharts">
                                             <rect key="frame" x="8" y="170" width="304" height="180"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
