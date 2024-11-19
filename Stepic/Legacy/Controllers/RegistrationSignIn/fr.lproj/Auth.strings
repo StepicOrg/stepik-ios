@@ -1,0 +1,57 @@
+/* Class = "UILabel"; text = "Whoops! The e-mail address and/or password you specified are not correct."; ObjectID = "55E-Yo-HFU"; */
+"55E-Yo-HFU.text" = "Oups ! L'adresse e-mail et/ou le mot de passe que vous avez spécifiés ne sont pas corrects.";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "C3e-7n-JkS"; */
+"C3e-7n-JkS.normalTitle" = "S'inscrire";
+
+/* Class = "UITextField"; placeholder = "Name"; ObjectID = "c81-1U-sKd"; */
+"c81-1U-sKd.placeholder" = "Nom";
+
+/* Class = "UIButton"; normalTitle = "Remind the password"; ObjectID = "cic-9n-m9H"; */
+"cic-9n-m9H.normalTitle" = "Rappeler le mot de passe";
+
+/* Class = "UILabel"; text = "By registering you agree to the Terms of service and Privacy policy."; ObjectID = "Cqa-AS-4te"; */
+"Cqa-AS-4te.text" = "En vous inscrivant, vous acceptez les conditions d'utilisation et la politique de confidentialité.";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "dPv-EY-XCL"; */
+"dPv-EY-XCL.placeholder" = "E-mail";
+
+/* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "Fnt-qB-XZx"; */
+"Fnt-qB-XZx.normalTitle" = "Connexion";
+
+/* Class = "UIButton"; normalTitle = "Register"; ObjectID = "gfh-2r-iUJ"; */
+"gfh-2r-iUJ.normalTitle" = "S'inscrire";
+
+/* Class = "UILabel"; text = "Sign In with social account"; ObjectID = "GlJ-ad-nLa"; */
+"GlJ-ad-nLa.text" = "Connectez-vous avec un compte social";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "gng-wJ-E02"; */
+"gng-wJ-E02.placeholder" = "Mot de passe";
+
+/* Class = "UILabel"; text = "Sign Up"; ObjectID = "KmT-i0-02l"; */
+"KmT-i0-02l.text" = "S'inscrire";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "NCY-px-UvI"; */
+"NCY-px-UvI.placeholder" = "E-mail";
+
+/* Class = "UIButton"; normalTitle = "Sign In with e-mail"; ObjectID = "o00-ed-SpF"; */
+"o00-ed-SpF.normalTitle" = "Se connecter avec e-mail";
+
+/* Class = "UILabel"; text = "Sign In with email"; ObjectID = "Rqj-F6-Q1k"; */
+"Rqj-F6-Q1k.text" = "Connectez-vous avec e-mail";
+
+/* Class = "UILabel"; text = "Whoops! The e-mail address and/or password you specified are not correct."; ObjectID = "Sks-5y-rKN"; */
+"Sks-5y-rKN.text" = "Oups ! L'adresse e-mail et/ou le mot de passe que vous avez spécifiés ne sont pas corrects.";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "umg-9h-bV9"; */
+"umg-9h-bV9.placeholder" = "Mot de passe";
+
+/* Class = "UIButton"; normalTitle = "More"; ObjectID = "UyI-UL-4R6"; */
+"UyI-UL-4R6.normalTitle" = "Suite";
+
+/* Class = "UIButton"; normalTitle = "Sign In with social"; ObjectID = "vQR-hv-GBW"; */
+"vQR-hv-GBW.normalTitle" = "Connectez-vous avec les réseaux sociaux";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "Vrc-hu-CrF"; */
+"Vrc-hu-CrF.normalTitle" = "S'inscrire";
+
