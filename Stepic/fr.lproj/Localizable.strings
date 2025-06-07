@@ -1,0 +1,3666 @@
+/* (No Comment) */
+"AboutAppTitle" = "À propos de";
+
+/* (No Comment) */
+"AboutCourse" = "À propos du cours";
+
+/* (No Comment) */
+"AchievementCongratulationShareText" = "J'ai déverrouillé le succès \"%@\" dans l'application %@. Rejoignez et battez mon record !";
+
+/* (No Comment) */
+"AchievementCongratulationText" = "Succès dévérouillé";
+
+/* (No Comment) */
+"AchievementLocked" = "fermé à clé";
+
+/* Achievements */
+"Achievements" = "Réalisations";
+
+/* (No Comment) */
+"AchievementsActiveDaysStreakKindDescription1" = "Résoudre au moins une tâche à %@ jour d'affilée";
+
+/* (No Comment) */
+"AchievementsActiveDaysStreakKindDescription234" = "Résoudre au moins une tâche à %@ jours d'affilée";
+
+/* (No Comment) */
+"AchievementsActiveDaysStreakKindDescription567890" = "Résoudre au moins une tâche à %@ jours d'affilée";
+
+/* (No Comment) */
+"AchievementsActiveDaysStreakKindTitle" = "Utilisateur régulier";
+
+/* (No Comment) */
+"AchievementsCertificatesDistinctionCountKindDescription1" = "Gagnez %@ certificat avec distinction";
+
+/* (No Comment) */
+"AchievementsCertificatesDistinctionCountKindDescription234" = "Gagnez %@ certificats avec distinction";
+
+/* (No Comment) */
+"AchievementsCertificatesDistinctionCountKindDescription567890" = "Gagnez %@ certificats avec distinction";
+
+/* (No Comment) */
+"AchievementsCertificatesDistinctionCountKindTitle" = "Étudiant distingué";
+
+/* (No Comment) */
+"AchievementsCertificatesRegularCountKindDescription1" = "Gagnez %@ certificat";
+
+/* (No Comment) */
+"AchievementsCertificatesRegularCountKindDescription234" = "Gagnez %@ certificats";
+
+/* (No Comment) */
+"AchievementsCertificatesRegularCountKindDescription567890" = "Gagnez %@ certificats";
+
+/* (No Comment) */
+"AchievementsCertificatesRegularCountKindTitle" = "Diplômé";
+
+/* (No Comment) */
+"AchievementsCodeQuizzesSolvedCppKindDescription1" = "Utilisez C++ pour résoudre correctement le problème %@";
+
+/* (No Comment) */
+"AchievementsCodeQuizzesSolvedCppKindDescription234" = "Utiliser C++ pour résoudre correctement %@ problèmes";
+
+/* (No Comment) */
+"AchievementsCodeQuizzesSolvedCppKindDescription567890" = "Utiliser C++ pour résoudre correctement %@ problèmes";
+
+/* (No Comment) */
+"AchievementsCodeQuizzesSolvedCppKindTitle" = "Développeur.cpp";
+
+/* (No Comment) */
+"AchievementsCodeQuizzesSolvedJavaKindDescription1" = "Utilisez Java pour résoudre correctement le problème %@";
+
+/* (No Comment) */
+"AchievementsCodeQuizzesSolvedJavaKindDescription234" = "Utiliser Java pour résoudre correctement %@ problèmes";
+
+/* (No Comment) */
+"AchievementsCodeQuizzesSolvedJavaKindDescription567890" = "Utiliser Java pour résoudre correctement %@ problèmes";
+
+/* (No Comment) */
+"AchievementsCodeQuizzesSolvedJavaKindTitle" = "Du café?";
+
+/* (No Comment) */
+"AchievementsCodeQuizzesSolvedPythonKindDescription1" = "Utilisez Python pour résoudre correctement le problème %@";
+
+/* (No Comment) */
+"AchievementsCodeQuizzesSolvedPythonKindDescription234" = "Utilisez Python pour résoudre correctement %@ problèmes";
+
+/* (No Comment) */
+"AchievementsCodeQuizzesSolvedPythonKindDescription567890" = "Utilisez Python pour résoudre correctement %@ problèmes";
+
+/* (No Comment) */
+"AchievementsCodeQuizzesSolvedPythonKindTitle" = "Dompteur de serpent";
+
+/* (No Comment) */
+"AchievementsCourseReviewsCountKindDescription1" = "Donnez votre avis sur le cours %@";
+
+/* (No Comment) */
+"AchievementsCourseReviewsCountKindDescription234" = "Rédigez %@ avis sur le cours";
+
+/* (No Comment) */
+"AchievementsCourseReviewsCountKindDescription567890" = "Rédigez %@ avis sur le cours";
+
+/* (No Comment) */
+"AchievementsCourseReviewsCountKindTitle" = "Critique";
+
+/* (No Comment) */
+"AchievementsLevel" = "Niveau %@ / %@";
+
+/* (No Comment) */
+"AchievementsLevelNotObtained" = "Pas encore obtenu";
+
+/* (No Comment) */
+"AchievementsNextLevel" = "%@ pour le niveau suivant";
+
+/* (No Comment) */
+"AchievementsShareText" = "J'ai débloqué le succès « %@ » sur Stepik.org. Rejoignez et battez mon record !";
+
+/* (No Comment) */
+"AchievementsStepsSolvedChoiceKindDescription1" = "Résoudre correctement la tâche de choix %@";
+
+/* (No Comment) */
+"AchievementsStepsSolvedChoiceKindDescription234" = "Résoudre correctement les tâches de choix %@";
+
+/* (No Comment) */
+"AchievementsStepsSolvedChoiceKindDescription567890" = "Résoudre correctement les tâches de choix %@";
+
+/* (No Comment) */
+"AchievementsStepsSolvedChoiceKindTitle" = "je choisis";
+
+/* (No Comment) */
+"AchievementsStepsSolvedCodeKindDescription1" = "Résoudre correctement la tâche de code %@";
+
+/* (No Comment) */
+"AchievementsStepsSolvedCodeKindDescription234" = "Résoudre correctement les tâches de code %@";
+
+/* (No Comment) */
+"AchievementsStepsSolvedCodeKindDescription567890" = "Résoudre correctement les tâches de code %@";
+
+/* (No Comment) */
+"AchievementsStepsSolvedCodeKindTitle" = "Maître de l'informatique";
+
+/* (No Comment) */
+"AchievementsStepsSolvedKindDescription1" = "Résoudre correctement la tâche %@";
+
+/* (No Comment) */
+"AchievementsStepsSolvedKindDescription234" = "Résoudre correctement %@ tâches";
+
+/* (No Comment) */
+"AchievementsStepsSolvedKindDescription567890" = "Résoudre correctement %@ tâches";
+
+/* (No Comment) */
+"AchievementsStepsSolvedKindTitle" = "La quantité compte";
+
+/* (No Comment) */
+"AchievementsStepsSolvedNumberKindDescription1" = "Résoudre correctement la tâche numéro %@";
+
+/* (No Comment) */
+"AchievementsStepsSolvedNumberKindDescription234" = "Résolvez correctement %@ tâches numérotées";
+
+/* (No Comment) */
+"AchievementsStepsSolvedNumberKindDescription567890" = "Résolvez correctement les tâches de nombre %@";
+
+/* (No Comment) */
+"AchievementsStepsSolvedNumberKindTitle" = "Une réalisation de plus";
+
+/* (No Comment) */
+"AchievementsStepsSolvedStreakKindDescription1" = "Résoudre correctement %@ tâche d'affilée";
+
+/* (No Comment) */
+"AchievementsStepsSolvedStreakKindDescription234" = "Résolvez correctement %@ tâches d'affilée";
+
+/* (No Comment) */
+"AchievementsStepsSolvedStreakKindDescription567890" = "Résolvez correctement %@ tâches d'affilée";
+
+/* (No Comment) */
+"AchievementsStepsSolvedStreakKindTitle" = "Sapeur";
+
+/* (No Comment) */
+"AchievementUnlocked" = "déverrouillé";
+
+/* (No Comment) */
+"Actions" = "Actions";
+
+/* (No Comment) */
+"Activity" = "Activité";
+
+/* (No Comment) */
+"Adaptive7Days" = "7 jours";
+
+/* (No Comment) */
+"AdaptiveAchievementDaysStreak1" = "Passionné";
+
+/* (No Comment) */
+"AdaptiveAchievementDaysStreak2" = "Semaine de travail";
+
+/* (No Comment) */
+"AdaptiveAchievementDaysStreak3" = "Dépendant";
+
+/* (No Comment) */
+"AdaptiveAchievementDaysStreak4" = "Bourreau de travail";
+
+/* (No Comment) */
+"AdaptiveAchievementDaysStreak5" = "héros";
+
+/* (No Comment) */
+"AdaptiveAchievementDaysStreakDesc" = "Étudiez pendant %@ jours d'affilée";
+
+/* (No Comment) */
+"AdaptiveAchievementExp1" = "Apprenant";
+
+/* (No Comment) */
+"AdaptiveAchievementExp2" = "Étudiant";
+
+/* (No Comment) */
+"AdaptiveAchievementExp3" = "Expérimenté";
+
+/* (No Comment) */
+"AdaptiveAchievementExp4" = "Professionnelle";
+
+/* (No Comment) */
+"AdaptiveAchievementExp5" = "Gourou";
+
+/* (No Comment) */
+"AdaptiveAchievementExpDesc" = "Gagnez %@ XP";
+
+/* (No Comment) */
+"AdaptiveAchievementFirstStep" = "Premiers pas";
+
+/* (No Comment) */
+"AdaptiveAchievementFirstStepDesc" = "Tutoriel complet";
+
+/* (No Comment) */
+"AdaptiveAchievementLevel1" = "Expert";
+
+/* (No Comment) */
+"AdaptiveAchievementLevel2" = "Chef";
+
+/* (No Comment) */
+"AdaptiveAchievementLevelDesc" = "Atteindre le niveau";
+
+/* (No Comment) */
+"AdaptiveAchievements" = "Réalisations";
+
+/* (No Comment) */
+"AdaptiveAchievementShare" = "Sociable";
+
+/* (No Comment) */
+"AdaptiveAchievementShareDesc" = "Partagez votre réussite";
+
+/* (No Comment) */
+"AdaptiveAchievementStreak1" = "Combiné";
+
+/* (No Comment) */
+"AdaptiveAchievementStreak2" = "C'était facile";
+
+/* (No Comment) */
+"AdaptiveAchievementStreak3" = "Exactement!";
+
+/* (No Comment) */
+"AdaptiveAchievementStreak4" = "Voyant";
+
+/* (No Comment) */
+"AdaptiveAchievementStreakDesc" = "Faire %@ réponses correctes d'affilée";
+
+/* (No Comment) */
+"AdaptiveAllTime" = "Tout le temps";
+
+/* (No Comment) */
+"AdaptiveBestStreak" = "Meilleure séquence";
+
+/* (No Comment) */
+"AdaptiveControlButtonNextTask" = "Tâche suivante";
+
+/* (No Comment) */
+"AdaptiveControlButtonSubmit" = "Soumettre";
+
+/* (No Comment) */
+"AdaptiveControlButtonTryAgain" = "Réessayer";
+
+/* (No Comment) */
+"AdaptiveCourseSelectLoading" = "Chargement des cours...";
+
+/* (No Comment) */
+"AdaptiveCourseSelectTitle" = "Sélectionnez un cours";
+
+/* (No Comment) */
+"AdaptiveEasyReaction" = "Facile";
+
+/* (No Comment) */
+"AdaptiveHardReaction" = "Dur";
+
+/* (No Comment) */
+"AdaptiveLast7Days" = "Les 7 derniers jours";
+
+/* (No Comment) */
+"AdaptiveLearnersTitle" = "apprenants";
+
+/* (No Comment) */
+"AdaptiveLevelSuffix" = "niveau";
+
+/* (No Comment) */
+"AdaptiveLevelTitle" = "niveau";
+
+/* (No Comment) */
+"AdaptiveOnboardingTitle" = "Mode adaptatif";
+
+/* (No Comment) */
+"AdaptivePointsTitle" = "points";
+
+/* (No Comment) */
+"AdaptivePreferencesTitle" = "Cours adaptatifs";
+
+/* Adaptive */
+"AdaptiveProgress" = "Progrès";
+
+/* (No Comment) */
+"AdaptiveProgressByWeeks" = "Progression par semaines";
+
+/* (No Comment) */
+"AdaptiveProgressWeeksEmpty" = "Vous n'avez pas de tâches résolues";
+
+/* (No Comment) */
+"AdaptiveRating" = "Évaluation";
+
+/* (No Comment) */
+"AdaptiveRatingFooterText1" = "%@ utilisateur dans le tableau";
+
+/* (No Comment) */
+"AdaptiveRatingFooterText234" = "%@ utilisateurs dans le tableau";
+
+/* (No Comment) */
+"AdaptiveRatingFooterText567890" = "%@ utilisateurs dans le tableau";
+
+/* (No Comment) */
+"AdaptiveRatingLoadError" = "L'évaluation n'est pas disponible actuellement";
+
+/* (No Comment) */
+"AdaptiveRatingYou" = "Tu";
+
+/* (No Comment) */
+"AdaptiveStats" = "Statistiques";
+
+/* (No Comment) */
+"AdaptiveToday" = "Aujourd'hui";
+
+/* (No Comment) */
+"AdaptiveXPperWeek" = "XP par semaine";
+
+/* (No Comment) */
+"AdaptiveXPperWeekCell" = "XP par semaine";
+
+/* (No Comment) */
+"AgreementLabelText" = "En vous inscrivant, vous acceptez les <a href=\"http://welcome.stepik.org/en/terms\">Conditions d'utilisation</a> et <a href=\"http://welcome.stepik.org/ru/privacy\">Politique de confidentialité</a>";
+
+/* (No Comment) */
+"Alert" = "Alerte";
+
+/* (No Comment) */
+"AllCourses" = "Tous les cours";
+
+/* (No Comment) */
+"AnonymousCertificatesTitle" = "Les utilisateurs anonymes ne peuvent pas avoir de certificats";
+
+/* (No Comment) */
+"AnonymousNotificationsTitle" = "Les utilisateurs anonymes ne peuvent pas recevoir de notifications";
+
+/* (No Comment) */
+"Answer" = "Réponse";
+
+/* (No Comment) */
+"AppStore" = "Magasin d'applications";
+
+/* (No Comment) */
+"AppVersionTitle" = "Version %@ (%@)";
+
+/* (No Comment) */
+"AppVersionUnknownTitle" = "La version de l'application est inconnue";
+
+/* Arts */
+"ArtCustomizeLearningProcess" = "art_customize_learning_process_fr";
+
+/* (No Comment) */
+"Audience" = "Spectateurs";
+
+/* (No Comment) */
+"AuthorDidntUploadVideo" = "L'auteur n'a pas encore téléchargé de vidéo.";
+
+/* (No Comment) */
+"Authorization" = "Autorisation";
+
+/* (No Comment) */
+"authors1" = "auteur";
+
+/* (No Comment) */
+"authors234" = "auteurs";
+
+/* (No Comment) */
+"authors567890" = "auteurs";
+
+/* (No Comment) */
+"AutoplayPreferenceTitle" = "Transition automatique vers l'étape suivante à la fin de la vidéo";
+
+/* (No Comment) */
+"Back" = "Retour";
+
+/* (No Comment) */
+"Bad connection to sign in" = "Mauvaise connexion pour se connecter";
+
+/* (No Comment) */
+"Bad connection to sign up" = "Mauvaise connexion pour s'inscrire";
+
+/* (No Comment) */
+"BadConnectionAuth" = "Vérifiez votre connection internet";
+
+/* (No Comment) */
+"BeginDate" = "Date de début";
+
+/* (No Comment) */
+"CanBeChangedInSettings" = "Il peut être modifié dans les paramètres.";
+
+/* (No Comment) */
+"Cancel" = "Annuler";
+
+/* (No Comment) */
+"Catalog" = "Catalogue";
+
+/* (No Comment) */
+"CatalogPlaceholderError" = "Impossible de charger le catalogue. <b>Appuyez sur</b> à réessayer.";
+
+/* (No Comment) */
+"Certificate" = "Certificat";
+
+/* (No Comment) */
+"CertificateCondition" = "État du certificat";
+
+/* (No Comment) */
+"CertificateDescriptionBody" = "pour le cours";
+
+/* (No Comment) */
+"CertificateDetailEditNameTitle" = "Modifier le nom du destinataire";
+
+/* (No Comment) */
+"CertificateDetailHeadlineCourseTitle" = "Cours";
+
+/* (No Comment) */
+"CertificateDetailHeadlineRecipientTitle" = "Destinataire";
+
+/* CertificateDetail */
+"CertificateDetailTitle" = "Certificat";
+
+/* (No Comment) */
+"CertificateDetailUserRankText1" = "Le résultat est meilleur que %@ apprenant du cours";
+
+/* (No Comment) */
+"CertificateDetailUserRankText234" = "Le résultat est meilleur que %@ apprenants du cours";
+
+/* (No Comment) */
+"CertificateDetailUserRankText567890" = "Le résultat est meilleur que %@ apprenants du cours";
+
+/* (No Comment) */
+"CertificateDetailWithDistinctionTitle" = "Certificat avec Distinction";
+
+/* (No Comment) */
+"CertificateIsIssued" = "Délivrance";
+
+/* (No Comment) */
+"CertificateIsNotIssued" = "Ne pas émettre";
+
+/* Certificate name change */
+"CertificateNameChangeAction" = "Modifier le nom du destinataire";
+
+/* (No Comment) */
+"CertificateNameChangeAlertMessageConfirmation" = "Êtes-vous sûr de vouloir changer le nom du destinataire du certificat de \"%@\" à \"%@\" ?";
+
+/* (No Comment) */
+"CertificateNameChangeAlertMessageLastEditWarning" = "Avertissement! Après cette confirmation, vous ne pourrez plus modifier le nom du destinataire du certificat.";
+
+/* (No Comment) */
+"CertificateNameChangeAlertMessageWarning" = "Avertissement! Vous pouvez modifier le nom du destinataire du certificat uniquement %@.\nEntrez le nom:";
+
+/* (No Comment) */
+"CertificateNameChangeAlertTextFieldPlaceholder" = "Nom du destinataire";
+
+/* (No Comment) */
+"CertificateNameChangeAlertTitle" = "Modifier le nom du destinataire";
+
+/* (No Comment) */
+"CertificateNameChangeEmptyTextFieldErrorMessage" = "Le nom du destinataire ne doit pas être vide";
+
+/* (No Comment) */
+"CertificateNameChangeErrorStatusMessage" = "Échec de la modification du nom du destinataire du certificat";
+
+/* (No Comment) */
+"CertificateNameChangeSuccessStatusMessage" = "Nom du destinataire du certificat modifié";
+
+/* (No Comment) */
+"Certificates" = "Certificats";
+
+/* (No Comment) */
+"CertificatesListCertificateDistinctionTitle" = "Certificat avec distinction";
+
+/* (No Comment) */
+"CertificatesListCertificateRegularTitle" = "Certificat";
+
+/* CertificatesList */
+"CertificatesListGradeText" = "Résultat: %@%%";
+
+/* (No Comment) */
+"CertificateWithDistinction" = "Certificat avec distinction";
+
+/* ChoiceQuiz */
+"ChoiceQuizEmptyReplyMessage" = "Choisis une option";
+
+/* (No Comment) */
+"ChooseCourse" = "Choisissez le cours";
+
+/* (No Comment) */
+"ChooseSearchLanguage" = "Choisissez la langue du contenu";
+
+/* (No Comment) */
+"Close" = "proche";
+
+/* (No Comment) */
+"CodeEditorColor" = "Couleurs";
+
+/* (No Comment) */
+"CodeEditorCurrentFontSize" = "Actuel : %@pt";
+
+/* (No Comment) */
+"CodeEditorCurrentTheme" = "Courant: %@";
+
+/* (No Comment) */
+"CodeEditorFont" = "Police de caractère";
+
+/* (No Comment) */
+"CodeEditorFontSize" = "Taille de police";
+
+/* (No Comment) */
+"CodeEditorLanguage" = "Langue";
+
+/* (No Comment) */
+"CodeEditorSettingsTitle" = "Paramètres de l'éditeur de code";
+
+/* (No Comment) */
+"CodeEditorSettingsTooltip" = "Vous pouvez personnaliser l'éditeur de code";
+
+/* (No Comment) */
+"CodeEditorTheme" = "Thème de l'éditeur";
+
+/* Code Editor settings */
+"CodeEditorTitle" = "Éditeur de code";
+
+/* (No Comment) */
+"CodeQuizDetailLimitTitleMemory" = "Limite de mémoire :";
+
+/* (No Comment) */
+"CodeQuizDetailLimitTitleTime" = "Limite de temps:";
+
+/* (No Comment) */
+"CodeQuizDetailLimitValueMemory" = "%@ Mo";
+
+/* Code Quiz */
+"CodeQuizDetails" = "Détails";
+
+/* (No Comment) */
+"CodeQuizDetailSampleTitle" = "Exemple de données %@ :";
+
+/* (No Comment) */
+"CodeQuizDetailSampleTitleOne" = "Exemple de données :";
+
+/* (No Comment) */
+"CodeQuizEmptyCodeLanguages" = "Aucune langue prise en charge";
+
+/* (No Comment) */
+"CodeQuizFullscreenTabCodeTitle" = "Code";
+
+/* (No Comment) */
+"CodeQuizFullscreenTabInstructionTitle" = "Instruction";
+
+/* (No Comment) */
+"CodeQuizFullscreenTabRunEvaluationTitle" = "Évaluation...";
+
+/* (No Comment) */
+"CodeQuizFullscreenTabRunInputDataPlaceholder" = "Entrez l'entrée de test...";
+
+/* (No Comment) */
+"CodeQuizFullscreenTabRunInputDataTitle" = "Tester l'entrée";
+
+/* (No Comment) */
+"CodeQuizFullscreenTabRunOutputDataTitle" = "Sortie d'essai";
+
+/* (No Comment) */
+"CodeQuizFullscreenTabRunRunCodeButtonTitle" = "Exécuter le code";
+
+/* (No Comment) */
+"CodeQuizFullscreenTabRunSamplesAlertTitle" = "Sélectionnez l'entrée de test";
+
+/* (No Comment) */
+"CodeQuizFullscreenTabRunSamplesButtonTitle" = "Échantillons";
+
+/* (No Comment) */
+"CodeQuizFullscreenTabRunTestOuputEmptyResultTitle" = "Résultat vide";
+
+/* (No Comment) */
+"CodeQuizFullscreenTabRunTitle" = "Courir";
+
+/* (No Comment) */
+"CodeQuizRunCodeTooltip" = "Avant d'envoyer votre solution, vous pouvez exécuter votre code avec des données d'entrée de test !";
+
+/* (No Comment) */
+"CodeQuizTitle" = "Ecrire un programme";
+
+/* (No Comment) */
+"Completed" = "Complété";
+
+/* (No Comment) */
+"Confirm" = "Confirmer l'action";
+
+/* (No Comment) */
+"ConnectionErrorPullToRefresh" = "Activer la connexion et tirer pour actualiser";
+
+/* (No Comment) */
+"ConnectionErrorSubtitle" = "Activer la connexion Internet et réessayer";
+
+/* (No Comment) */
+"ConnectionErrorText" = "Impossible de se connecter à Internet";
+
+/* (No Comment) */
+"ConnectionErrorTitle" = "Erreur de connexion";
+
+/* (No Comment) */
+"ContactSupportMessageBody" = "Je fais ce qui suit :\n\n1.\n2.\n3.\n\nCe qui se produit:\n\nJe m'attends à:\n\n=======\nMerci de ne pas supprimer ces informations\n=======\nVersion de l'application: %@\nID Stepik : %@";
+
+/* (No Comment) */
+"ContactSupportSubject" = "Commentaires Stepik iOS";
+
+/* (No Comment) */
+"ContactSupportTitle" = "Contactez le support";
+
+/* Content Language settings */
+"ContentLanguageDescription" = "La langue des cours affichés.";
+
+/* (No Comment) */
+"ContentLanguagePreference" = "Langue du contenu";
+
+/* (No Comment) */
+"Continue" = "Continuer";
+
+/* (No Comment) */
+"ContinueCourseCourseCurrentProgressTitle" = "Progression actuelle : %@/%@ points";
+
+/* (No Comment) */
+"ContinueLearning" = "Apprendre";
+
+/* (No Comment) */
+"ContinueLearningWidgetButtonTitle" = "Continuer à apprendre";
+
+/* (No Comment) */
+"ContinueLearningWidgetTooltip" = "Appuyez pour continuer là où vous avez terminé la dernière fois";
+
+/* (No Comment) */
+"Copied" = "Copié";
+
+/* (No Comment) */
+"Copy" = "Copie";
+
+/* (No Comment) */
+"Correct" = "Corriger";
+
+/* No comment provided by engineer. */
+"CorrectFeedbackTitle($0)" = "Titre du commentaire correct ($0)";
+
+/* Quiz */
+"CorrectFeedbackTitle1" = "Corriger.";
+
+/* (No Comment) */
+"CorrectFeedbackTitle2" = "Vous avez raison, bravo !";
+
+/* (No Comment) */
+"CorrectFeedbackTitle3" = "Tout est correct.";
+
+/* (No Comment) */
+"CorrectFeedbackTitle4" = "Droit.";
+
+/* (No Comment) */
+"CorrectFeedbackTitle5" = "Tu as raison!";
+
+/* (No Comment) */
+"CorrectFeedbackTitle6" = "Tout à fait raison.";
+
+/* (No Comment) */
+"CorrectFeedbackTitle7" = "Bon travail.";
+
+/* (No Comment) */
+"CorrectFeedbackTitle8" = "Bon travail!";
+
+/* (No Comment) */
+"CorrectFeedbackTitle9" = "Absolument raison.";
+
+/* (No Comment) */
+"CorrectFeedbackTitle10" = "Bonne nouvelle pour vous, c'est vrai !";
+
+/* (No Comment) */
+"CorrectFeedbackTitle11" = "Réponse fabuleuse.";
+
+/* (No Comment) */
+"CorrectFeedbackTitle12" = "Oui!";
+
+/* (No Comment) */
+"CorrectFeedbackTitle13" = "Super!";
+
+/* (No Comment) */
+"CorrectFeedbackTitle14" = "Bien fait!";
+
+/* (No Comment) */
+"CorrectFeedbackTitleFreeAnswer" = "Toute réponse textuelle sera considérée comme correcte.";
+
+/* (No Comment) */
+"CorrectFreeResponse" = "Votre réponse a été enregistrée.";
+
+/* (No Comment) */
+"CouldNotOpenLink" = "Impossible d'ouvrir le lien";
+
+/* (No Comment) */
+"Course" = "Cours";
+
+/* (No Comment) */
+"CourseBenefitDetailAmountPercent" = "%@ du chiffre d'affaires moins les frais de Stepik";
+
+/* (No Comment) */
+"CourseBenefitDetailAmountPercentTitle" = "Votre part";
+
+/* (No Comment) */
+"CourseBenefitDetailAmountTitle" = "Vos revenus";
+
+/* (No Comment) */
+"CourseBenefitDetailBuyerTitle" = "Client";
+
+/* (No Comment) */
+"CourseBenefitDetailChannelInvoicePayment" = "Paiement sur le compte";
+
+/* (No Comment) */
+"CourseBenefitDetailChannelRefund" = "Remboursement";
+
+/* (No Comment) */
+"CourseBenefitDetailChannelStepikLink" = "Venu via Stepik";
+
+/* (No Comment) */
+"CourseBenefitDetailChannelTitle" = "Canaliser";
+
+/* (No Comment) */
+"CourseBenefitDetailChannelZLink" = "Entré via z-link";
+
+/* (No Comment) */
+"CourseBenefitDetailCourseTitle" = "Cours";
+
+/* (No Comment) */
+"CourseBenefitDetailDateTitle" = "Date";
+
+/* (No Comment) */
+"CourseBenefitDetailPaymentAmountTitle" = "Paiement";
+
+/* (No Comment) */
+"CourseBenefitDetailPromoCodeTitle" = "Code promo";
+
+/* CourseBenefitDetail */
+"CourseBenefitDetailTitle" = "Détails d'achat";
+
+/* (No Comment) */
+"CourseBenefitDetailTitleRefund" = "Détails du remboursement";
+
+/* Personal deadlines */
+"CourseInfo" = "Informations sur le cours";
+
+/* (No Comment) */
+"CourseInfoAddToWishlistFailureMessage" = "Échec de l'ajout du cours à la liste de souhaits";
+
+/* Wishlist */
+"CourseInfoAddToWishlistSuccessMessage" = "Cours ajouté avec succès à la liste de souhaits";
+
+/* Favorite */
+"CourseInfoCourseActionAddToFavoritesAlertTitle" = "Ajouter aux Favoris";
+
+/* (No Comment) */
+"CourseInfoCourseActionAddToFavoritesFailureMessage" = "Échec de l'ajout du cours aux favoris";
+
+/* (No Comment) */
+"CourseInfoCourseActionAddToFavoritesSuccessMessage" = "Cours ajouté avec succès aux favoris";
+
+/* Archive */
+"CourseInfoCourseActionMoveToArchivedAlertTitle" = "Déplacer vers Archivé";
+
+/* (No Comment) */
+"CourseInfoCourseActionMoveToArchivedFailureMessage" = "Échec du déplacement du cours vers Archivé";
+
+/* (No Comment) */
+"CourseInfoCourseActionMoveToArchivedSuccessMessage" = "Cours déplacé avec succès vers archivé";
+
+/* (No Comment) */
+"CourseInfoCourseActionRemoveFromArchivedAlertTitle" = "Supprimer des archives";
+
+/* (No Comment) */
+"CourseInfoCourseActionRemoveFromArchivedFailureMessage" = "Échec de la suppression du cours des archives";
+
+/* (No Comment) */
+"CourseInfoCourseActionRemoveFromArchivedSuccessMessage" = "Cours supprimé avec succès des archives";
+
+/* (No Comment) */
+"CourseInfoCourseActionRemoveFromFavoritesAlertTitle" = "Retirer des favoris";
+
+/* (No Comment) */
+"CourseInfoCourseActionRemoveFromFavoritesFailureMessage" = "Échec de la suppression du cours des favoris";
+
+/* (No Comment) */
+"CourseInfoCourseActionRemoveFromFavoritesSuccessMessage" = "Cours supprimé avec succès des favoris";
+
+/* (No Comment) */
+"CourseInfoCourseActionViewRevenueAlertTitle" = "Afficher les revenus";
+
+/* (No Comment) */
+"CourseInfoPaymentsNotAvailableEnded" = "Cours terminé le %@";
+
+/* (No Comment) */
+"CourseInfoPaymentsNotAvailableEndedOther" = "Cours actuellement indisponible";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalBuyButtonPurchaseInProgressTitle" = "Traitement du paiement";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalCheckPromoCodeStateError" = "Impossible de vérifier le code promotionnel";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalInputPlaceholder" = "Entrez un code promotionnel";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalPromoCodeStatusError" = "Code promotionnel invalide";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalPromoCodeStatusLoading" = "Vérification du code promotionnel";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalPromoCodeStatusSuccess" = "Code promotionnel appliqué";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalPurchaseErrorContactSupportSubject" = "Erreur lors de l'achat du cours";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalPurchaseErrorFeedbackMessage" = "Une erreur s'est produite lors du traitement du paiement, essayez de restaurer l'achat et <a href=\"https://support.stepik.org/hc/en-us\">contactez l'assistance</a>, si l'erreur persiste. Les fonds ne seront plus débités.";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalPurchaseErrorProductsRequestFailedMessage" = "Impossible d'obtenir des informations de l'App Store, veuillez réessayer plus tard";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalPurchaseErrorRestoreTitle" = "Restaurer l'achat";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalPurchaseErrorStatusTitle" = "Le paiement a réussi, mais l'achat n'est pas terminé";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalPurchaseErrorUnsupportedCourseMessage" = "Ce cours n'est pas disponible à l'achat dans l'application mobile";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalPurchaseSuccessStartLearningTitle" = "Commencer à apprendre";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalPurchaseSuccessStatusTitle" = "Le paiement a réussi";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalRevealPromoCodeInputTitle" = "J'ai un code promo";
+
+/* CourseInfoPurchaseModal */
+"CourseInfoPurchaseModalTitle" = "Achat de cours";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalWishlistButtonAddingToWishlistTitle" = "Ajouter";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalWishlistButtonAddToWishlistTitle" = "Ajouter à la liste de souhaits";
+
+/* (No Comment) */
+"CourseInfoPurchaseModalWishlistButtonInWishlistTitle" = "Ajouté à la liste de souhaits";
+
+/* (No Comment) */
+"CourseInfoRemoveFromWishlistFailureMessage" = "Échec de la suppression du cours de la liste de souhaits";
+
+/* (No Comment) */
+"CourseInfoRemoveFromWishlistSuccessMessage" = "Cours supprimé avec succès de la liste de souhaits";
+
+/* (No Comment) */
+"CourseInfoRestorePurchaseAlertCancelTitle" = "Annuler";
+
+/* (No Comment) */
+"CourseInfoRestorePurchaseAlertContactSupportTitle" = "Contactez le support";
+
+/* (No Comment) */
+"CourseInfoRestorePurchaseErrorMessage" = "Essayez de restaurer à nouveau l'achat ultérieurement et contactez l'assistance si l'erreur persiste.\nErreur: %@";
+
+/* (No Comment) */
+"CourseInfoRestorePurchaseErrorTitle" = "Impossible de restaurer l'achat";
+
+/* (No Comment) */
+"CourseInfoRestorePurchaseSuccessMessage" = "Achat restauré avec succès";
+
+/* (No Comment) */
+"CourseInfoRestorePurchaseTitle" = "Restaurer l'achat";
+
+/* (No Comment) */
+"CourseInfoTabInfo" = "Info";
+
+/* (No Comment) */
+"CourseInfoTabNews" = "Nouvelles";
+
+/* (No Comment) */
+"CourseInfoTabNewsBadgeComposing" = "Brouillon";
+
+/* (No Comment) */
+"CourseInfoTabNewsBadgeOneTime" = "Une fois";
+
+/* (No Comment) */
+"CourseInfoTabNewsBadgeOnEvent" = "Par événement";
+
+/* (No Comment) */
+"CourseInfoTabNewsBadgeScheduled" = "Programmé";
+
+/* (No Comment) */
+"CourseInfoTabNewsBadgeSending" = "Actif";
+
+/* (No Comment) */
+"CourseInfoTabNewsBadgeSent" = "Expédié";
+
+/* (No Comment) */
+"CourseInfoTabNewsClickCountTitle" = "cliqué";
+
+/* (No Comment) */
+"CourseInfoTabNewsDateOneTimeScheduled" = "Planifié pour %@";
+
+/* (No Comment) */
+"CourseInfoTabNewsDateOneTimeSending" = "De %@";
+
+/* (No Comment) */
+"CourseInfoTabNewsDateOnEventComposing" = "De %@";
+
+/* (No Comment) */
+"CourseInfoTabNewsDateOnEventSending" = "De %@";
+
+/* (No Comment) */
+"CourseInfoTabNewsDateOnEventSent" = "%@ - %@";
+
+/* (No Comment) */
+"CourseInfoTabNewsEmptyNews" = "Pas de nouvelles";
+
+/* (No Comment) */
+"CourseInfoTabNewsOpenCountTitle" = "Ouvert";
+
+/* (No Comment) */
+"CourseInfoTabNewsPublishCountTitle" = "Publié";
+
+/* (No Comment) */
+"CourseInfoTabNewsQueueCountTitle" = "En file d'attente";
+
+/* (No Comment) */
+"CourseInfoTabNewsSentCountTitle" = "Expédié";
+
+/* (No Comment) */
+"CourseInfoTabReviews" = "Commentaires";
+
+/* (No Comment) */
+"CourseInfoTabReviewsOutOfRatingTitle" = "sur 5";
+
+/* (No Comment) */
+"CourseInfoTabSyllabus" = "Programme";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationMessage" = "Voulez-vous vraiment supprimer le cours téléchargé ?";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationTitle" = "Supprimer le cours";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusDeleteSectionDownloadsConfirmationMessage" = "Voulez-vous vraiment supprimer la section téléchargée ?";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusDeleteSectionDownloadsConfirmationTitle" = "Supprimer la rubrique";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationMessage" = "Voulez-vous vraiment supprimer l'unité téléchargée ?";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationTitle" = "Supprimer l'unité";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusDownloadOnCellularDataAlertMessage" = "Vous n'êtes pas connecté au Wi-Fi. Utiliser les données cellulaires pour le téléchargement ?";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusDownloadOnCellularDataAlertTitle" = "Utiliser les données cellulaires";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusDownloadOnCellularDataJustOnceAction" = "Juste cette fois";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusDownloadOnCellularDataUseAlwaysAction" = "Utiliser toujours";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusFailedDownloadAlertMessage" = "Désolé, mais quelque chose s'est mal passé, veuillez réessayer le téléchargement.";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusFailedDownloadAlertTitle" = "Erreur de téléchargement";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusFailedDownloadENOSPCAlertMessage" = "Vous n'avez pas assez d'espace de stockage pour télécharger. Libérez de l'espace et réessayez plus tard.";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusSectionExamNoScoreTitle" = "La note de l'examen apparaîtra plus tard";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusSectionExamRequirementTitle" = "L'examen est verrouillé. Pour avoir accès, gagnez %@ dans le module \"%@\".";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusSectionProgressTitle" = "%@/%@ points";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusSectionRequirementTitle" = "Pour déverrouiller ce module, vous devez marquer %@ dans le module \"%@\"";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusUnitDemoAccessTitle" = "Accès démo";
+
+/* (No Comment) */
+"CourseInfoTabSyllabusUnitProgressTitle" = "%@/%@ points";
+
+/* Course info */
+"CourseInfoTitle" = "À propos du cours";
+
+/* (No Comment) */
+"CourseInfoTitleAbout" = "À propos de";
+
+/* (No Comment) */
+"CourseInfoTitleAcquiredSkills" = "Ce que vous apprendrez";
+
+/* (No Comment) */
+"CourseInfoTitleAuthor" = "par";
+
+/* (No Comment) */
+"CourseInfoTitleCertificate" = "Certificat";
+
+/* (No Comment) */
+"CourseInfoTitleCertificateDetails" = "Détails du certificat";
+
+/* (No Comment) */
+"CourseInfoTitleInstructors" = "Instructeurs";
+
+/* (No Comment) */
+"CourseInfoTitleLanguage" = "Langue";
+
+/* (No Comment) */
+"CourseInfoTitleRequirements" = "Conditions";
+
+/* (No Comment) */
+"CourseInfoTitleTargetAudience" = "Public cible";
+
+/* (No Comment) */
+"CourseInfoTitleTimeToComplete" = "Temps prévu pour terminer";
+
+/* (No Comment) */
+"CourseInfoTryForFreeButtonTitle" = "Essayer gratuitement";
+
+/* (No Comment) */
+"CourseIntoPaymentsCantBeBought" = "Vous ne pouvez pas encore acheter ce cours";
+
+/* (No Comment) */
+"CourseListFilterCourseLanguageAnyTitle" = "N'importe quel";
+
+/* (No Comment) */
+"CourseListFilterRowIsFreeTitle" = "Libre";
+
+/* (No Comment) */
+"CourseListFilterRowShowResultTitle" = "Afficher le résultat";
+
+/* (No Comment) */
+"CourseListFilterRowWithCertificateTitle" = "Avec certificat";
+
+/* (No Comment) */
+"CourseListFilterSectionCourseDetailsTitle" = "Détails du cours";
+
+/* (No Comment) */
+"CourseListFilterSectionCourseLanguageTitle" = "Langue du cours";
+
+/* Course List Filter */
+"CourseListFilterTitle" = "Filtres";
+
+/* Course info */
+"CourseMeetsRecommendations" = "Répond aux recommandations de Stepik";
+
+/* (No Comment) */
+"CourseModerator" = "Modérateur du cours";
+
+/* (No Comment) */
+"CoursePassed" = "Cours réussi";
+
+/* (No Comment) */
+"CourseRevenueDisclaimer" = "Important : Toutes les opérations sont effectuées à l'heure de Moscou (MSK, UTC+3).";
+
+/* (No Comment) */
+"CourseRevenueEmptyCourseBenefitsTitle" = "Aucun paiement trouvé pour cette demande";
+
+/* (No Comment) */
+"CourseRevenueEmptyMessage" = "Vos gains seront ici";
+
+/* (No Comment) */
+"CourseRevenueMonthIncomeDate" = "Vos revenus pour %@";
+
+/* (No Comment) */
+"CourseRevenueMonthTurnoverDate" = "Vos ventes pour %@";
+
+/* (No Comment) */
+"CourseRevenueTabMonthly" = "Mensuel";
+
+/* (No Comment) */
+"CourseRevenueTabMonthlyChannelInvoicePaymentsTitle" = "Paiement sur le compte";
+
+/* (No Comment) */
+"CourseRevenueTabMonthlyChannelStepikTitle" = "Venu via Stepik";
+
+/* (No Comment) */
+"CourseRevenueTabMonthlyChannelZLinkTitle" = "Entré via z-link";
+
+/* (No Comment) */
+"CourseRevenueTabMonthlyIncomeTitle" = "Achats";
+
+/* (No Comment) */
+"CourseRevenueTabMonthlyRefundsTitle" = "Remboursements";
+
+/* CourseRevenueTabMonthly */
+"CourseRevenueTabMonthlyTurnoverTitle" = "Ventes";
+
+/* (No Comment) */
+"CourseRevenueTabPurchasesAndRefunds" = "Achats et remboursements";
+
+/* (No Comment) */
+"CourseRevenueTabPurchasesManualBenefitTitle" = "Manuellement: %@";
+
+/* CourseRevenueTabPurchases */
+"CourseRevenueTabPurchasesSeatsCount1" = "place dans le cours";
+
+/* (No Comment) */
+"CourseRevenueTabPurchasesSeatsCount234" = "places dans le cours";
+
+/* (No Comment) */
+"CourseRevenueTabPurchasesSeatsCount567890" = "places dans le cours";
+
+/* Course revenue */
+"CourseRevenueTitle" = "Revenu";
+
+/* (No Comment) */
+"CourseRevenueTotalIncomeDate" = "Gains depuis %@";
+
+/* (No Comment) */
+"CourseRevenueTotalTurnoverDate" = "Ventes depuis %@";
+
+/* (No Comment) */
+"CourseRevenueTransactionRefundedTitle" = "Remboursement";
+
+/* (No Comment) */
+"courses1" = "cours";
+
+/* (No Comment) */
+"courses234" = "cours";
+
+/* (No Comment) */
+"courses567890" = "cours";
+
+/* CourseSearch */
+"CourseSearchBarPlaceholder" = "Rechercher dans le cours %@";
+
+/* (No Comment) */
+"CourseSearchPlaceholderEmptySearchResults" = "Rien n'a été trouvé pour cette requête";
+
+/* (No Comment) */
+"CourseSearchPlaceholderEmptySuggesions" = "Entrez des mots-clés pour rechercher dans le cours";
+
+/* (No Comment) */
+"CourseStaff" = "Personnel du cours";
+
+/* (No Comment) */
+"CourseSubscriptionNotificationRequestAlertMessage" = "Nous essayons de rendre le processus d'apprentissage efficace et confortable. Activer les notifications pour suivre les délais et recevoir rapidement les mises à jour des cours ?";
+
+/* (No Comment) */
+"CourseSubscriptionNotificationRequestAlertTitle" = "Restez à l'écoute";
+
+/* Course List */
+"CourseWidgetArchived" = "Archivé";
+
+/* (No Comment) */
+"CourseWidgetEnrolled" = "Inscrit";
+
+/* (No Comment) */
+"CourseWidgetPriceFree" = "Libre";
+
+/* (No Comment) */
+"CourseWidgetSeeAllTitle" = "Voir tout";
+
+/* (No Comment) */
+"CreateSchedule" = "Créer un horaire";
+
+/* (No Comment) */
+"CurrentBestStreakAlertBottomText" = "Résolvez des quiz tous les jours et améliorez vos résultats !";
+
+/* (No Comment) */
+"CurrentBestStreakAlertTopText" = "La meilleure séquence est une excellente motivation pour apprendre";
+
+/* (No Comment) */
+"CurrentStreak" = "Série actuelle";
+
+/* (No Comment) */
+"CurrentStreakTitle" = "Résoudre des quiz";
+
+/* (No Comment) */
+"days1" = "journée";
+
+/* (No Comment) */
+"days234" = "journées";
+
+/* (No Comment) */
+"days567890" = "journées";
+
+/* (No Comment) */
+"DeadlineModeQuestion" = "Combien de temps aimeriez-vous consacrer à l'étude de ce cours ?";
+
+/* (No Comment) */
+"DeepLinkRoutingServiceErrorStatusRouteStory" = "Échec de l'ouverture d'une histoire";
+
+/* (No Comment) */
+"Delete" = "Effacer";
+
+/* (No Comment) */
+"DeleteAllContentConfirmationAlertMessage" = "Voulez-vous vraiment supprimer tout le contenu téléchargé ?";
+
+/* (No Comment) */
+"DeleteAllContentConfirmationAlertTitle" = "Supprimer tout le contenu";
+
+/* (No Comment) */
+"DeleteAllContentPreferenceTitle" = "Supprimer tout le contenu";
+
+/* (No Comment) */
+"DeletedComment" = "Commentaire supprimé";
+
+/* (No Comment) */
+"DeleteSchedule" = "Supprimer l'horaire";
+
+/* (No Comment) */
+"DeniedNotificationsDefaultAlertMessage" = "Il semble que vous ayez désactivé les notifications. Activer dans les paramètres ?";
+
+/* (No Comment) */
+"DeniedNotificationsDefaultAlertTitle" = "Les notifications sont désactivées";
+
+/* (No Comment) */
+"Description" = "La description";
+
+/* (No Comment) */
+"DisabledDiscussionsButtonTitle" = "Commentaires désactivés";
+
+/* (No Comment) */
+"DiscountPolicyFirstNTitle1" = "Vous avez %@ tentative, pour laquelle vous obtiendrez des points";
+
+/* (No Comment) */
+"DiscountPolicyFirstNTitle234" = "Vous avez %@ tentatives, pour lesquelles vous obtiendrez des points";
+
+/* (No Comment) */
+"DiscountPolicyFirstNTitle567890" = "Vous avez %@ tentatives, pour lesquelles vous obtiendrez des points";
+
+/* (No Comment) */
+"DiscountPolicyHalfTitle" = "Pour les prochaines tentatives, vous pourrez obtenir la moitié des points";
+
+/* (No Comment) */
+"DiscountPolicyInverseTitle" = "Après chaque mauvaise soumission, votre maximum de points sera réduit";
+
+/* (No Comment) */
+"DiscountPolicyNoWayTitle" = "Vous n'obtiendrez pas de points pour les prochaines tentatives";
+
+/* (No Comment) */
+"Discussions" = "Discussions";
+
+/* (No Comment) */
+"DiscussionsAlertActionAbuseTitle" = "Abuser de";
+
+/* (No Comment) */
+"DiscussionsAlertActionDeleteTitle" = "Effacer";
+
+/* (No Comment) */
+"DiscussionsAlertActionEditTitle" = "Éditer";
+
+/* (No Comment) */
+"DiscussionsAlertActionLikeTitle" = "Comme";
+
+/* (No Comment) */
+"DiscussionsAlertActionShowSolutionTitle" = "Afficher la solution";
+
+/* (No Comment) */
+"DiscussionsAlertActionShowSubmissionsTitle" = "Soumissions";
+
+/* (No Comment) */
+"DiscussionsAlertActionUnabuseTitle" = "N'abuse pas";
+
+/* (No Comment) */
+"DiscussionsAlertActionUnlikeTitle" = "Contrairement à";
+
+/* (No Comment) */
+"DiscussionsButtonTitle" = "Afficher les commentaires (%@)";
+
+/* (No Comment) */
+"DiscussionsCommentNotFoundTitle" = "Le commentaire #%@ a été supprimé ou n'a jamais existé";
+
+/* (No Comment) */
+"DiscussionsIsPinnedBadgeTitle" = "Épinglé";
+
+/* (No Comment) */
+"DiscussionsPlaceholderEmptySolutionsButtonTitle" = "Publier une solution";
+
+/* (No Comment) */
+"DiscussionsPlaceholderEmptySolutionsTitle" = "Aucune solution. Postez le premier !";
+
+/* (No Comment) */
+"DiscussionsSortTypeAlertTitle" = "Trier par";
+
+/* (No Comment) */
+"DiscussionsSortTypeLastDiscussions" = "Dernières discussions";
+
+/* (No Comment) */
+"DiscussionsSortTypeMostActiveDiscussions" = "Les plus actifs";
+
+/* (No Comment) */
+"DiscussionsSortTypeMostLikedDiscussions" = "Le plus aimé";
+
+/* (No Comment) */
+"DiscussionsSortTypeRecentActivityDiscussions" = "Activité récente";
+
+/* Discussions */
+"DiscussionsTitle" = "commentaires";
+
+/* (No Comment) */
+"DiscussionThreadCommentSolutionTitle" = "La solution %@";
+
+/* (No Comment) */
+"DiscussionThreadSolutionsTitle" = "Solutions";
+
+/* (No Comment) */
+"Done" = "Fait";
+
+/* (No Comment) */
+"DontHaveAccountQuestion" = "Vous n'avez pas de compte ?";
+
+/* (No Comment) */
+"DownloadARQuickLookAlertFailedMessage" = "Impossible de télécharger l'objet AR. Veuillez réessayer plus tard.";
+
+/* (No Comment) */
+"DownloadARQuickLookTitle" = "Téléchargement de l'objet AR";
+
+/* (No Comment) */
+"Downloaded" = "Téléchargé";
+
+/* (No Comment) */
+"DownloadedContentSettingsBlockTitle" = "Contenu téléchargé";
+
+/* (No Comment) */
+"Downloading" = "Téléchargement";
+
+/* (No Comment) */
+"Downloads" = "Téléchargements";
+
+/* Downloads */
+"DownloadsTitle" = "Cours téléchargés";
+
+/* (No Comment) */
+"DropCourse" = "Abandonnez le cours";
+
+/* (No Comment) */
+"EditSchedule" = "Modifier l'horaire";
+
+/* (No Comment) */
+"EditStepAlertActionTitle" = "Éditer";
+
+/* (No Comment) */
+"EditStepMessage" = "Vous ne pouvez modifier que le texte de l'étape et uniquement en HTML brut. Pour accéder à l'éditeur complet, veuillez utiliser la version Web de Stepik.";
+
+/* (No Comment) */
+"EditStepPlaceholder" = "Texte...";
+
+/* (No Comment) */
+"EditStepRemoteUpdateSuccessfulTitle" = "Actualisé";
+
+/* (No Comment) */
+"EditStepRemoteUpdateUnsuccessfulTitle" = "Échec de mise à jour";
+
+/* Edit step */
+"EditStepTitle" = "Modifier l'étape";
+
+/* (No Comment) */
+"Email" = "E-mail";
+
+/* (No Comment) */
+"EmptyAuthViewDescription" = "Le compte autorisé vous permet de synchroniser les progrès";
+
+/* (No Comment) */
+"EmptyAuthViewSubtitle" = "Autorisation complète pour étudier confortablement";
+
+/* (No Comment) */
+"EmptyAuthViewTitle" = "C'est toi!";
+
+/* (No Comment) */
+"EmptyCertificatesDescription" = "Choisissez un cours et apprenez à obtenir un certificat";
+
+/* (No Comment) */
+"EmptyCertificatesTitle" = "Aucun certificat";
+
+/* (No Comment) */
+"EmptyDownloadsDescription" = "Vous ne pouvez télécharger que les vidéos des cours auxquels vous êtes inscrit. Veuillez accéder à l'un des onglets des cours et essayer de télécharger des vidéos.";
+
+/* (No Comment) */
+"EmptyDownloadsTitle" = "Pas de téléchargement ou de vidéos téléchargées";
+
+/* (No Comment) */
+"EmptyFindCoursesDescription" = "Tirez pour actualiser les cours disponibles";
+
+/* (No Comment) */
+"EmptyFindCoursesTitle" = "Rafraîchir les cours";
+
+/* (No Comment) */
+"EmptyMyCoursesDescription" = "Allez dans l'onglet \"Tous les cours\" pour voir la liste des cours disponibles, choisissez-en quelques-uns pour vous inscrire, c'est amusant !";
+
+/* (No Comment) */
+"EmptyMyCoursesTitle" = "Vous n'êtes inscrit à aucun cours";
+
+/* (No Comment) */
+"EmptyTitle" = "Rien ici :(";
+
+/* (No Comment) */
+"EndDate" = "Date de fin";
+
+/* (No Comment) */
+"Enrolled" = "Mes cours";
+
+/* (No Comment) */
+"Enter course name" = "Entrez le nom du cours";
+
+/* (No Comment) */
+"Enter your email address" = "Entrez votre adresse email";
+
+/* (No Comment) */
+"Enter your name" = "Entrez votre nom";
+
+/* (No Comment) */
+"Enter your password" = "Tapez votre mot de passe";
+
+/* (No Comment) */
+"Error" = "Erreur";
+
+/* ExamEGERussian */
+"ErrorMessage" = "Désolé, une erreur s'est produite : veuillez réessayer plus tard.";
+
+/* (No Comment) */
+"EvaluateSubmissionErrorText" = "Échec de l'évaluation de la soumission";
+
+/* (No Comment) */
+"EvaluationFeedbackTitle" = "Évaluation...";
+
+/* (No Comment) */
+"ExamProctoredTitle" = "Examen avec surveillance";
+
+/* (No Comment) */
+"ExamTitle" = "Examen";
+
+/* (No Comment) */
+"Exit" = "Sortir";
+
+/* (No Comment) */
+"ExtremeDeadlineMode" = "Extrême";
+
+/* (No Comment) */
+"FailedFetchKnowledgeGraphErrorMessage" = "Tirez vers le bas pour actualiser l'écran.";
+
+/* (No Comment) */
+"FailedFetchKnowledgeGraphErrorTitle" = "Impossible de charger le graphique des connaissances";
+
+/* (No Comment) */
+"FailedFetchStepsError" = "Impossible de charger les étapes. Veuillez réessayer plus tard.";
+
+/* (No Comment) */
+"FailedFetchStepsForLessonMessage" = "Veuillez réessayer plus tard.";
+
+/* (No Comment) */
+"FailedFetchStepsForLessonTitle" = "Impossible de charger le contenu de la leçon";
+
+/* (No Comment) */
+"FailedMarkStepAsSolved" = "Nous ne pouvons pas marquer l'étape comme résolue. Veuillez réessayer plus tard.";
+
+/* (No Comment) */
+"FailedToRemoveMessage" = "Échec de la suppression";
+
+/* (No Comment) */
+"FailedToSignIn" = "Échec de la connexion";
+
+/* (No Comment) */
+"FailedToSignInNoEmail" = "Échec de la connexion : l'adresse e-mail n'est pas fournie par le réseau social";
+
+/* (No Comment) */
+"FakeUserFailedSignInMessage" = "Vérifiez votre connexion Internet, puis réessayez.";
+
+/* (No Comment) */
+"FakeUserFailedSignInTitle" = "Quelque chose s'est mal passé";
+
+/* Stepik TV */
+"Featured" = "Mis en exergue";
+
+/* (No Comment) */
+"FeedbackAbout" = "Commentaires sur l'application iOS %@";
+
+/* (No Comment) */
+"FillBlankInputTextFieldPlaceholder" = "Entrez votre réponse";
+
+/* (No Comment) */
+"FillBlankOptionTitle" = "Sélectionnez l'option";
+
+/* (No Comment) */
+"FillBlanksQuizTitle" = "Remplir les espaces vides";
+
+/* (No Comment) */
+"FillBlanksSelectAnswerString" = "Sélectionnez votre réponse";
+
+/* (No Comment) */
+"FillBlanksSelectButtonString" = "Sélectionner";
+
+/* (No Comment) */
+"FindCourses" = "Trouver des cours";
+
+/* (No Comment) */
+"FinishOnboarding" = "Commencer à apprendre";
+
+/* (No Comment) */
+"FirstName" = "Prénom";
+
+/* (No Comment) */
+"followers1" = "disciple";
+
+/* (No Comment) */
+"followers234" = "suiveurs";
+
+/* (No Comment) */
+"followers567890" = "suiveurs";
+
+/* (No Comment) */
+"ForgotPassword" = "mot de passe oublié?";
+
+/* (No Comment) */
+"Format" = "Format";
+
+/* (No Comment) */
+"FreeAnswerQuizPlaceholder" = "Entrez du texte";
+
+/* (No Comment) */
+"FreeAnswerQuizTitle" = "Rédigez une réponse";
+
+/* (No Comment) */
+"from" = "de";
+
+/* (No Comment) */
+"Fullscreen" = "Plein écran";
+
+/* (No Comment) */
+"FullscreenImageViewerErrorActionClose" = "proche";
+
+/* (No Comment) */
+"FullscreenImageViewerErrorActionRetry" = "Réessayer";
+
+/* (No Comment) */
+"FullscreenImageViewerErrorMessage" = "Échec du chargement de l'image. Réessayer ou fermer ?";
+
+/* (No Comment) */
+"GoToStepikAppStore" = "Trouver des cours sur Stepik";
+
+/* (No Comment) */
+"HardDeadline" = "Délai contraignant";
+
+/* (No Comment) */
+"HelpCenterLink" = "https://support.stepik.org/hc/en-us";
+
+/* (No Comment) */
+"HelpCenterTitle" = "Centre d'aide";
+
+/* (No Comment) */
+"High" = "Haute";
+
+/* (No Comment) */
+"HobbyDeadlineMode" = "Loisir";
+
+/* (No Comment) */
+"Home" = "Maison";
+
+/* (No Comment) */
+"HomePlaceholderAnonymous" = "<b>Connexion</b> et commencez à apprendre dès maintenant";
+
+/* (No Comment) */
+"HomePlaceholderEmptyEnrolled" = "<b>S'inscrire</b> pour des cours gratuits et ils seront là";
+
+/* (No Comment) */
+"HomePlaceholderEmptyPopular" = "<b>Cours ouverts</b> sont en vacances. S'il vous plaît, voir plus tard";
+
+/* (No Comment) */
+"HomePlaceHolderErrorEnrolled" = "Erreur lors du chargement de vos cours. <b>Appuyez sur</b> Essayer à nouveau";
+
+/* (No Comment) */
+"HomePlaceholderErrorPopular" = "Il semble que nous n'ayons pas réussi à charger les cours populaires. <b>Appuyez sur</b> Essayer à nouveau";
+
+/* (No Comment) */
+"hours1" = "heure";
+
+/* (No Comment) */
+"hours234" = "heures";
+
+/* (No Comment) */
+"hours567890" = "heures";
+
+/* (No Comment) */
+"HowWouldYouRate" = "Comment évalueriez-vous %@?";
+
+/* (No Comment) */
+"HrsPerWeek" = "heures/semaine";
+
+/* (No Comment) */
+"IAPPurchaseBuyInWeb" = "Acheter en ligne";
+
+/* (No Comment) */
+"IAPPurchaseErrorPaymentFailed" = "Une erreur s'est produite lors du traitement de votre achat.";
+
+/* (No Comment) */
+"IAPPurchaseErrorPaymentNotAllowed" = "Les achats intégrés ne sont pas autorisés.";
+
+/* (No Comment) */
+"IAPPurchaseErrorPaymentReceiptValidationFailed" = "Échec de la validation du reçu.";
+
+/* (No Comment) */
+"IAPPurchaseErrorPaymentUserChanged" = "L'utilisateur actuel a changé pendant le paiement, veuillez vous connecter à votre compte d'utilisateur précédent.";
+
+/* (No Comment) */
+"IAPPurchaseFailedMessage" = "Impossible d'acheter un cours \"%@\". %@";
+
+/* (No Comment) */
+"IAPPurchaseFailedTitle" = "Achat raté";
+
+/* (No Comment) */
+"IAPPurchaseSucceededMessage" = "Le cours \"%@\" a été acheté avec succès.";
+
+/* In-App Purchases */
+"IAPPurchaseSucceededTitle" = "Achat réussi";
+
+/* (No Comment) */
+"IgnoreMuteSwitch" = "Ignorer le commutateur de sourdine";
+
+/* (No Comment) */
+"In Progress" = "En cours";
+
+/* (No Comment) */
+"InARow" = "dans une rangée";
+
+/* (No Comment) */
+"Info" = "Info";
+
+/* (No Comment) */
+"Instructors" = "Instructeurs";
+
+/* (No Comment) */
+"Intro" = "Introduction";
+
+/* (No Comment) */
+"Invalid email or password" = "email ou mot de passe invalide";
+
+/* (No Comment) */
+"JoinCourse" = "Rejoindre le cours";
+
+/* (No Comment) */
+"JoinCoursesSuggestionDescription" = "Connectez-vous pour résoudre des devoirs, afficher le contenu des leçons et obtenir des certificats";
+
+/* (No Comment) */
+"JoiningCourse" = "Rejoindre le cours...";
+
+/* (No Comment) */
+"Language" = "Langue";
+
+/* (No Comment) */
+"LanguageSettingsTitle" = "Paramètres de langue";
+
+/* (No Comment) */
+"LastName" = "Nom de famille";
+
+/* (No Comment) */
+"LastStepRouterShowExamInWeb" = "Le module suivant est un module d'examen, vous ne pouvez le résoudre que dans la version Web. Appuyez sur \"Ouvrir\" pour continuer dans la version Web.";
+
+/* (No Comment) */
+"Later" = "Plus tard";
+
+/* (No Comment) */
+"LearningSettingsBlockTitle" = "Apprentissage";
+
+/* (No Comment) */
+"LearningTabTitle" = "Apprentissage";
+
+/* (No Comment) */
+"Leave" = "Partir";
+
+/* (No Comment) */
+"Lesson" = "Leçon";
+
+/* (No Comment) */
+"LessonDownloadTooltip" = "Téléchargez la leçon pour regarder les conférences hors ligne";
+
+/* (No Comment) */
+"LessonFinishedDemoPanModalSubtitle" = "Pour voir, les autres leçons achètent un accès complet au cours.";
+
+/* LessonFinishedDemoPanModal */
+"LessonFinishedDemoPanModalTitle" = "Toutes nos félicitations! Vous venez de terminer le module de démonstration « %@ ».";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalActionButtonBackToAssignmentsTitle" = "Retour aux devoirs";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalActionButtonFindNewCourseTitle" = "Trouver un nouveau cours";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalActionButtonLeaveReviewTitle" = "Laisser un commentaire";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalActionButtonShareResultTitle" = "Partager le résultat";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalActionButtonViewCertificateTitle" = "Afficher le certificat";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalCertificateFeedback" = "Recevez %@ pour obtenir un certificat.";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalShareResult" = "J'ai reçu %@ sur %@ dans le cours « %@ »";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalSubtitleCertificateDistinctionNeedScoreMessage" = "Pour recevoir le certificat avec distinction, vous devez gagner %@, %@ maintenant à gauche.";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalSubtitleCertificateHint" = "Vous pourrez le mettre dans votre CV ou sur les réseaux sociaux, ou le télécharger et l'imprimer.";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalSubtitleCertificateIssuedMessage" = "Le certificat régulier est délivré pour %@, le certificat avec distinction pour %@.";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalSubtitleCertificateNotIssuedNeutralMessage" = "Il n'y a pas de certificats dans ce cours, mais nous n'apprenons pas seulement pour une confirmation formelle, n'est-ce pas ?";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalSubtitleCertificateNotIssuedSuccessMessage" = "Il n'y a pas de certificats dans ce cours, mais vous pouvez partager votre résultat sur vos réseaux sociaux.";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalSubtitleCertificateNotReadyNotifyMessage" = "Nous vous informerons lorsque votre certificat sera prêt.";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalSubtitleCertificateReadyMessage" = "Mettez votre certificat dans votre CV ou sur les réseaux sociaux. C'est un excellent résultat et vous pouvez en être fier !";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalSubtitleCertificateWithoutDistinctionIssuedMessage" = "Le certificat normal est émis pour %@.";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalSubtitleContinueMessage" = "Continuer avec ce cours ou en trouver un autre ?";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalSubtitleProgress" = "Vous avez reçu <b>%@ sur %@</b>, ce qui représente %@ du matériel de cours.";
+
+/* LessonFinishedStepsPanModal */
+"LessonFinishedStepsPanModalTitleFinishedCourse" = "Ceci a été la dernière leçon du cours « %@ ».";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalTitleFinishedCourseWithSuccess" = "Toutes nos félicitations!\nVous avez terminé le cours « %@ ».";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalTitleFinishedCourseWithSuccessAndCertificate" = "Toutes nos félicitations!\nVous avez terminé le cours « %@ » et reçu le certificat !";
+
+/* (No Comment) */
+"LessonFinishedStepsPanModalTitleFinishedCourseWithSuccessAndDistinctionCertificate" = "Toutes nos félicitations!\nVous avez terminé le cours « %@ » et reçu le certificat avec distinction !";
+
+/* (No Comment) */
+"LessonPreviousUnitNavigationClosedByBeginDateMessage" = "Le module adjacent \"%@\" ouvrira %@.";
+
+/* (No Comment) */
+"LessonPreviousUnitNavigationClosedByEndDateMessage" = "Le module adjacent \"%@\" a été fermé %@.";
+
+/* (No Comment) */
+"LessonPreviousUnitNavigationExamMessage" = "Le module adjacent \"%@\" est un examen. Vous pouvez le démarrer à partir du programme du cours.";
+
+/* (No Comment) */
+"LessonPreviousUnitNavigationFinishedModuleTitle" = "Vous avez terminé le module \"%@\".";
+
+/* (No Comment) */
+"LessonPreviousUnitNavigationRequirementNotSatisfiedMessage" = "Pour déverrouiller le module \"%@\" adjacent, vous devez marquer %@ dans le module \"%@\".";
+
+/* (No Comment) */
+"LessonsCountText1" = "%@ leçon";
+
+/* (No Comment) */
+"LessonsCountText234" = "%@ cours";
+
+/* (No Comment) */
+"LessonsCountText567890" = "%@ cours";
+
+/* (No Comment) */
+"LessonsViewControllerTitle" = "Sujet";
+
+/* (No Comment) */
+"LessonTooltipPointsTitle" = "Vous obtiendrez : %@ pour l'étape";
+
+/* (No Comment) */
+"LessonTooltipPointsWithScoreTitle" = "Vous avez : %@ sur %@ pour l'étape";
+
+/* (No Comment) */
+"LessonTooltipTimeToCompleteTitle" = "%@ pour la leçon";
+
+/* (No Comment) */
+"LessonUnitNavigationActionSyllabus" = "Aller au Syllabus";
+
+/* (No Comment) */
+"LessonUnitNavigationClosedByBeginDateMessage" = "Le prochain module \"%@\" ouvrira %@.";
+
+/* (No Comment) */
+"LessonUnitNavigationClosedByEndDateMessage" = "Le module suivant \"%@\" a été fermé %@.";
+
+/* (No Comment) */
+"LessonUnitNavigationCommonErrorMessage" = "Impossible d'ouvrir le module \"%@\". Veuillez réessayer plus tard.";
+
+/* (No Comment) */
+"LessonUnitNavigationExamMessage" = "Le module suivant \"%@\" est l'examen. Vous pouvez le démarrer à partir du programme du cours.";
+
+/* (No Comment) */
+"LessonUnitNavigationFinishedModuleTitle" = "Toutes nos félicitations!\nVous avez terminé le module \"%@\".";
+
+/* (No Comment) */
+"LessonUnitNavigationRequirementNotSatisfiedActionContinue" = "Continuer à apprendre";
+
+/* (No Comment) */
+"LessonUnitNavigationRequirementNotSatisfiedMessage" = "Pour débloquer le prochain module \"%@\", vous devez marquer %@ dans le module \"%@\".";
+
+/* (No Comment) */
+"Link" = "Lien";
+
+/* (No Comment) */
+"LoadCatalogBlocks" = "Charger le catalogue";
+
+/* (No Comment) */
+"LoadingCourse" = "Chargement du cours...";
+
+/* (No Comment) */
+"LoadingVideoQualityPreference" = "Téléchargement de la qualité vidéo";
+
+/* (No Comment) */
+"LoadStories" = "Charger des histoires";
+
+/* (No Comment) */
+"LogInButton" = "Connexion";
+
+/* (No Comment) */
+"Logout" = "Se déconnecter";
+
+/* (No Comment) */
+"LogOutConfirmationAlertActionDestructiveTitle" = "Se déconnecter";
+
+/* (No Comment) */
+"LogOutConfirmationAlertMessage" = "Êtes-vous sûr de vouloir vous déconnecter?";
+
+/* (No Comment) */
+"LogOutConfirmationAlertTitle" = "Se déconnecter";
+
+/* (No Comment) */
+"LongestStreak" = "La plus longue série";
+
+/* (No Comment) */
+"Low" = "Bas";
+
+/* (No Comment) */
+"MarkAllAsRead" = "tout marquer comme lu";
+
+/* (No Comment) */
+"MarkAllAsReadSuccess" = "Tous marqués comme lus !";
+
+/* (No Comment) */
+"MatchingQuizTitle" = "Associer deux listes";
+
+/* (No Comment) */
+"MathQuizTitle" = "Entrez une formule mathématique";
+
+/* (No Comment) */
+"Mb" = "Mo";
+
+/* (No Comment) */
+"Medium" = "Moyen";
+
+/* (No Comment) */
+"minutes1" = "minute";
+
+/* (No Comment) */
+"minutes234" = "minutes";
+
+/* (No Comment) */
+"minutes567890" = "minutes";
+
+/* (No Comment) */
+"MultipleChoiceQuizTitle" = "Sélectionnez une ou plusieurs options";
+
+/* Table Quiz */
+"MultipleChoiceTableQuizPrompt" = "Sélectionnez une ou plusieurs options";
+
+/* (No Comment) */
+"My courses" = "Mes cours";
+
+/* (No Comment) */
+"MyCourses" = "Mes cours";
+
+/* (No Comment) */
+"Name" = "Nom";
+
+/* (No Comment) */
+"NewCommentAlertMessage" = "Afficher le commentaire sur le Web ?";
+
+/* (No Comment) */
+"NewCommentAlertTitle" = "Nouveau commentaire";
+
+/* (No Comment) */
+"NewHomePlaceholderEmptyEnrolledButtonTitle" = "Rechercher des cours dans le catalogue";
+
+/* (No Comment) */
+"NewHomePlaceholderEmptyEnrolledTitle" = "Vos cours\nsera la";
+
+/* (No Comment) */
+"NewHomePlaceholderErrorButtonTitle" = "Réessayer";
+
+/* (No Comment) */
+"NewHomePlaceholderErrorTitle" = "La connexion est perdue";
+
+/* (No Comment) */
+"NewLevelCongratulationShareText" = "J'ai atteint le niveau %@ dans l'application %@. Rejoignez et battez mon record !";
+
+/* (No Comment) */
+"NewLevelCongratulationText" = "Vous avez atteint le niveau %@ !";
+
+/* (No Comment) */
+"NewProfileBlockTitleAchievements" = "Réalisations";
+
+/* (No Comment) */
+"NewProfileBlockTitleActivity" = "Activité";
+
+/* (No Comment) */
+"NewProfileBlockTitleCertificates" = "Certificats";
+
+/* (No Comment) */
+"NewProfileBlockTitleCreatedCourses" = "Cours créés";
+
+/* (No Comment) */
+"NewProfileBlockTitleDetails" = "Détails";
+
+/* (No Comment) */
+"NewProfileBlockTitleDetailsOrganization" = "À propos de l'organisation";
+
+/* (No Comment) */
+"NewProfileBlockTitleSocialProfiles" = "Liens externes";
+
+/* (No Comment) */
+"NewProfileRatingCertificates1" = "%@ Certificat";
+
+/* (No Comment) */
+"NewProfileRatingCertificates234" = "%@ Certificats";
+
+/* (No Comment) */
+"NewProfileRatingCertificates567890" = "%@ Certificats";
+
+/* (No Comment) */
+"NewProfileRatingCourses1" = "%@ Cours";
+
+/* (No Comment) */
+"NewProfileRatingCourses234" = "%@ Cours";
+
+/* (No Comment) */
+"NewProfileRatingCourses567890" = "%@ Cours";
+
+/* (No Comment) */
+"NewProfileRatingKnowledge" = "Connaissances %@";
+
+/* New profile */
+"NewProfileRatingReputation" = "Réputation %@";
+
+/* (No Comment) */
+"NewProfileStreakNotificationsNotifyPreference" = "Avertir des stries";
+
+/* (No Comment) */
+"NewProfileStreakNotificationsTimeSelection" = "Heure de notification";
+
+/* (No Comment) */
+"NewProfileUserActivityCurrentStreak" = "%@ dans une rangée";
+
+/* (No Comment) */
+"NewProfileUserActivityLongestStreak" = "Série maximale %@";
+
+/* (No Comment) */
+"NewProfileUserActivityNoCurrentStreak" = "Résolvez aujourd'hui pour commencer une séquence";
+
+/* (No Comment) */
+"NextLesson" = "Prochaine leçon";
+
+/* New lesson & step */
+"NextLessonNavigation" = "Prochaine leçon";
+
+/* (No Comment) */
+"NextStepNavigationTitle" = "Prochain";
+
+/* (No Comment) */
+"NextTask" = "Tâche suivante";
+
+/* (No Comment) */
+"No" = "Non";
+
+/* (No Comment) */
+"No Submissions Left" = "Aucune soumission restante";
+
+/* (No Comment) */
+"NoAccess" = "Pas d'accès";
+
+/* (No Comment) */
+"NoAdaptiveModuleError" = "Cette leçon n'a pas d'étapes pratiques.";
+
+/* (No Comment) */
+"NoDiscussionsButtonTitle" = "Laissez un commentaire";
+
+/* (No Comment) */
+"NoNotifications" = "Aucune notification";
+
+/* (No Comment) */
+"NoRecommendations" = "Nous n'avons pas de recommandations pour vous.";
+
+/* (No Comment) */
+"NoReviews" = "Malheureusement, aucun avis n'a été envoyé pour ce cours";
+
+/* (No Comment) */
+"NoSearchResultsTitle" = "Rien n'a été trouvé";
+
+/* (No Comment) */
+"NoSolutionsButtonTitle" = "Publier une solution";
+
+/* (No Comment) */
+"NoSubmissionsLeft" = "Aucun essai restant";
+
+/* (No Comment) */
+"NotAbleSendEmailAlertMessage" = "Votre appareil n'a pas pu envoyer d'e-mail. Veuillez vérifier la configuration de l'e-mail et réessayer.";
+
+/* (No Comment) */
+"NotAbleSendEmailAlertTitle" = "Impossible d'envoyer un e-mail";
+
+/* (No Comment) */
+"NotEnrolledToCourseMessage" = "Vous n'êtes pas inscrit au cours";
+
+/* (No Comment) */
+"NotificationRequestDefaultAlertMessage" = "Nous essayons de rendre le processus d'apprentissage efficace et confortable. Signaler un contenu intéressant et pertinent pour vous ?";
+
+/* (No Comment) */
+"NotificationRequestDefaultAlertTitle" = "Restez à l'écoute";
+
+/* (No Comment) */
+"Notifications" = "Avis";
+
+/* (No Comment) */
+"NotificationsAll" = "Tout";
+
+/* (No Comment) */
+"NotificationsComments" = "commentaires";
+
+/* (No Comment) */
+"NotificationsLearning" = "Apprentissage";
+
+/* (No Comment) */
+"NotificationsOther" = "Autre";
+
+/* (No Comment) */
+"NotificationsReviews" = "Commentaires";
+
+/* (No Comment) */
+"NotificationsTeaching" = "Enseignement";
+
+/* (No Comment) */
+"NotificationTabNotificationRequestAlertMessage" = "Nous essayons de rendre le processus d'apprentissage efficace et confortable. Activer les notifications pour suivre les discussions et recevoir rapidement les mises à jour des cours ?";
+
+/* Notification alerts */
+"NotificationTabNotificationRequestAlertTitle" = "Restez à l'écoute";
+
+/* (No Comment) */
+"NotificationTime" = "Heure de notification";
+
+/* (No Comment) */
+"NotifyAboutStreaksPreference" = "Avertir des stries";
+
+/* (No Comment) */
+"NotSupportedLanguage" = "La langue n'est pas encore prise en charge dans l'application";
+
+/* (No Comment) */
+"NotWithUsYet" = "Vous ne nous avez pas encore rejoint ?";
+
+/* (No Comment) */
+"NoVideo" = "Pas de vidéo";
+
+/* (No Comment) */
+"NumberInputTextFieldPlaceholder" = "Entrez votre réponse";
+
+/* (No Comment) */
+"NumberQuizTitle" = "Entrez un nombre";
+
+/* (No Comment) */
+"OK" = "D'ACCORD";
+
+/* No comment provided by engineer. */
+"OnboardingDescription($0)" = "Description de l'intégration($0)";
+
+/* (No Comment) */
+"OnboardingDescription1" = "Parcourez tous les cours disponibles sur Stepik et choisissez ce qui vous convient";
+
+/* (No Comment) */
+"OnboardingDescription2" = "Regardez les conférences vidéo en ligne ou téléchargez-les pour y accéder sans connexion";
+
+/* (No Comment) */
+"OnboardingDescription3" = "Effectuez les devoirs à l'aide de votre appareil mobile";
+
+/* (No Comment) */
+"OnboardingDescription4" = "Configurez des rappels pour étudier régulièrement et terminer les cours plus rapidement";
+
+/* (No Comment) */
+"OnboardingNextButton" = "Prochain";
+
+/* (No Comment) */
+"OnboardingStartButton" = "Commencer";
+
+/* No comment provided by engineer. */
+"OnboardingTitle($0)" = "Titre d'intégration($0)";
+
+/* Onboarding */
+"OnboardingTitle1" = "Choisir";
+
+/* (No Comment) */
+"OnboardingTitle2" = "Télécharger";
+
+/* (No Comment) */
+"OnboardingTitle3" = "Résoudre";
+
+/* (No Comment) */
+"OnboardingTitle4" = "Complet";
+
+/* (No Comment) */
+"Open" = "Ouvert";
+
+/* (No Comment) */
+"OpenInBrowser" = "Ouvrir le lien dans le navigateur ?";
+
+/* (No Comment) */
+"OpenInBrowserQuestion" = "Ouvrir dans le navigateur ?";
+
+/* (No Comment) */
+"Organization" = "Organisme";
+
+/* (No Comment) */
+"OtherSettingsBlockTitle" = "Autre";
+
+/* (No Comment) */
+"PagesCountText1" = "%@ pages";
+
+/* (No Comment) */
+"PagesCountText234" = "%@ pages";
+
+/* (No Comment) */
+"PagesCountText567890" = "%@ pages";
+
+/* No comment provided by engineer. */
+"PartiallyCorrectFeedbackTitle($0)" = "Titre de commentaire partiellement correct (0 $)";
+
+/* (No Comment) */
+"PartiallyCorrectFeedbackTitle1" = "Presque correcte ! Continue d'essayer.";
+
+/* (No Comment) */
+"PartiallyCorrectFeedbackTitle2" = "Vous êtes proche de la bonne réponse. Essayons encore!";
+
+/* (No Comment) */
+"PartiallyCorrectFeedbackTitle3" = "Votre réponse est presque correcte. Essayez d'améliorer votre résultat !";
+
+/* (No Comment) */
+"PartiallyCorrectFeedbackTitle4" = "Partiellement correct, super ! Vous pouvez faire mieux, réessayez !";
+
+/* (No Comment) */
+"PartiallyCorrectFeedbackTitle5" = "Partiellement correct. Essayez d'améliorer votre score!";
+
+/* (No Comment) */
+"PartiallyCorrectFeedbackTitle6" = "Vous avez presque raison, continuez !";
+
+/* (No Comment) */
+"Passed" = "Passé";
+
+/* (No Comment) */
+"PassedPercent" = "Passé";
+
+/* (No Comment) */
+"Password" = "Mot de passe";
+
+/* (No Comment) */
+"PeerReviewText" = "Il s'agit d'une tâche avec évaluation par les pairs. Appuyez pour ouvrir sur le Web pour obtenir des points.";
+
+/* (No Comment) */
+"PersonalDeadline" = "Date limite personnelle";
+
+/* (No Comment) */
+"PersonalDeadlineNotificationBody" = "La date limite pour le module %@ est dans %@ heures. Ne le manquez pas !";
+
+/* (No Comment) */
+"PersonalDeadlinesButtonTooltip" = "Nous pouvons créer intelligemment un programme d'apprentissage personnel pour vous, afin que vous n'oubliiez jamais d'étudier";
+
+/* (No Comment) */
+"PersonalDeadlinesModeCreationFailureMessage" = "Échec de la création d'un horaire personnel";
+
+/* (No Comment) */
+"PersonalDeadlinesModeCreationSuccessMessage" = "Calendrier personnel créé avec succès";
+
+/* (No Comment) */
+"PersonalDeadlineWidgetNoButtonTitle" = "Non merci";
+
+/* No comment provided by engineer. */
+"PersonalDeadlineWidgetSuggestionText" = "PersonalDeadlineWidgetSuggestionText";
+
+/* (No Comment) */
+"PersonalDeadlineWidgetYesButtonTitle" = "Créer";
+
+/* (No Comment) */
+"PlaceholderEmptyButton" = "Peut-être que le bouton vous aide";
+
+/* (No Comment) */
+"PlaceholderEmptyDownloadsButton" = "Aller au catalogue";
+
+/* (No Comment) */
+"PlaceholderEmptyDownloadsText" = "Aucun cours téléchargé";
+
+/* (No Comment) */
+"PlaceholderEmptyNotificationsButton" = "Aller au catalogue";
+
+/* (No Comment) */
+"PlaceholderEmptyNotificationsText" = "Vous n'avez pas encore de notifications";
+
+/* (No Comment) */
+"PlaceholderEmptySearchButton" = "Aller au catalogue";
+
+/* (No Comment) */
+"PlaceholderEmptySearchText" = "Il n'y a pas de cours";
+
+/* Placeholders */
+"PlaceholderEmptyText" = "Rien ici";
+
+/* (No Comment) */
+"PlaceholderLoginButton" = "S'identifier";
+
+/* (No Comment) */
+"PlaceholderLoginText" = "Désolé, nous sommes-nous déjà rencontrés ?\nEssayez de vous connecter";
+
+/* (No Comment) */
+"PlaceholderNoConnectionButton" = "Recommencez";
+
+/* (No Comment) */
+"PlaceholderNoConnectionText" = "Désolé, il semble que vous ayez perdu la connexion";
+
+/* (No Comment) */
+"PlaceholderNoDiscussionsButtonTitle" = "Laissez un commentaire";
+
+/* (No Comment) */
+"PlaceholderNoDiscussionsTitle" = "Pas de discussions. Commencez le premier !";
+
+/* (No Comment) */
+"Please, log in to see the user courses catalog" = "Veuillez vous connecter pour voir le catalogue des cours utilisateur";
+
+/* (No Comment) */
+"PleaseLeaveFeedbackAppstore" = "S'il vous plaît, laissez vos commentaires dans l'AppStore";
+
+/* (No Comment) */
+"PleaseLeaveFeedbackEmail" = "S'il vous plaît, envoyez vos commentaires par e-mail";
+
+/* (No Comment) */
+"points1" = "indiquer";
+
+/* (No Comment) */
+"points234" = "points";
+
+/* (No Comment) */
+"points567890" = "points";
+
+/* (No Comment) */
+"Popular" = "Populaire";
+
+/* (No Comment) */
+"Practice" = "Pratique";
+
+/* (No Comment) */
+"PracticeLessonDescription" = "Consolider les connaissances acquises";
+
+/* (No Comment) */
+"PracticeLessonTitle" = "Missions pratiques";
+
+/* (No Comment) */
+"Preferences" = "Préférences";
+
+/* (No Comment) */
+"PreviewTitle" = "Aperçu";
+
+/* (No Comment) */
+"PreviousLessonNavigation" = "Leçon précédente";
+
+/* (No Comment) */
+"PrevLesson" = "Leçon précédente";
+
+/* (No Comment) */
+"PrivacyPolicyLink" = "https://welcome.stepik.org/en/privacy";
+
+/* (No Comment) */
+"PrivacyPolicyTitle" = "Politique de confidentialité";
+
+/* (No Comment) */
+"Profile" = "Profil";
+
+/* (No Comment) */
+"ProfileAnonymousSubtitle" = "Connectez-vous pour accéder à plus de fonctionnalités";
+
+/* (No Comment) */
+"ProfileAnonymousTitle" = "Il semble que vous n'ayez pas de profil";
+
+/* (No Comment) */
+"ProfileEditAboutMeTitle" = "À propos de moi";
+
+/* (No Comment) */
+"ProfileEditDetailsPlaceholder" = "À propos de";
+
+/* (No Comment) */
+"ProfileEditEmailPlaceholder" = "Adresse";
+
+/* (No Comment) */
+"ProfileEditEmailTitle" = "E-mail";
+
+/* (No Comment) */
+"ProfileEditFirstNamePlaceholder" = "Prénom";
+
+/* (No Comment) */
+"ProfileEditGeneralDescription" = "Vos noms légaux, utilisés pour tous les certificats.";
+
+/* (No Comment) */
+"ProfileEditGeneralTitle" = "Général";
+
+/* (No Comment) */
+"ProfileEditLastNamePlaceholder" = "Nom de famille";
+
+/* (No Comment) */
+"ProfileEditShortBioPlaceholder" = "Courte biographie (255 caractères max)";
+
+/* Profile edit */
+"ProfileEditTitle" = "Modifier le profil";
+
+/* (No Comment) */
+"ProgressTitle" = "Progrès";
+
+/* (No Comment) */
+"Prompt" = "Entrer des données";
+
+/* (No Comment) */
+"PullToRefreshSectionsDescription" = "Tirez pour actualiser les sections";
+
+/* (No Comment) */
+"PullToRefreshSectionsTitle" = "Actualiser les rubriques";
+
+/* (No Comment) */
+"PullToRefreshUnitsDescription" = "Tirez pour rafraîchir les leçons";
+
+/* (No Comment) */
+"PullToRefreshUnitsTitle" = "Rafraîchir les leçons";
+
+/* (No Comment) */
+"PurchaseCourseNotificationText" = "Envisagez-vous d'obtenir %@ ? Terminez votre achat et commencez à étudier tout de suite !";
+
+/* (No Comment) */
+"PurchaseCourseNotificationTitle" = "Un pas vers de nouvelles connaissances";
+
+/* Quick Actions */
+"QuickActionContinueLearningErrorMessage" = "Échec de la poursuite de l'apprentissage";
+
+/* (No Comment) */
+"QuickActionContinueLearningErrorUnauthorizedMessage" = "Connectez-vous pour continuer à apprendre";
+
+/* (No Comment) */
+"quizReviews1" = "examen";
+
+/* (No Comment) */
+"quizReviews234" = "Commentaires";
+
+/* (No Comment) */
+"quizReviews567890" = "Commentaires";
+
+/* (No Comment) */
+"RatingCongratulationText" = "Corriger! + %@ XP";
+
+/* (No Comment) */
+"RatingProgress" = "%@ ⁄ %@ XP";
+
+/* (No Comment) */
+"RatingProgressLevel" = "%@ niveau";
+
+/* (No Comment) */
+"RatingProgressTutorial" = "Didacticiel";
+
+/* No comment provided by engineer. */
+"ReactionTransition($0)" = "Transition de réaction($0)";
+
+/* (No Comment) */
+"ReactionTransition1" = "Appliquer votre réaction...";
+
+/* (No Comment) */
+"ReactionTransition2" = "A la recherche d'une prochaine mission...";
+
+/* (No Comment) */
+"ReactionTransition3" = "Les robots fonctionnent toujours...";
+
+/* (No Comment) */
+"ReactionTransition4" = "Faire des maths...";
+
+/* (No Comment) */
+"ReceiveNotifications" = "Recevoir des notifications";
+
+/* (No Comment) */
+"RecommendationsExplore" = "Recommandations";
+
+/* (No Comment) */
+"RecommendationsExploreDescription" = "Consultez les catégories qui correspondent à vos centres d'intérêt";
+
+/* (No Comment) */
+"Recommended" = "Recommandé";
+
+/* (No Comment) */
+"RecommendedCategory" = "Cours recommandés";
+
+/* No comment provided by engineer. */
+"Refreshing" = "Rafraîchissant";
+
+/* (No Comment) */
+"RefreshingDiscussions" = "Discussions rafraîchissantes...";
+
+/* (No Comment) */
+"RefreshingTitle" = "Rafraîchissant...";
+
+/* (No Comment) */
+"RegisterButton" = "S'inscrire";
+
+/* (No Comment) */
+"Registration" = "Inscription";
+
+/* (No Comment) */
+"RegistrationError" = "Erreur d'enregistrement";
+
+/* (No Comment) */
+"Reload" = "Recharger";
+
+/* (No Comment) */
+"ReloadPlayerMessage" = "Recharger le lecteur vidéo ?";
+
+/* (No Comment) */
+"ReloadPlayerTitle" = "Téléchargement de la vidéo terminé";
+
+/* (No Comment) */
+"RemindThePassword" = "Rappeler le mot de passe";
+
+/* (No Comment) */
+"Remove" = "Retirer";
+
+/* (No Comment) */
+"RemovedAllMessage" = "Supprimé";
+
+/* (No Comment) */
+"RemoveVideoBody" = "Voulez-vous vraiment supprimer les vidéos mises en cache ?";
+
+/* (No Comment) */
+"RemoveVideoTitle" = "Supprimer les vidéos en cache";
+
+/* (No Comment) */
+"Reply" = "Réponse";
+
+/* (No Comment) */
+"Requirements" = "Conditions";
+
+/* (No Comment) */
+"Reset" = "Réinitialiser";
+
+/* (No Comment) */
+"ResetAlertDescription" = "La réinitialisation du code supprimera toute votre progression actuelle pour ce devoir";
+
+/* (No Comment) */
+"ResetButtonTitle" = "Réinitialiser";
+
+/* (No Comment) */
+"Result" = "Résultat";
+
+/* (No Comment) */
+"RetentionNotificationOnNextDayText" = "Vous avez fait un excellent travail d'apprentissage jusqu'à présent. Revenez et devenez encore plus intelligent! 🚀";
+
+/* (No Comment) */
+"RetentionNotificationOnNextDayTitle" = "Ne ralentis pas";
+
+/* (No Comment) */
+"RetentionNotificationOnThirdDayText" = "Vous n'êtes pas venu ici depuis un moment. Revenez et continuez à étudier! 💡";
+
+/* (No Comment) */
+"RetentionNotificationOnThirdDayTitle" = "Le temps d'étudier";
+
+/* (No Comment) */
+"reviews1" = "examen";
+
+/* (No Comment) */
+"reviews234" = "Commentaires";
+
+/* (No Comment) */
+"reviews567890" = "Commentaires";
+
+/* (No Comment) */
+"reviewSummaries1" = "examen";
+
+/* (No Comment) */
+"reviewSummaries234" = "Commentaires";
+
+/* (No Comment) */
+"reviewSummaries567890" = "Commentaires";
+
+/* (No Comment) */
+"Save" = "sauvegarder";
+
+/* (No Comment) */
+"Search" = "Chercher";
+
+/* (No Comment) */
+"SearchCourses" = "Rechercher des cours";
+
+/* (No Comment) */
+"SearchPlaceholderEmpty" = "<b>Désolé</b>, nous n'avons trouvé aucun cours correspondant à votre demande";
+
+/* (No Comment) */
+"SearchPlaceholderError" = "Erreur lors de la recherche de cours. <b>Appuyez sur</b> Essayer à nouveau";
+
+/* (No Comment) */
+"seconds1" = "deuxième";
+
+/* (No Comment) */
+"seconds234" = "secondes";
+
+/* (No Comment) */
+"seconds567890" = "secondes";
+
+/* (No Comment) */
+"Section" = "Section";
+
+/* (No Comment) */
+"Select" = "Sélectionner";
+
+/* (No Comment) */
+"SelectLanguage" = "Choisir la langue";
+
+/* (No Comment) */
+"SelectTimeTitle" = "Modifier l'heure";
+
+/* (No Comment) */
+"SendMailErrorAlertMessage" = "Impossible d'envoyer un e-mail. Veuillez vérifier vos paramètres de messagerie et réessayer.";
+
+/* (No Comment) */
+"SendMailSuccessMessage" = "Expédié";
+
+/* (No Comment) */
+"SettingDownloadVideoQualityHigh" = "Haute";
+
+/* (No Comment) */
+"SettingDownloadVideoQualityLow" = "Bas";
+
+/* (No Comment) */
+"SettingDownloadVideoQualityMedium" = "Moyen";
+
+/* (No Comment) */
+"SettingDownloadVideoQualityVeryHigh" = "Très haut";
+
+/* (No Comment) */
+"Settings" = "Réglages";
+
+/* (No Comment) */
+"SettingsCellTitleAbout" = "À propos de";
+
+/* (No Comment) */
+"SettingsCellTitleAdaptiveMode" = "Mode adaptatif";
+
+/* (No Comment) */
+"SettingsCellTitleAutoplayNextVideo" = "Lecture automatique de la vidéo suivante";
+
+/* (No Comment) */
+"SettingsCellTitleCodeEditor" = "Paramètres de l'éditeur de code";
+
+/* (No Comment) */
+"SettingsCellTitleContentLanguage" = "Langue du contenu";
+
+/* (No Comment) */
+"SettingsCellTitleDeleteAccount" = "Supprimer le compte";
+
+/* (No Comment) */
+"SettingsCellTitleDeleteAllContent" = "Supprimer tout le contenu";
+
+/* (No Comment) */
+"SettingsCellTitleDownloadQuality" = "Qualité de téléchargement";
+
+/* (No Comment) */
+"SettingsCellTitleDownloads" = "Téléchargements";
+
+/* (No Comment) */
+"SettingsCellTitleLogOut" = "Se déconnecter";
+
+/* (No Comment) */
+"SettingsCellTitleStreamQuality" = "Qualité du flux";
+
+/* (No Comment) */
+"SettingsCellTitleTextSizeInSteps" = "Taille du texte en étapes";
+
+/* (No Comment) */
+"SettingsCellTitleTheme" = "Thème";
+
+/* (No Comment) */
+"SettingsCellTitleUseCellularDataForDownloads" = "Utiliser les données cellulaires pour les téléchargements";
+
+/* (No Comment) */
+"SettingsContentLanguageFooterTitle" = "La langue des cours affichés.";
+
+/* (No Comment) */
+"SettingsContentLanguageTitle" = "Langue du contenu";
+
+/* (No Comment) */
+"SettingsDownloadVideoQualityFooterTitle" = "Plus la taille de la vidéo est petite, plus elle se charge rapidement et pour maintenir une vitesse élevée, gardez l'application ouverte.";
+
+/* (No Comment) */
+"SettingsDownloadVideoQualityTitle" = "Qualité de téléchargement vidéo";
+
+/* (No Comment) */
+"SettingsHeaderTitleAppearance" = "Apparence";
+
+/* (No Comment) */
+"SettingsHeaderTitleDownloadedContent" = "Contenu téléchargé";
+
+/* (No Comment) */
+"SettingsHeaderTitleLanguage" = "Langue";
+
+/* (No Comment) */
+"SettingsHeaderTitleLearning" = "Apprentissage";
+
+/* (No Comment) */
+"SettingsHeaderTitleOther" = "Autre";
+
+/* (No Comment) */
+"SettingsHeaderTitleVideo" = "Vidéo";
+
+/* (No Comment) */
+"SettingsStepFontSizeFooterTitle" = "Les modifications de la taille du texte n'affectent que le texte de l'étape";
+
+/* (No Comment) */
+"SettingsStepFontSizeItemLarge" = "Grand";
+
+/* (No Comment) */
+"SettingsStepFontSizeItemMedium" = "Moyen";
+
+/* (No Comment) */
+"SettingsStepFontSizeItemSmall" = "Petit";
+
+/* (No Comment) */
+"SettingsStepFontSizeTitle" = "Taille du texte";
+
+/* (No Comment) */
+"SettingsStreamVideoQualityFooterTitle" = "En cas de connexion Internet lente ou instable, nous vous recommandons de choisir une qualité inférieure.";
+
+/* (No Comment) */
+"SettingsStreamVideoQualityTitle" = "Qualité du flux vidéo";
+
+/* (No Comment) */
+"SettingsThemeItemDark" = "Sombre";
+
+/* (No Comment) */
+"SettingsThemeItemLight" = "Lumière";
+
+/* (No Comment) */
+"SettingsThemeItemSystem" = "Système";
+
+/* (No Comment) */
+"SettingsThemeTitle" = "Thème";
+
+/* Settings */
+"SettingsTitle" = "Réglages";
+
+/* (No Comment) */
+"SettingStreamVideoQualityHigh" = "Haute";
+
+/* (No Comment) */
+"SettingStreamVideoQualityLow" = "Bas";
+
+/* (No Comment) */
+"SettingStreamVideoQualityMedium" = "Moyen";
+
+/* (No Comment) */
+"SettingStreamVideoQualityVeryHigh" = "Très haut";
+
+/* (No Comment) */
+"Share" = "Partager";
+
+/* (No Comment) */
+"ShareAchievement" = "Partager la réussite";
+
+/* Tooltips */
+"ShareCourseTooltip" = "Partagez le lien avec vos amis pour apprendre ensemble";
+
+/* (No Comment) */
+"ShortBio" = "Courte biographie";
+
+/* (No Comment) */
+"ShowAll" = "Tout";
+
+/* (No Comment) */
+"ShowAllTestDetailIndicator" = "Tout >";
+
+/* (No Comment) */
+"ShowAllTestText" = "Voir tout";
+
+/* (No Comment) */
+"ShowAllTestTextDetailIndicator" = "Voir tout >";
+
+/* (No Comment) */
+"ShowComments" = "Afficher les discussions";
+
+/* (No Comment) */
+"ShowExamInWeb" = "Examen ouvert en version Web ?";
+
+/* (No Comment) */
+"ShowMoreDiscussions" = "Plus de discussions";
+
+/* (No Comment) */
+"ShowMoreReplies" = "Plus de réponses";
+
+/* (No Comment) */
+"Sign In" = "S'identifier";
+
+/* (No Comment) */
+"Sign Up" = "S'inscrire";
+
+/* Common phrases */
+"SignedIn" = "Connecté !";
+
+/* (No Comment) */
+"SignIn" = "S'identifier";
+
+/* (No Comment) */
+"SignInByEmail" = "Connectez-vous par e-mail";
+
+/* (No Comment) */
+"SignInEmailButton" = "Se connecter avec e-mail";
+
+/* (No Comment) */
+"SignInLessButton" = "Moins";
+
+/* (No Comment) */
+"SignInMoreButton" = "Suite";
+
+/* (No Comment) */
+"SignInSocialButton" = "Connectez-vous avec les réseaux sociaux";
+
+/* (No Comment) */
+"SignInTitleEmail" = "<b>Connexion</b> avec e-mail";
+
+/* (No Comment) */
+"SignInTitleSocial" = "<b>Connexion</b> avec des comptes sociaux";
+
+/* (No Comment) */
+"SignInToHaveCertificates" = "Connectez-vous pour pouvoir obtenir un certificat";
+
+/* (No Comment) */
+"SignInToHaveNotifications" = "Connectez-vous pour pouvoir recevoir des notifications";
+
+/* (No Comment) */
+"SignInToJoin" = "Connectez-vous pour rejoindre des cours";
+
+/* (No Comment) */
+"SignOut" = "Déconnexion";
+
+/* (No Comment) */
+"SignUp" = "S'inscrire";
+
+/* (No Comment) */
+"SignUpAction" = "S'inscrire";
+
+/* (No Comment) */
+"SignUpButton" = "S'inscrire";
+
+/* (No Comment) */
+"SignUpTitle" = "<b>S'inscrire</b>";
+
+/* (No Comment) */
+"SimilarCourseListAuthorsHeaderTitle" = "Auteurs des cours";
+
+/* Similar Course Lists */
+"SimilarCourseListHeaderTitle" = "Thèmes similaires";
+
+/* (No Comment) */
+"SingleChoiceQuizTitle" = "Sélectionnez une option";
+
+/* (No Comment) */
+"SingleChoiceTableQuizPrompt" = "Sélectionnez une option";
+
+/* (No Comment) */
+"SiriShortcutContinueLearningContentDescription" = "Où tu t'es arrêté";
+
+/* (No Comment) */
+"SiriShortcutContinueLearningKeyword1" = "Continuer";
+
+/* (No Comment) */
+"SiriShortcutContinueLearningKeyword2" = "Apprentissage";
+
+/* (No Comment) */
+"SiriShortcutContinueLearningKeyword3" = "Cours";
+
+/* SiriShortcuts */
+"SiriShortcutContinueLearningTitle" = "Continuer à apprendre";
+
+/* (No Comment) */
+"SocialSignIn" = "Continue avec";
+
+/* (No Comment) */
+"SocialSignupWithExistingEmailError" = "Cet e-mail est déjà pris. Veuillez vous connecter par e-mail.";
+
+/* (No Comment) */
+"SoftDeadline" = "Délai souple";
+
+/* (No Comment) */
+"SolutionsButtonTitle" = "Afficher les solutions (%@)";
+
+/* Solution */
+"SolutionTitle" = "La solution %@";
+
+/* (No Comment) */
+"SolveSomethingToday" = "Résolvez n'importe quoi aujourd'hui pour augmenter votre séquence.";
+
+/* (No Comment) */
+"SolveStreaksDaysCount" = "Votre séquence actuelle est %@ %@ d'affilée. Super!";
+
+/* (No Comment) */
+"SolveToImprove" = "Résolvez n'importe quoi pour améliorer votre séquence !";
+
+/* (No Comment) */
+"SortingQuizTitle" = "Trier une liste donnée";
+
+/* (No Comment) */
+"SQLQuizTitle" = "Défi SQL – Saisir une requête SQL";
+
+/* (No Comment) */
+"Staff" = "Bâton Stepik";
+
+/* (No Comment) */
+"StandardDeadlineMode" = "Standard";
+
+/* (No Comment) */
+"StepARQuickLookUnsupportedAlertMessage" = "Votre appareil n'est pas pris en charge par l'affichage du contenu dans la réalité augmentée, l'exigence minimale iOS 12.";
+
+/* (No Comment) */
+"StepARQuickLookUnsupportedAlertTitle" = "Aperçu rapide AR non pris en charge";
+
+/* (No Comment) */
+"StepARThumbnailALTText" = "Un modèle 3D.";
+
+/* (No Comment) */
+"StepDisabledStudentMessage" = "Écrivez aux auteurs du cours afin qu'ils prêtent attention aux paramètres %@.<br><br>L'accès peut être restauré après un certain temps.";
+
+/* (No Comment) */
+"StepDisabledStudentTitle" = "Vous ne pouvez pas encore voir le devoir";
+
+/* (No Comment) */
+"StepDisabledTeacherInCourseMessage" = "Pour permettre aux apprenants de voir le devoir, remplacez le type de cours par %@.<br><br>Cette étape comporte des fonctionnalités payantes. <a href=\"https://support.stepik.org/hc/en-us/articles/360012252539\">En savoir plus sur les forfaits</a>.";
+
+/* (No Comment) */
+"StepDisabledTeacherInCoursePlanEnterpriseTitle" = "<b>Entreprise</b>";
+
+/* (No Comment) */
+"StepDisabledTeacherInCoursePlanProTitle" = "<b>PRO</b> ou payé";
+
+/* (No Comment) */
+"StepDisabledTeacherNoCourseMessage" = "Pour permettre aux apprenants de voir le devoir, ajoutez la leçon à %@.<br><br>Cette étape a des fonctionnalités payantes. <a href=\"https://support.stepik.org/hc/en-us/articles/360012252539\">En savoir plus sur les forfaits</a>.";
+
+/* (No Comment) */
+"StepDisabledTeacherNoCoursePlanEnterpriseTitle" = "une <b>Entreprise</b> cours";
+
+/* (No Comment) */
+"StepDisabledTeacherNoCoursePlanProTitle" = "un <b>PRO</b> ou <b>payé</b> cours";
+
+/* (No Comment) */
+"StepDisabledTeacherTitle" = "Les apprenants ne peuvent pas encore voir le devoir";
+
+/* (No Comment) */
+"StepikAcademyCourseListHeaderDescription" = "Stepik Academy est un programme avec le soutien d'un enseignant, d'un groupe et d'un conservateur de l'équipe Stepik avec des délais et une vérification des tâches. La formation est payante, mais ça vaut le coup !";
+
+/* (No Comment) */
+"StepikAcademyCourseListHeaderMoreButtonTitle" = "Apprendre encore plus";
+
+/* Stepik Academy Course List */
+"StepikAcademyCourseListHeaderTitle" = "Lassé d'étudier seul ?";
+
+/* (No Comment) */
+"StepikSocialNetworksTitle" = "Nos réseaux sociaux";
+
+/* (No Comment) */
+"StepPosition" = "Marcher %@";
+
+/* (No Comment) */
+"StepQuizReviewGivenCompleted1" = "%@ a été envoyé";
+
+/* (No Comment) */
+"StepQuizReviewGivenCompleted234" = "%@ ont été envoyé";
+
+/* (No Comment) */
+"StepQuizReviewGivenCompleted567890" = "%@ ont été envoyé";
+
+/* (No Comment) */
+"StepQuizReviewGivenCompletedAction" = "Afficher les avis donnés";
+
+/* (No Comment) */
+"StepQuizReviewGivenExtraNote" = "Rédigez plus d'avis pour augmenter vos chances de recevoir un avis";
+
+/* (No Comment) */
+"StepQuizReviewGivenInProgress1" = "Rédigez %@ autre avis. %@.";
+
+/* (No Comment) */
+"StepQuizReviewGivenInProgress234" = "Rédigez %@ autres avis. %@.";
+
+/* (No Comment) */
+"StepQuizReviewGivenInProgress567890" = "Rédigez %@ autres avis. %@.";
+
+/* (No Comment) */
+"StepQuizReviewGivenInProgressAction" = "Examen sur le Web";
+
+/* (No Comment) */
+"StepQuizReviewGivenInProgressContinueAction" = "Continuer l'examen sur le Web";
+
+/* (No Comment) */
+"StepQuizReviewGivenInProgressZero1" = "Ecrire une critique";
+
+/* (No Comment) */
+"StepQuizReviewGivenInProgressZero234" = "Rédigez %@ avis";
+
+/* (No Comment) */
+"StepQuizReviewGivenInProgressZero567890" = "Rédigez %@ avis";
+
+/* (No Comment) */
+"StepQuizReviewGivenNoReview" = "Rien à revoir";
+
+/* (No Comment) */
+"StepQuizReviewGivenPendingZero" = "Rédiger des avis";
+
+/* (No Comment) */
+"StepQuizReviewGivenStartReview" = "Commencer l'examen";
+
+/* (No Comment) */
+"StepQuizReviewGivenTitle" = "Examen";
+
+/* (No Comment) */
+"StepQuizReviewInstructorCompleted" = "Votre solution notée. Vous avez %@ sur %@.";
+
+/* (No Comment) */
+"StepQuizReviewInstructorCompletedAction" = "Voir l'avis";
+
+/* (No Comment) */
+"StepQuizReviewInstructorCompletedHint" = "La réponse de l'instructeur ne viendra pas immédiatement, vous recevrez une notification";
+
+/* (No Comment) */
+"StepQuizReviewInstructorPending" = "L'instructeur notera votre solution avec le score maximum de %@.";
+
+/* (No Comment) */
+"StepQuizReviewPeerCompleted1" = "Votre solution a été notée %@ sur %@ point";
+
+/* (No Comment) */
+"StepQuizReviewPeerCompleted234" = "Votre solution a été notée %@ sur %@ points";
+
+/* (No Comment) */
+"StepQuizReviewPeerCompleted567890" = "Votre solution a été notée %@ sur %@ points";
+
+/* (No Comment) */
+"StepQuizReviewPeerPending" = "Obtenez des points, le score maximum est %@";
+
+/* (No Comment) */
+"StepQuizReviewPeerPendingZero" = "Obtenir des points";
+
+/* (No Comment) */
+"StepQuizReviewSendChoose" = "Choisissez la soumission";
+
+/* (No Comment) */
+"StepQuizReviewSendCompleted" = "La soumission a été envoyée pour examen";
+
+/* (No Comment) */
+"StepQuizReviewSendInProgress" = "Envoyez votre meilleure soumission pour examen. Vous ne pouvez pas le changer plus tard.";
+
+/* Peer review */
+"StepQuizReviewSendPending" = "Envoyez votre meilleure soumission pour examen";
+
+/* (No Comment) */
+"StepQuizReviewSendSubmit" = "Soumettre cette soumission";
+
+/* (No Comment) */
+"StepQuizReviewStagesNotice" = "Vérification du quiz par la méthode de révision. Suivez ces étapes pour obtenir des points.";
+
+/* (No Comment) */
+"StepQuizReviewTakenAction" = "Afficher les avis reçus";
+
+/* (No Comment) */
+"StepQuizReviewTakenCompleted1" = "%@ avis reçu";
+
+/* (No Comment) */
+"StepQuizReviewTakenCompleted234" = "%@ avis reçus";
+
+/* (No Comment) */
+"StepQuizReviewTakenCompleted567890" = "%@ avis reçus";
+
+/* (No Comment) */
+"StepQuizReviewTakenHint" = "Temps d'attente moyen - 48 heures";
+
+/* (No Comment) */
+"StepQuizReviewTakenInProgress1" = "Attendez %@ plus d'examen de votre solution. %@.";
+
+/* (No Comment) */
+"StepQuizReviewTakenInProgress234" = "Attendez %@ autres avis sur votre solution. %@.";
+
+/* (No Comment) */
+"StepQuizReviewTakenInProgress567890" = "Attendez %@ autres avis sur votre solution. %@.";
+
+/* (No Comment) */
+"StepQuizReviewTakenInProgressZero1" = "Attendez %@ examen de votre solution";
+
+/* (No Comment) */
+"StepQuizReviewTakenInProgressZero234" = "Attendez %@ avis sur votre solution";
+
+/* (No Comment) */
+"StepQuizReviewTakenInProgressZero567890" = "Attendez %@ avis sur votre solution";
+
+/* (No Comment) */
+"StepQuizReviewTakenPendingZero" = "Attendez les avis de votre solution";
+
+/* (No Comment) */
+"StepQuizReviewTakenTitle" = "Avis reçus";
+
+/* (No Comment) */
+"StepQuizReviewTeacherNoticeInstructorsNoSubmissions" = "Tous les avis ont été envoyés.";
+
+/* (No Comment) */
+"StepQuizReviewTeacherNoticeInstructorsSubmissions" = "Révisez %@, les apprenants recevront des points";
+
+/* (No Comment) */
+"StepQuizReviewTeacherNoticePeer" = "Les apprenants s'évaluent les uns les autres";
+
+/* (No Comment) */
+"StepQuizReviewTeacherQuizTitle" = "Champ de questionnaire";
+
+/* (No Comment) */
+"StepStatisticsCorrectRatioTitle" = "Avec succès:";
+
+/* (No Comment) */
+"StepStatisticsPassedByTitle" = "Passé:";
+
+/* (No Comment) */
+"StepSubmissionsAlertActionTitle" = "Afficher les soumissions";
+
+/* (No Comment) */
+"StepVideoPlayingNotReachableErrorMessage" = "Vérifiez votre connexion Internet, puis réessayez.";
+
+/* (No Comment) */
+"StepVideoPlayingNotReachableErrorTitle" = "Vous n'êtes pas connecté";
+
+/* (No Comment) */
+"StepVideoPreviewAccessibilityHint" = "Appuyez deux fois pour lancer la lecture de la vidéo";
+
+/* Accessibility */
+"StepVideoPreviewAccessibilityLabel" = "Aperçu vidéo";
+
+/* (No Comment) */
+"StreakAlertMessage" = "Vous résolvez %@ %@ d'affilée. Résolvez des quiz tous les jours et améliorez votre séquence ! Souhaitez-vous être informé des séquences à apprendre chaque jour ? Vous pouvez toujours modifier cette option dans les préférences.";
+
+/* (No Comment) */
+"StreakAlertMessageNoStreak" = "Résolvez des quiz tous les jours et améliorez votre séquence ! Souhaitez-vous être informé des séquences à apprendre chaque jour ? Vous pouvez toujours modifier cette option dans les préférences.";
+
+/* (No Comment) */
+"StreakAlertTitle" = "Félicitations!";
+
+/* (No Comment) */
+"StreakNotificationAlertBody" = "Revenez et résolvez un quiz pour augmenter votre séquence quotidienne !";
+
+/* (No Comment) */
+"StreakNotificationsAlertMessage" = "Il semble que vous ayez désactivé les notifications dans les paramètres système. Activez-les dans les préférences ?";
+
+/* (No Comment) */
+"StreakNotificationsAlertTitle" = "Notifications de série";
+
+/* (No Comment) */
+"StreaksAreUpdated" = "Les séries sont mises à jour à";
+
+/* (No Comment) */
+"StreaksSwitchTooltip" = "Allumez pour obtenir de nouvelles connaissances chaque jour";
+
+/* (No Comment) */
+"StringInputTextFieldPlaceholder" = "Entrez votre réponse";
+
+/* (No Comment) */
+"StringQuizPlaceholder" = "Tapez votre réponse";
+
+/* (No Comment) */
+"StringQuizTitle" = "Rédiger une réponse sous forme de texte (chaîne)";
+
+/* (No Comment) */
+"Studying" = "En train d'étudier";
+
+/* (No Comment) */
+"Subjects" = "Sujets";
+
+/* (No Comment) */
+"submissions1" = "soumission";
+
+/* (No Comment) */
+"submissions234" = "soumissions";
+
+/* (No Comment) */
+"submissions567890" = "soumissions";
+
+/* (No Comment) */
+"SubmissionsActionFilterByUser" = "Filtrer par utilisateur";
+
+/* (No Comment) */
+"SubmissionScoreText" = "Score";
+
+/* (No Comment) */
+"SubmissionsFilterOrderAscendingTitle" = "Les plus âgés d'abord";
+
+/* (No Comment) */
+"SubmissionsFilterOrderDescendingTitle" = "Le plus récent d'abord";
+
+/* (No Comment) */
+"SubmissionsFilterReviewStatusAnyTitle" = "Tout statut d'examen";
+
+/* (No Comment) */
+"SubmissionsFilterReviewStatusAwaitingTitle" = "En attente d'examen";
+
+/* (No Comment) */
+"SubmissionsFilterReviewStatusDoneTitle" = "Examen terminé";
+
+/* (No Comment) */
+"SubmissionsFilterSectionOrderTitle" = "Date";
+
+/* (No Comment) */
+"SubmissionsFilterSectionReviewStatusTitle" = "Commentaires";
+
+/* (No Comment) */
+"SubmissionsFilterSectionShowResultTitle" = "Afficher le résultat";
+
+/* (No Comment) */
+"SubmissionsFilterSectionSubmissionStatusTitle" = "État de la soumission";
+
+/* (No Comment) */
+"SubmissionsFilterSubmissionStatusAnyTitle" = "N'importe quel";
+
+/* (No Comment) */
+"SubmissionsFilterSubmissionStatusCorrectTitle" = "Corriger";
+
+/* (No Comment) */
+"SubmissionsFilterSubmissionStatusEvaluationTitle" = "Traitement";
+
+/* (No Comment) */
+"SubmissionsFilterSubmissionStatusWrongTitle" = "Mauvais";
+
+/* Submissions Filter */
+"SubmissionsFilterTitle" = "Soumissions de recherche";
+
+/* (No Comment) */
+"SubmissionsPlaceholderEmptyTitle" = "Aucune soumission";
+
+/* Review action titles */
+"SubmissionsReviewActionSeeReviewsTitle" = "Voir les avis";
+
+/* (No Comment) */
+"SubmissionsReviewActionSeeSubmissionTitle" = "Voir la soumission";
+
+/* Review messages */
+"SubmissionsReviewStateCantReviewAnotherMessage" = "Une autre soumission a été envoyée pour examen.";
+
+/* (No Comment) */
+"SubmissionsReviewStateCantReviewTeacherMessage" = "La soumission d'un enseignant ne peut pas être examinée.";
+
+/* Review titles */
+"SubmissionsReviewStateCantReviewTitle" = "La révision n'est pas possible.";
+
+/* (No Comment) */
+"SubmissionsReviewStateCantReviewWrongMessage" = "Mauvaise réponse.";
+
+/* (No Comment) */
+"SubmissionsReviewStateEvaluationMessage" = "Réponse dans le traitement.";
+
+/* (No Comment) */
+"SubmissionsReviewStateInProgressMessage" = "Plus d'examens sont nécessaires pour cette soumission.";
+
+/* (No Comment) */
+"SubmissionsReviewStateInProgressNotGiveMessage" = "%@ n'a pas encore soumis tous les avis pour les autres soumissions d'apprenants.";
+
+/* (No Comment) */
+"SubmissionsReviewStateInProgressNotGiveNotTakeMessage" = "%@ n'a pas encore soumis toutes les évaluations pour les autres soumissions d'apprenants et n'a pas reçu ses évaluations.";
+
+/* (No Comment) */
+"SubmissionsReviewStateInProgressTitle" = "%@ avis sur %@.";
+
+/* (No Comment) */
+"SubmissionsReviewStateNotSubmittedForReviewMessage" = "Besoin d'envoyer la solution pour examen.";
+
+/* (No Comment) */
+"SubmissionsReviewStateNotSubmittedForReviewTitle" = "Non soumis à examen.";
+
+/* (No Comment) */
+"SubmissionsSearchBarPlaceholderText" = "ID, email, nom, numéro de soumission";
+
+/* (No Comment) */
+"SubmissionsSelectSubmission" = "Sélectionnez cette soumission";
+
+/* (No Comment) */
+"SubmissionStatusCorrectText" = "Corriger";
+
+/* (No Comment) */
+"SubmissionStatusEvaluationText" = "Traitement";
+
+/* (No Comment) */
+"SubmissionStatusPartiallyCorrectText" = "Partiellement correct";
+
+/* (No Comment) */
+"SubmissionStatusWrongText" = "Mauvais";
+
+/* Submissions */
+"SubmissionsTitle" = "Soumissions";
+
+/* (No Comment) */
+"SubmissionsTitleSelectSubmission" = "Sélectionnez Soumission";
+
+/* (No Comment) */
+"Submit" = "Soumettre";
+
+/* (No Comment) */
+"Subscribe" = "S'abonner";
+
+/* (No Comment) */
+"Subscribing..." = "Abonnement...";
+
+/* (No Comment) */
+"Successfully signed in, but could not get user" = "Connexion réussie, mais impossible d'obtenir l'utilisateur";
+
+/* (No Comment) */
+"Successfully signed up, but could not get user" = "Inscription réussie, mais impossible d'obtenir l'utilisateur";
+
+/* (No Comment) */
+"Summary" = "Sommaire";
+
+/* (No Comment) */
+"SwipeLeftTitle" = "Balayez vers la gauche";
+
+/* (No Comment) */
+"SwipeRightTitle" = "Balayez vers la droite";
+
+/* (No Comment) */
+"Syllabus" = "Programme";
+
+/* (No Comment) */
+"SyllabusDeadlinesButton" = "Programme";
+
+/* (No Comment) */
+"SyllabusDownloadAll" = "Télécharger";
+
+/* (No Comment) */
+"SyllabusDownloaded" = "Téléchargé %@";
+
+/* (No Comment) */
+"SyllabusExamContinueInWeb" = "Continuer dans la version Web";
+
+/* (No Comment) */
+"SyllabusExamFinished" = "Achevé";
+
+/* (No Comment) */
+"SyllabusExamInProgress" = "En cours";
+
+/* (No Comment) */
+"SyllabusExamStartInWeb" = "Commencez l'examen dans la version Web";
+
+/* (No Comment) */
+"TableQuizTitle" = "Sélectionnez les bonnes cellules";
+
+/* (No Comment) */
+"TagPlaceholderError" = "Erreur lors du chargement des cours. <b>Appuyez sur</b> Essayer à nouveau";
+
+/* (No Comment) */
+"TapToLearnAboutStreaks" = "Appuyez pour en savoir plus sur les séries";
+
+/* (No Comment) */
+"TapToShareAchievement" = "Appuyez pour partager la réussite";
+
+/* (No Comment) */
+"Teachers" = "Instructeurs";
+
+/* (No Comment) */
+"TermsOfServiceLink" = "https://welcome.stepik.org/en/terms";
+
+/* (No Comment) */
+"TermsOfServiceTitle" = "Conditions d'utilisation";
+
+/* (No Comment) */
+"ThankYou" = "Merci!";
+
+/* (No Comment) */
+"Theory" = "La théorie";
+
+/* (No Comment) */
+"This quiz is unavailable on AppleTV" = "Ce quiz n'est pas disponible sur AppleTV";
+
+/* (No Comment) */
+"times1" = "temps";
+
+/* (No Comment) */
+"times234" = "fois";
+
+/* (No Comment) */
+"times567890" = "fois";
+
+/* (No Comment) */
+"TooManyAttemptsSignIn" = "Trop d'essais. Merci d'essayer plus tard";
+
+/* (No Comment) */
+"TopicProgressInPercentsText1" = "%@%% complété";
+
+/* (No Comment) */
+"TopicProgressInPercentsText234" = "%@%% complété";
+
+/* (No Comment) */
+"TopicProgressInPercentsText567890" = "%@%% complété";
+
+/* (No Comment) */
+"Topics" = "Les sujets";
+
+/* (No Comment) */
+"TopicTimeToComplete567890" = "%@ minutes à terminer";
+
+/* (No Comment) */
+"TopicTimeToCompleteText1" = "%@ minute pour terminer";
+
+/* (No Comment) */
+"TopicTimeToCompleteText234" = "%@ minutes à terminer";
+
+/* (No Comment) */
+"TrainingTabTitle" = "Entraînement";
+
+/* (No Comment) */
+"TrendingTopics" = "Sujets tendances";
+
+/* (No Comment) */
+"triesLeft1" = "%@ essai à gauche";
+
+/* (No Comment) */
+"triesLeft234" = "%@ essais restants";
+
+/* (No Comment) */
+"triesLeft567890" = "%@ essais restants";
+
+/* (No Comment) */
+"Try Again" = "Réessayer";
+
+/* (No Comment) */
+"TryAgain" = "Réessayer";
+
+/* (No Comment) */
+"TryJoinFromWeb" = "Essayez de rejoindre le cours en version Web !";
+
+/* (No Comment) */
+"Unenroll" = "Arrêtez d'étudier";
+
+/* (No Comment) */
+"UnenrollAlertMessage" = "Vous ne voulez pas suivre ce cursus ?";
+
+/* (No Comment) */
+"UnenrollAlertTitle" = "Arrêtez d'étudier";
+
+/* (No Comment) */
+"Unsubscribing..." = "Désinscription...";
+
+/* (No Comment) */
+"UnsupportedQuizActionButtonTitle" = "Ouvrez la version Web pour résoudre";
+
+/* (No Comment) */
+"UnsupportedQuizTitle" = "Type d'étape non pris en charge";
+
+/* (No Comment) */
+"UnsupportedSolutionActionTitle" = "Solution ouverte dans la version Web";
+
+/* (No Comment) */
+"UnsupportedSolutionTitle" = "Le type de quiz actuel n'est pas encore pris en charge dans l'application mobile";
+
+/* (No Comment) */
+"until" = "jusqu'à";
+
+/* (No Comment) */
+"Updates" = "Mises à jour";
+
+/* (No Comment) */
+"UseAdaptiveModePreference" = "Mode adaptatif";
+
+/* (No Comment) */
+"UserCoursesReviewsBlockTitle" = "Mes avis";
+
+/* (No Comment) */
+"UserCoursesReviewsLeaveReview" = "Laisser un commentaire";
+
+/* (No Comment) */
+"UserCoursesReviewsPlaceholderEmptyTitle" = "Aucun avis";
+
+/* (No Comment) */
+"UserCoursesReviewsPossibleReviews1" = "nouveau cours à revoir";
+
+/* (No Comment) */
+"UserCoursesReviewsPossibleReviews234" = "nouveaux cours à revoir";
+
+/* (No Comment) */
+"UserCoursesReviewsPossibleReviews567890" = "nouveaux cours à revoir";
+
+/* User Courses Reviews */
+"UserCoursesReviewsTitle" = "Commentaires";
+
+/* (No Comment) */
+"UserCoursesTabAllCoursesTitle" = "Tout";
+
+/* (No Comment) */
+"UserCoursesTabArchivedTitle" = "Archive";
+
+/* (No Comment) */
+"UserCoursesTabDownloadedTitle" = "Téléchargé";
+
+/* (No Comment) */
+"UserCoursesTabFavoritesTitle" = "Favori";
+
+/* User Courses */
+"UserCoursesTitle" = "Mes cours";
+
+/* (No Comment) */
+"UserInfo" = "Utilisateur";
+
+/* (No Comment) */
+"ValidationEmailAndPasswordError" = "L'adresse e-mail et/ou le mot de passe que vous avez spécifiés ne sont pas corrects.";
+
+/* (No Comment) */
+"VeryHigh" = "Très haut";
+
+/* (No Comment) */
+"Video" = "Vidéo";
+
+/* (No Comment) */
+"VideoInBackgroundTooltip" = "Vous pouvez lire la vidéo en arrière-plan";
+
+/* (No Comment) */
+"VideoPlayerAutoplayCancelTitle" = "Restez sur cette étape";
+
+/* (No Comment) */
+"VideoPlayerAutoplayPreferenceTitle" = "Passage automatique à l'étape suivante";
+
+/* (No Comment) */
+"VideoPlayerBackButtonAccessibilityHint" = "Appuyez deux fois pour arrêter la lecture de la vidéo et fermer le lecteur vidéo";
+
+/* (No Comment) */
+"VideoPlayerBackButtonAccessibilityLabel" = "Fermer le lecteur vidéo";
+
+/* (No Comment) */
+"VideoPlayerFailedToStartPictureInPictureMessage" = "Échec du démarrage de la lecture de cette vidéo dans Picture in Picture.";
+
+/* (No Comment) */
+"VideoPlayerFailedToStartPictureInPictureTitle" = "Erreur de lecture";
+
+/* (No Comment) */
+"VideoPlayerFastForwardButtonAccessibilityHint" = "Appuyez deux fois pour avancer rapidement de dix secondes";
+
+/* (No Comment) */
+"VideoPlayerFastForwardButtonAccessibilityLabel" = "Avance rapide de dix secondes";
+
+/* (No Comment) */
+"VideoPlayerInvalidVideoAlertMessage" = "La vidéo n'a pas encore été téléchargée ou traitée. Veuillez réessayer plus tard.";
+
+/* (No Comment) */
+"VideoPlayerInvalidVideoAlertTitle" = "Erreur de lecture";
+
+/* (No Comment) */
+"VideoPlayerPlaybackFailedStateAlertMessage" = "Une erreur de lecture vidéo s'est produite, réessayez ou fermez le lecteur ?";
+
+/* Video player */
+"VideoPlayerPlaybackFailedStateAlertTitle" = "Erreur du lecteur vidéo";
+
+/* (No Comment) */
+"VideoPlayerPlaybackQualityButtonAccessibilityHint" = "Appuyez deux fois pour sélectionner la qualité de lecture vidéo";
+
+/* (No Comment) */
+"VideoPlayerPlaybackQualityButtonAccessibilityLabel" = "Qualité de lecture";
+
+/* (No Comment) */
+"VideoPlayerPlaybackSpeedButtonAccessibilityHint" = "Appuyez deux fois pour sélectionner la vitesse de lecture vidéo";
+
+/* (No Comment) */
+"VideoPlayerPlaybackSpeedButtonAccessibilityLabel" = "Vitesse de lecture";
+
+/* (No Comment) */
+"VideoPlayerPlayButtonAccessibilityHint" = "Appuyez deux fois pour arrêter ou démarrer la lecture de la vidéo";
+
+/* (No Comment) */
+"VideoPlayerPlayButtonAccessibilityLabel" = "Démarrer ou arrêter la lecture de la vidéo";
+
+/* (No Comment) */
+"VideoPlayerRewindButtonAccessibilityHint" = "Appuyez deux fois pour rembobiner dix secondes";
+
+/* (No Comment) */
+"VideoPlayerRewindButtonAccessibilityLabel" = "Rembobiner dix secondes";
+
+/* (No Comment) */
+"VideoPreferences" = "Préférences vidéo";
+
+/* (No Comment) */
+"VideoQuality" = "Qualité vidéo";
+
+/* (No Comment) */
+"VideoRate" = "Tarif vidéo";
+
+/* (No Comment) */
+"Videos" = "vidéos";
+
+/* (No Comment) */
+"VisitedCourses" = "Cours visités";
+
+/* (No Comment) */
+"WatchingVideoQualityPreference" = "Qualité vidéo en continu";
+
+/* (No Comment) */
+"WelcomeTitle" = "Accueillir";
+
+/* (No Comment) */
+"WhoopsHead" = "Oups !";
+
+/* (No Comment) */
+"WidgetAdaptiveLabel" = "ADAPTATIF";
+
+/* (No Comment) */
+"WidgetButtonBuy" = "Acheter avec %@";
+
+/* (No Comment) */
+"WidgetButtonInfo" = "Info";
+
+/* (No Comment) */
+"WidgetButtonJoin" = "Rejoindre";
+
+/* (No Comment) */
+"WidgetButtonLearn" = "Continuer à apprendre";
+
+/* (No Comment) */
+"WidgetButtonSyllabus" = "Programme";
+
+/* (No Comment) */
+"WiFiLoadPreference" = "Seuls les téléchargements vidéo Wi-Fi";
+
+/* (No Comment) */
+"WishlistWidgetEmptyMessage" = "Aucun cours";
+
+/* Wishlist */
+"WishlistWidgetTitle" = "Liste de souhaits";
+
+/* (No Comment) */
+"WithDistinction" = "Avec distinction";
+
+/* (No Comment) */
+"Workload" = "Charge de travail";
+
+/* (No Comment) */
+"WriteCommentActionButtonCreate" = "Envoyer";
+
+/* (No Comment) */
+"WriteCommentActionButtonEdit" = "Mise à jour";
+
+/* (No Comment) */
+"WriteCommentCancelPromptDestructiveActionTitle" = "Effacer";
+
+/* (No Comment) */
+"WriteCommentCancelPromptMessage" = "Supprimer le brouillon ?";
+
+/* Write comment */
+"WriteCommentDefaultTitle" = "Commentaire";
+
+/* (No Comment) */
+"WriteCommentPlaceholder" = "Laissez un commentaire...";
+
+/* (No Comment) */
+"WriteCommentSelectSolutionTitle" = "Sélectionnez la solution";
+
+/* (No Comment) */
+"WriteCommentSolutionFormatTitle" = "La solution %@";
+
+/* (No Comment) */
+"WriteCommentSolutionTitle" = "La solution";
+
+/* (No Comment) */
+"WriteCourseReviewActionCreate" = "Écrire une critique";
+
+/* (No Comment) */
+"WriteCourseReviewActionDelete" = "Supprimer un avis";
+
+/* (No Comment) */
+"WriteCourseReviewActionDeleteResultFailed" = "Échec de la suppression de votre avis";
+
+/* (No Comment) */
+"WriteCourseReviewActionDeleteResultSuccess" = "Supprimé";
+
+/* (No Comment) */
+"WriteCourseReviewActionEdit" = "Modifier un avis";
+
+/* (No Comment) */
+"WriteCourseReviewActionNotAllowedDescription" = "Pour rédiger un avis, effectuez plus de 80 % des étapes";
+
+/* (No Comment) */
+"WriteCourseReviewActionSendResultFailed" = "Échec de l'envoi de votre avis";
+
+/* (No Comment) */
+"WriteCourseReviewActionSendResultSuccess" = "Expédié";
+
+/* (No Comment) */
+"WriteCourseReviewPlaceholder" = "Examen";
+
+/* (No Comment) */
+"WriteCourseReviewRatingHint" = "Appuyez sur une étoile pour évaluer";
+
+/* Write course review */
+"WriteCourseReviewTitle" = "Examen du cours";
+
+/* (No Comment) */
+"Wrong" = "Mauvais";
+
+/* (No Comment) */
+"WrongFeedbackTitleLastTry" = "Incorrect.";
+
+/* No comment provided by engineer. */
+"WrongFeedbackTitleNotLastTry($0)" = "WrongFeedbackTitleNotLastTry($0)";
+
+/* (No Comment) */
+"WrongFeedbackTitleNotLastTry1" = "Mauvais. Essayons encore.";
+
+/* (No Comment) */
+"WrongFeedbackTitleNotLastTry2" = "Non. C'est l'heure du prochain essai.";
+
+/* (No Comment) */
+"WrongFeedbackTitleNotLastTry3" = "Réessayez, mauvaise réponse.";
+
+/* (No Comment) */
+"WrongFields" = "Données de champs incorrectes !";
+
+/* (No Comment) */
+"Yes" = "Oui";
+
+/* (No Comment) */
+"YouAreSolving" = "Vous résolvez";
+
